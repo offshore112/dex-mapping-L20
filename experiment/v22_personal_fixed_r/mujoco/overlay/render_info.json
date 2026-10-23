@@ -1,0 +1,459 @@
+{
+  "status": "completed_mujoco_render",
+  "frame_count": 112,
+  "source_geometry_frame_count": 774,
+  "preview_fps": 4.0,
+  "duration_s": 27.902376299956813,
+  "gif_duration_s": 27.9,
+  "gif": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v22_personal_fixed_r\\mujoco\\overlay\\personal_to_fixed_r.gif",
+  "records": [
+    {
+      "frame_id": 0,
+      "timestamp_relative_s": 0.0
+    },
+    {
+      "frame_id": 6,
+      "timestamp_relative_s": 0.23861909995321184
+    },
+    {
+      "frame_id": 14,
+      "timestamp_relative_s": 0.4943555999780074
+    },
+    {
+      "frame_id": 21,
+      "timestamp_relative_s": 0.7345944000408053
+    },
+    {
+      "frame_id": 28,
+      "timestamp_relative_s": 0.9899854999966919
+    },
+    {
+      "frame_id": 35,
+      "timestamp_relative_s": 1.2466360999969766
+    },
+    {
+      "frame_id": 41,
+      "timestamp_relative_s": 1.4547645000275224
+    },
+    {
+      "frame_id": 48,
+      "timestamp_relative_s": 1.7107227999949828
+    },
+    {
+      "frame_id": 56,
+      "timestamp_relative_s": 1.9981731999432668
+    },
+    {
+      "frame_id": 62,
+      "timestamp_relative_s": 2.22273449995555
+    },
+    {
+      "frame_id": 69,
+      "timestamp_relative_s": 2.478177599958144
+    },
+    {
+      "frame_id": 76,
+      "timestamp_relative_s": 2.7346997000277042
+    },
+    {
+      "frame_id": 83,
+      "timestamp_relative_s": 2.974914100021124
+    },
+    {
+      "frame_id": 90,
+      "timestamp_relative_s": 3.230559599935077
+    },
+    {
+      "frame_id": 97,
+      "timestamp_relative_s": 3.4866155999479815
+    },
+    {
+      "frame_id": 104,
+      "timestamp_relative_s": 3.7425949999596924
+    },
+    {
+      "frame_id": 111,
+      "timestamp_relative_s": 3.998738099937327
+    },
+    {
+      "frame_id": 118,
+      "timestamp_relative_s": 4.238595700007863
+    },
+    {
+      "frame_id": 125,
+      "timestamp_relative_s": 4.494493199978024
+    },
+    {
+      "frame_id": 131,
+      "timestamp_relative_s": 4.718695100047626
+    },
+    {
+      "frame_id": 138,
+      "timestamp_relative_s": 4.974857699940912
+    },
+    {
+      "frame_id": 145,
+      "timestamp_relative_s": 5.2145276999799535
+    },
+    {
+      "frame_id": 152,
+      "timestamp_relative_s": 5.470817300025374
+    },
+    {
+      "frame_id": 159,
+      "timestamp_relative_s": 5.726481099962257
+    },
+    {
+      "frame_id": 166,
+      "timestamp_relative_s": 5.98252079996746
+    },
+    {
+      "frame_id": 173,
+      "timestamp_relative_s": 6.238630400039256
+    },
+    {
+      "frame_id": 180,
+      "timestamp_relative_s": 6.479271200019866
+    },
+    {
+      "frame_id": 187,
+      "timestamp_relative_s": 6.733991799992509
+    },
+    {
+      "frame_id": 194,
+      "timestamp_relative_s": 6.990668899961747
+    },
+    {
+      "frame_id": 201,
+      "timestamp_relative_s": 7.246558699989691
+    },
+    {
+      "frame_id": 207,
+      "timestamp_relative_s": 7.454679999966174
+    },
+    {
+      "frame_id": 215,
+      "timestamp_relative_s": 7.742796199978329
+    },
+    {
+      "frame_id": 222,
+      "timestamp_relative_s": 7.998340799938887
+    },
+    {
+      "frame_id": 228,
+      "timestamp_relative_s": 8.222899700049311
+    },
+    {
+      "frame_id": 235,
+      "timestamp_relative_s": 8.47862750000786
+    },
+    {
+      "frame_id": 242,
+      "timestamp_relative_s": 8.71821900003124
+    },
+    {
+      "frame_id": 249,
+      "timestamp_relative_s": 8.974613099941052
+    },
+    {
+      "frame_id": 256,
+      "timestamp_relative_s": 9.230761699960567
+    },
+    {
+      "frame_id": 263,
+      "timestamp_relative_s": 9.486620899988338
+    },
+    {
+      "frame_id": 270,
+      "timestamp_relative_s": 9.742831300012767
+    },
+    {
+      "frame_id": 277,
+      "timestamp_relative_s": 9.9825801999541
+    },
+    {
+      "frame_id": 284,
+      "timestamp_relative_s": 10.238672200008295
+    },
+    {
+      "frame_id": 291,
+      "timestamp_relative_s": 10.494520199950784
+    },
+    {
+      "frame_id": 297,
+      "timestamp_relative_s": 10.718325200024992
+    },
+    {
+      "frame_id": 304,
+      "timestamp_relative_s": 10.958227999974042
+    },
+    {
+      "frame_id": 312,
+      "timestamp_relative_s": 11.24647430004552
+    },
+    {
+      "frame_id": 318,
+      "timestamp_relative_s": 11.470625799964182
+    },
+    {
+      "frame_id": 325,
+      "timestamp_relative_s": 11.726382000022568
+    },
+    {
+      "frame_id": 332,
+      "timestamp_relative_s": 11.982410099939443
+    },
+    {
+      "frame_id": 339,
+      "timestamp_relative_s": 12.222384099964984
+    },
+    {
+      "frame_id": 346,
+      "timestamp_relative_s": 12.478381799999624
+    },
+    {
+      "frame_id": 353,
+      "timestamp_relative_s": 12.73429169994779
+    },
+    {
+      "frame_id": 360,
+      "timestamp_relative_s": 12.990097900037654
+    },
+    {
+      "frame_id": 367,
+      "timestamp_relative_s": 13.246329899993725
+    },
+    {
+      "frame_id": 374,
+      "timestamp_relative_s": 13.486269099987112
+    },
+    {
+      "frame_id": 381,
+      "timestamp_relative_s": 13.742553999996744
+    },
+    {
+      "frame_id": 388,
+      "timestamp_relative_s": 13.998827600036748
+    },
+    {
+      "frame_id": 394,
+      "timestamp_relative_s": 14.222474699956365
+    },
+    {
+      "frame_id": 401,
+      "timestamp_relative_s": 14.462868200032972
+    },
+    {
+      "frame_id": 408,
+      "timestamp_relative_s": 14.718723500031047
+    },
+    {
+      "frame_id": 415,
+      "timestamp_relative_s": 14.974451299989596
+    },
+    {
+      "frame_id": 422,
+      "timestamp_relative_s": 15.230620799935423
+    },
+    {
+      "frame_id": 429,
+      "timestamp_relative_s": 15.486821300000884
+    },
+    {
+      "frame_id": 436,
+      "timestamp_relative_s": 15.726768699940294
+    },
+    {
+      "frame_id": 443,
+      "timestamp_relative_s": 15.982970000011846
+    },
+    {
+      "frame_id": 450,
+      "timestamp_relative_s": 16.23872929997742
+    },
+    {
+      "frame_id": 457,
+      "timestamp_relative_s": 16.494668500032276
+    },
+    {
+      "frame_id": 463,
+      "timestamp_relative_s": 16.702662299969234
+    },
+    {
+      "frame_id": 471,
+      "timestamp_relative_s": 16.990848000044934
+    },
+    {
+      "frame_id": 478,
+      "timestamp_relative_s": 17.246299499995075
+    },
+    {
+      "frame_id": 484,
+      "timestamp_relative_s": 17.47082349995617
+    },
+    {
+      "frame_id": 491,
+      "timestamp_relative_s": 17.726541799958795
+    },
+    {
+      "frame_id": 498,
+      "timestamp_relative_s": 17.966749100014567
+    },
+    {
+      "frame_id": 505,
+      "timestamp_relative_s": 18.222526800003834
+    },
+    {
+      "frame_id": 512,
+      "timestamp_relative_s": 18.478608299978077
+    },
+    {
+      "frame_id": 519,
+      "timestamp_relative_s": 18.734588999999687
+    },
+    {
+      "frame_id": 526,
+      "timestamp_relative_s": 18.99082239996642
+    },
+    {
+      "frame_id": 533,
+      "timestamp_relative_s": 19.23023230000399
+    },
+    {
+      "frame_id": 540,
+      "timestamp_relative_s": 19.486164400004782
+    },
+    {
+      "frame_id": 547,
+      "timestamp_relative_s": 19.742595699965023
+    },
+    {
+      "frame_id": 554,
+      "timestamp_relative_s": 19.99883009993937
+    },
+    {
+      "frame_id": 560,
+      "timestamp_relative_s": 20.207076099934056
+    },
+    {
+      "frame_id": 567,
+      "timestamp_relative_s": 20.46274170000106
+    },
+    {
+      "frame_id": 574,
+      "timestamp_relative_s": 20.718992099980824
+    },
+    {
+      "frame_id": 581,
+      "timestamp_relative_s": 20.974832899984904
+    },
+    {
+      "frame_id": 588,
+      "timestamp_relative_s": 21.23064099997282
+    },
+    {
+      "frame_id": 595,
+      "timestamp_relative_s": 21.470697900047526
+    },
+    {
+      "frame_id": 602,
+      "timestamp_relative_s": 21.726517100003548
+    },
+    {
+      "frame_id": 609,
+      "timestamp_relative_s": 21.982764499960467
+    },
+    {
+      "frame_id": 616,
+      "timestamp_relative_s": 22.23903469997458
+    },
+    {
+      "frame_id": 623,
+      "timestamp_relative_s": 22.49475389998406
+    },
+    {
+      "frame_id": 629,
+      "timestamp_relative_s": 22.702959200018086
+    },
+    {
+      "frame_id": 637,
+      "timestamp_relative_s": 22.99066989996936
+    },
+    {
+      "frame_id": 644,
+      "timestamp_relative_s": 23.24665039998945
+    },
+    {
+      "frame_id": 650,
+      "timestamp_relative_s": 23.470697000040673
+    },
+    {
+      "frame_id": 657,
+      "timestamp_relative_s": 23.7108674000483
+    },
+    {
+      "frame_id": 664,
+      "timestamp_relative_s": 23.966430000029504
+    },
+    {
+      "frame_id": 671,
+      "timestamp_relative_s": 24.222767899977043
+    },
+    {
+      "frame_id": 678,
+      "timestamp_relative_s": 24.47819139994681
+    },
+    {
+      "frame_id": 685,
+      "timestamp_relative_s": 24.73431910004001
+    },
+    {
+      "frame_id": 692,
+      "timestamp_relative_s": 24.99030710000079
+    },
+    {
+      "frame_id": 699,
+      "timestamp_relative_s": 25.230920000001788
+    },
+    {
+      "frame_id": 706,
+      "timestamp_relative_s": 25.48644999996759
+    },
+    {
+      "frame_id": 713,
+      "timestamp_relative_s": 25.742913499940187
+    },
+    {
+      "frame_id": 720,
+      "timestamp_relative_s": 25.998559699975885
+    },
+    {
+      "frame_id": 726,
+      "timestamp_relative_s": 26.20675599994138
+    },
+    {
+      "frame_id": 734,
+      "timestamp_relative_s": 26.494471300044097
+    },
+    {
+      "frame_id": 740,
+      "timestamp_relative_s": 26.71887899993453
+    },
+    {
+      "frame_id": 747,
+      "timestamp_relative_s": 26.97463880002033
+    },
+    {
+      "frame_id": 754,
+      "timestamp_relative_s": 27.23061540001072
+    },
+    {
+      "frame_id": 761,
+      "timestamp_relative_s": 27.47041219996754
+    },
+    {
+      "frame_id": 768,
+      "timestamp_relative_s": 27.726763100014068
+    }
+  ]
+}

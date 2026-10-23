@@ -1,0 +1,110 @@
+{
+  "version": "v3_L20运动学核查",
+  "date": "2026-10-16",
+  "status": "passed",
+  "scope": "offline URDF kinematic consistency; no physical calibration/dynamics/hardware",
+  "source": {
+    "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\linkerhand_l20_left.urdf",
+    "sha256": "2c29f77a892d026ad92dfba6a61b3c5b70e90784c4a6dabdc09503f7f0209e3e",
+    "size_bytes": 27629
+  },
+  "config": {
+    "version": "v3_L20运动学核查",
+    "date": "2026-10-16",
+    "timezone": "Asia/Shanghai",
+    "side": "left",
+    "root_frame": "hand_base_link",
+    "random_seed": 20261016,
+    "random_configuration_count": 40,
+    "single_joint_delta_rad": 0.1,
+    "coupled_sweep_fraction": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "position_tolerance_m": 1e-10,
+    "orientation_tolerance_rad": 1e-09,
+    "matrix_tolerance": 1e-10,
+    "finite_difference_step_rad": 1e-06,
+    "axis_derivative_tolerance_m_per_rad": 1e-07,
+    "limit_tolerance_rad": 1e-12,
+    "viewer_triangles_per_visual": 1200
+  },
+  "sample_count": 114,
+  "link_count": 22,
+  "joint_count": 21,
+  "independent_coordinate_count": 16,
+  "mimic_count": 5,
+  "checks": {
+    "structure_counts": true,
+    "reference_position": true,
+    "reference_orientation": true,
+    "proper_rotation": true,
+    "subtree_isolation": true,
+    "joint_origin_stationary_under_own_rotation": true,
+    "positive_axis_derivative": true,
+    "mimic_relation": true,
+    "bone_length_invariant": true,
+    "reject_invalid_inputs": true
+  },
+  "max_reference_position_error_m": 5.637184056103667e-17,
+  "max_reference_orientation_error_rad": 2.2635582962162765e-16,
+  "max_orthogonal_error": 6.661338147750939e-16,
+  "max_determinant_error": 6.661338147750939e-16,
+  "max_subtree_leakage_matrix_abs": 0.0,
+  "max_joint_origin_motion_m": 0.0,
+  "max_axis_derivative_error_m_per_rad": 1.0527117372260975e-11,
+  "max_mimic_residual_rad": 0.0,
+  "bone_lengths": {
+    "index_proximal": {
+      "reference_mm": 45.01528712365374,
+      "max_variation_m": 3.469446951953614e-17
+    },
+    "index_middle": {
+      "reference_mm": 31.821961045684855,
+      "max_variation_m": 2.0816681711721685e-17
+    },
+    "middle_proximal": {
+      "reference_mm": 45.01528712365374,
+      "max_variation_m": 3.469446951953614e-17
+    },
+    "middle_middle": {
+      "reference_mm": 31.821961045683857,
+      "max_variation_m": 2.7755575615628914e-17
+    },
+    "ring_proximal": {
+      "reference_mm": 45.01528712365374,
+      "max_variation_m": 3.469446951953614e-17
+    },
+    "ring_middle": {
+      "reference_mm": 31.821960033071896,
+      "max_variation_m": 2.0816681711721685e-17
+    },
+    "pinky_proximal": {
+      "reference_mm": 45.01528712365374,
+      "max_variation_m": 3.469446951953614e-17
+    },
+    "pinky_middle": {
+      "reference_mm": 31.82196104568477,
+      "max_variation_m": 2.7755575615628914e-17
+    }
+  },
+  "invalid_inputs_rejected": {
+    "unknown_joint": true,
+    "passive_joint_command": true,
+    "out_of_range": true
+  },
+  "packages": {
+    "numpy": "1.26.4",
+    "scipy": "1.17.1",
+    "trimesh": "4.12.2",
+    "yourdfpy": "0.0.60"
+  },
+  "physical_scale_calibrated": false,
+  "hardware_coupling_verified": false,
+  "anatomical_wrist_and_tip_points_defined": false,
+  "collision_checked": false,
+  "retargeting_run": false
+}

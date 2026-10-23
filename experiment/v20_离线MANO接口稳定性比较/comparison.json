@@ -1,0 +1,66 @@
+{
+  "version": "v20_offline_MANO_v18_v19_stability_comparison",
+  "status": "completed_offline_interface_fixture_comparison",
+  "input": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v16_R_L20序列平滑与碰撞诊断\\r_action_sequence_v16.json",
+  "prepared_sequence": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v20_离线MANO接口稳定性比较\\offline_mano_sequence_v20.json",
+  "target_conditioned_sequence": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v20_离线MANO接口稳定性比较\\target_conditioned_sequence_v20.json",
+  "methods": {
+    "v18_sequential": {
+      "metrics": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v20_离线MANO接口稳定性比较\\v18_sequential\\metrics.json",
+      "summary": {
+        "all_solver_success": true,
+        "all_limit_violations_zero": true,
+        "max_mimic_residual_rad": 0.0,
+        "mean_semantic_point_rmse_normalized": 0.10873720024278576,
+        "mean_bone_direction_rmse_deg": 17.001772436784375,
+        "mean_bend_angle_rmse_deg": 6.727985169702651,
+        "max_q_step_abs_rad": 0.9791514415240998,
+        "mean_q_step_abs_rad": 0.24389837851145685,
+        "max_q_step_norm_normalized": 0.7307214033345616,
+        "pair_mean_abs_normalized_error": {
+          "thumb_tip+index_tip": 0.001433947747650051,
+          "thumb_tip+middle_tip": 0.0011199113258234315
+        },
+        "pair_max_abs_normalized_error": {
+          "thumb_tip+index_tip": 0.001643898869746703,
+          "thumb_tip+middle_tip": 0.0017873002899830952
+        }
+      }
+    },
+    "v19_global": {
+      "metrics": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v20_离线MANO接口稳定性比较\\v19_global_continuation\\metrics.json",
+      "summary": {
+        "all_solver_success": true,
+        "all_limit_violations_zero": true,
+        "max_mimic_residual_rad": 0.0,
+        "mean_semantic_point_rmse_normalized": 0.10962764558235336,
+        "mean_bone_direction_rmse_deg": 17.06397737882244,
+        "mean_bend_angle_rmse_deg": 6.8333408875410635,
+        "max_q_step_abs_rad": 0.8303499839885592,
+        "mean_q_step_abs_rad": 0.22839215933852947,
+        "max_q_step_norm_normalized": 0.6189115663491916,
+        "pair_mean_abs_normalized_error": {
+          "thumb_tip+index_tip": 0.0014886810596372215,
+          "thumb_tip+middle_tip": 0.001109485685660406
+        },
+        "pair_max_abs_normalized_error": {
+          "thumb_tip+index_tip": 0.0017668356073618566,
+          "thumb_tip+middle_tip": 0.0018557591348544074
+        }
+      }
+    }
+  },
+  "stability_delta_v19_minus_v18": {
+    "max_q_step_abs_rad": -0.14880145753554064,
+    "mean_q_step_abs_rad": -0.015506219172927382,
+    "max_q_step_norm_normalized": -0.11180983698536995,
+    "semantic_point_rmse_normalized": 0.0008904453395675999,
+    "bone_direction_rmse_deg": 0.062204942038064814
+  },
+  "interpretation": "v19 is more stable if q-step deltas are negative; this fixture is an offline synthetic MANO replay, not a camera generalization result.",
+  "limitations": [
+    "The supplied fixture is generated MANO, not a real camera recording.",
+    "The comparison uses the same fixed target-conditioned adapter and L20 model for both methods.",
+    "No collision/contact or actuator u is included."
+  ]
+}

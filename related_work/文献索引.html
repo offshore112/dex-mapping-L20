@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>文献与官方资源索引 · 新手研究指南</title><style>
+:root { --ink:#18283b; --muted:#5e6d7c; --blue:#235c91; --line:#dce4ea; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; scroll-padding-top:26px; }
+body { margin:0; color:var(--ink); background:#f3f6f9;
+ font-family:'Microsoft YaHei','PingFang SC',system-ui,sans-serif; line-height:1.85; }
+.shell { max-width:1400px; margin:auto; display:grid; grid-template-columns:278px minmax(0,1fr); gap:28px; padding:32px; }
+aside { position:sticky; top:24px; align-self:start; max-height:calc(100vh - 48px); overflow:auto; padding:22px;
+ background:#edf3f8; border:1px solid var(--line); border-radius:14px; font-size:13px; }
+.brand { font-size:22px; font-weight:750; color:var(--blue); }
+.hint { color:var(--muted); font-size:12px; margin:8px 0 20px; }
+aside ul { list-style:none; margin:0; padding-left:0; }
+aside li { margin:9px 0; }
+aside li ul { padding-left:13px; font-size:12px; }
+a { color:var(--blue); text-decoration:none; overflow-wrap:anywhere; }
+a:hover { text-decoration:underline; }
+main { min-width:0; background:white; border:1px solid var(--line); border-radius:16px; padding:42px 48px; }
+.eyebrow { color:var(--blue); letter-spacing:.12em; font-size:12px; font-weight:bold; }
+.status { color:var(--muted); background:#f5f8fb; padding:12px 16px; border-radius:8px; font-size:13px; }
+h1 { font-size:30px; line-height:1.45; margin:16px 0 20px; }
+h2 { font-size:23px; line-height:1.5; margin-top:48px; padding-top:14px; border-top:2px solid var(--line); }
+h3 { font-size:18px; margin-top:28px; }
+p, li { overflow-wrap:anywhere; }
+strong { color:#102a44; }
+pre { padding:20px; background:#f0f5fa; border:1px solid var(--line); border-radius:10px;
+ overflow:auto; line-height:1.7; font-size:13px; }
+code { font-family:Consolas,'Microsoft YaHei',monospace; font-size:.88em; }
+p code, li code { background:#eff4f8; border-radius:4px; padding:2px 5px; }
+table { display:block; width:100%; overflow-x:auto; border-collapse:collapse; font-size:13px; line-height:1.7; margin:20px 0; }
+td, th { border:1px solid var(--line); padding:11px 13px; min-width:95px; vertical-align:top; }
+th { background:#eaf1f7; text-align:left; }
+tbody tr:nth-child(even) { background:#fafbfd; }
+blockquote { margin:22px 0; padding:12px 22px; border-left:4px solid #3c7bb1; background:#f3f7fb; }
+footer { margin-top:40px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; }
+@media(max-width:900px) { .shell { display:block; padding:16px; } aside { position:static; max-height:260px; margin-bottom:18px; }
+ main { padding:24px 20px; } h1 { font-size:25px; } h2 { font-size:21px; } }
+@media print { body { background:white; font-size:11pt; } .shell { display:block; padding:0; } aside { display:none; }
+ main { border:0; padding:0; } h2,h3 { break-after:avoid; } pre,blockquote,tr { break-inside:avoid; }
+ table { display:table; font-size:9pt; } a { color:inherit; } }
+</style></head>
+<body><div class="shell">
+<aside><div class="brand">dex-mapping</div>
+<div class="hint">从研究想法到可验证的两阶段映射<br>2026-10-14 · 研究文档与实施记录</div>
+<nav aria-label="文档目录"><div class="toc">
+<ul>
+<li><a href="#另需了解的输入与机构资源">另需了解的输入与机构资源</a></li>
+<li><a href="#每篇相近工作都回答这些问题">每篇相近工作都回答这些问题</a></li>
+</ul>
+</div>
+</nav></aside>
+<main><div class="eyebrow">研究思路 · 新手指南</div>
+<p class="status">当前阶段：独立环境与 MANO 加载核查已通过；L20 FK、R 拟合、基线与网络训练尚未运行。</p>
+<h1 id="文献与官方资源索引">文献与官方资源索引</h1>
+<p>核查：2026-10-14。以下有可核查官方入口；当前仅核对标题与公开摘要/项目资料，全文阅读、代码复现与本项目结果比较均未完成。顺序面向新手。</p>
+<table>
+<thead>
+<tr>
+<th>阅读顺序</th>
+<th>工作/资源</th>
+<th>官方入口</th>
+<th>读它解决什么问题</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>MANO：Embodied Hands: Modeling and Capturing Hands and Bodies Together，Romero、Tzionas、Black，2017</td>
+<td><a href="https://mano.is.tue.mpg.de/">项目</a></td>
+<td>理解 β、θ、形状范围与姿态模型</td>
+<td>已核查项目，未精读/下载模型</td>
+</tr>
+<tr>
+<td>2</td>
+<td>dex-retargeting（代码库，源自 AnyTeleop）</td>
+<td><a href="https://github.com/dexsuite/dex-retargeting">代码</a></td>
+<td>先跑一个可检查的优化映射基线</td>
+<td>已核查代码说明，未复现</td>
+</tr>
+<tr>
+<td>3</td>
+<td>DexPilot: Vision Based Teleoperation of Dexterous Robotic Hand-Arm System，Handa 等，ICRA 2020</td>
+<td><a href="https://research.nvidia.com/publication/2020-05_dexpilot-vision-based-teleoperation-dexterous-robotic-hand-arm-system">NVIDIA 研究页</a></td>
+<td>理解视觉遥操作与功能约束</td>
+<td>已核查官方研究页，未精读</td>
+</tr>
+<tr>
+<td>4</td>
+<td>UniDex: A Robot Foundation Suite for Universal Dexterous Hand Control from Egocentric Human Videos，Zhang 等，2026</td>
+<td><a href="https://unidex-ai.github.io/">项目</a> · <a href="https://github.com/unidex-ai/UniDex">代码</a> · <a href="https://arxiv.org/abs/2603.22264">摘要</a></td>
+<td>比较人类视频、统一动作空间与跨手控制</td>
+<td>已核查项目/代码/检索摘要，未精读</td>
+</tr>
+<tr>
+<td>5</td>
+<td>UniDexTok: A Unified Dexterous Hand Tokenizer from Real Data，Fang 等，2026，arXiv:2606.10683</td>
+<td><a href="https://arxiv.org/abs/2606.10683">摘要</a></td>
+<td>比较共享人/机器人状态接口与机构条件表示</td>
+<td>已核查摘要，未精读</td>
+</tr>
+<tr>
+<td>6</td>
+<td>AnyDexRT: Calibration-Free Dexterous Hand Retargeting with Few-Shot Human Guidance，Wang 等，2026，arXiv:2607.08341</td>
+<td><a href="https://arxiv.org/abs/2607.08341">摘要</a></td>
+<td>比较免校准与少量人工指导的适配成本</td>
+<td>已核查摘要，未精读</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Morphometric Imitation: From Morphology and Contact Aware Hand Retargeting to Sim-to-Real Visuomotor Policy，Sadjadpour 等，2026，arXiv:2609.28660</td>
+<td><a href="https://arxiv.org/abs/2609.28660">摘要</a></td>
+<td>比较接触保持、动力学可行性和策略训练</td>
+<td>已核查摘要，未精读</td>
+</tr>
+</tbody>
+</table>
+<p>2026 工作的录用状态须依据明确官方记录。UniDex 作者代码说明写作 CVPR 2026，原分享中的具体 CVF 页面未能读取；其余条目本索引按 arXiv 预印本列出。</p>
+<h2 id="另需了解的输入与机构资源">另需了解的输入与机构资源</h2>
+<table>
+<thead>
+<tr>
+<th>资源</th>
+<th>入口</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MediaPipe Hand Landmarker</td>
+<td><a href="https://developers.google.com/edge/mediapipe/solutions/vision/hand_landmarker">官方指南</a></td>
+<td>关键点输入，不直接等同 MANO 参数</td>
+</tr>
+<tr>
+<td>HaMeR</td>
+<td><a href="https://github.com/geopavlakos/hamer">官方代码</a></td>
+<td>候选 MANO 重建输入，安装与模型要求另核对</td>
+</tr>
+<tr>
+<td>InterHand2.6M</td>
+<td><a href="https://mks0601.github.io/InterHand2.6M/">官方数据页</a></td>
+<td>候选真实数据与拟合参数</td>
+</tr>
+<tr>
+<td>ros2_control 关节/传动说明</td>
+<td><a href="https://control.ros.org/lyrical/doc/ros2_control/hardware_interface/doc/joints_userdoc.html">官方文档</a></td>
+<td>区分运动学、mimic、传动与硬件接口</td>
+</tr>
+</tbody>
+</table>
+<h2 id="每篇相近工作都回答这些问题">每篇相近工作都回答这些问题</h2>
+<ol>
+<li>输入是人手、机器人关节、视频、物体还是组合？</li>
+<li>是否显式提供人体尺寸与目标手几何？对应关系怎么建立？</li>
+<li>输出是关键点、关节状态、独立执行器命令还是策略？</li>
+<li>如何处理欠驱动、耦合、碰撞和接触？哪些模型假设被使用？</li>
+<li>“未见”到底留出了人、手型、任务还是物体？是否使用适配标签/微调？</li>
+<li>是否需要每个手型手写对应、额外配置或校准？这些成本有无统计？</li>
+<li>数据、代码、指标是否足以在本项目中公平复现？</li>
+</ol>
+<p>填完这些问题再判断区别。摘要没提到某个模块，不代表全文一定没有。</p>
+<footer>本页离线可读，无需加载外部资源。可编辑源文件：文献索引.md。<br>
+主文档与辅助记录在同一个项目文件夹中，已生成的阅读版之间可直接跳转。</footer>
+</main></div></body></html>

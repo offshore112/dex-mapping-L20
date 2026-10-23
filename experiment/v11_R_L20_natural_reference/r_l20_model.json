@@ -1,0 +1,1851 @@
+{
+  "version": "v11_shared_R_L20_model",
+  "status": "constructed_initial_shared_target_model",
+  "model_role": "one shared target virtual hand for all operators; not a per-operator hand",
+  "root_frame": "hand_base_link",
+  "units": {
+    "length": "m_convention_pending_physical_calibration",
+    "angle": "rad"
+  },
+  "sources": {
+    "urdf": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\linkerhand_l20_left.urdf",
+    "urdf_file": {
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\linkerhand_l20_left.urdf",
+      "sha256": "2c29f77a892d026ad92dfba6a61b3c5b70e90784c4a6dabdc09503f7f0209e3e",
+      "size_bytes": 27629
+    },
+    "mano_fit_npz": {
+      "path": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v5_MANO-R拟合\\fit_output\\mano_r_fit.npz",
+      "sha256": "7f579274cc77a0410eddecd75b3db4bb9cc429ce16ab00c285e889d07e82cd17",
+      "size_bytes": 40774
+    },
+    "target_landmarks": {
+      "path": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v5_MANO-R拟合\\l20_landmarks21_v5.json",
+      "sha256": "0a76dc7a756c2dd9077be3321511f6e795d03ea6adde4e75fbaba4d101adc792",
+      "size_bytes": 6803
+    },
+    "tip_reference_points": {
+      "path": "E:\\lingqiaoshou\\dex-mapping\\robots\\L20_left\\l20_r_reference_points_v4.json",
+      "sha256": "d22c629f1b51a4114f13cdc88ee412fda9cb574c22227ec7d94e34da56e217d7",
+      "size_bytes": 7981
+    }
+  },
+  "geometry": {
+    "representation": "fixed MANO-R reference surface; dynamic pose is a later interface",
+    "surface_obj": "r_l20_surface.obj",
+    "beta_R": [
+      1.984290874489423,
+      1.946746649886621,
+      -10.1409286027289,
+      4.494538882633884,
+      -1.4443195696455442,
+      -3.50599235018315,
+      3.892597184856881,
+      6.861944540958,
+      -4.60136715709409,
+      -3.717646677907253
+    ],
+    "theta_ref_hand_pose": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": 1.587646643364669,
+    "rotation": [
+      [
+        -0.11542075465237889,
+        -0.9925086864514994,
+        -0.040056918425025234
+      ],
+      [
+        -0.1716422643295999,
+        0.05964797007188771,
+        -0.9833519475559291
+      ],
+      [
+        0.9783746636596828,
+        -0.1066237636952963,
+        -0.1772410520284784
+      ]
+    ],
+    "translation_m": [
+      -0.010538956835578558,
+      -0.012704222348167754,
+      0.1624015091984531
+    ],
+    "vertex_count": 778,
+    "face_count": 1538,
+    "static_fit_rmse_mm": 26.605113883330503,
+    "static_fit_max_error_mm": 58.79643938191861
+  },
+  "kinematics": {
+    "robot_name": "linkerhand_l20_left",
+    "root": "hand_base_link",
+    "link_count": 22,
+    "joint_count": 21,
+    "joint_order": [
+      "pinky_mcp_roll",
+      "pinky_mcp_pitch",
+      "pinky_pip",
+      "pinky_dip",
+      "ring_mcp_roll",
+      "ring_mcp_pitch",
+      "ring_pip",
+      "ring_dip",
+      "middle_mcp_roll",
+      "middle_mcp_pitch",
+      "middle_pip",
+      "middle_dip",
+      "index_mcp_roll",
+      "index_mcp_pitch",
+      "index_pip",
+      "index_dip",
+      "thumb_cmc_yaw",
+      "thumb_cmc_roll",
+      "thumb_cmc_pitch",
+      "thumb_mcp",
+      "thumb_ip"
+    ],
+    "independent_q_order": [
+      "pinky_mcp_roll",
+      "pinky_mcp_pitch",
+      "pinky_pip",
+      "ring_mcp_roll",
+      "ring_mcp_pitch",
+      "ring_pip",
+      "middle_mcp_roll",
+      "middle_mcp_pitch",
+      "middle_pip",
+      "index_mcp_roll",
+      "index_mcp_pitch",
+      "index_pip",
+      "thumb_cmc_yaw",
+      "thumb_cmc_roll",
+      "thumb_cmc_pitch",
+      "thumb_mcp"
+    ],
+    "independent_q_count": 16,
+    "mimic_count": 5,
+    "joints": [
+      {
+        "name": "pinky_mcp_roll",
+        "type": "revolute",
+        "parent": "hand_base_link",
+        "child": "pinky_metacarpals",
+        "origin_xyz_m": [
+          -0.0286705351154727,
+          0.0381019360798378,
+          0.150312712339165
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "lower_rad": -0.17,
+        "upper_rad": 0.17,
+        "mimic": null
+      },
+      {
+        "name": "pinky_mcp_pitch",
+        "type": "revolute",
+        "parent": "pinky_metacarpals",
+        "child": "pinky_proximal",
+        "origin_xyz_m": [
+          0.0167698082541766,
+          -1.26288306181443e-05,
+          0.0
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 1.4,
+        "mimic": null
+      },
+      {
+        "name": "pinky_pip",
+        "type": "revolute",
+        "parent": "pinky_proximal",
+        "child": "pinky_middle",
+        "origin_xyz_m": [
+          -0.00419455239160021,
+          0.0,
+          0.0448194355727413
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 1.57,
+        "mimic": null
+      },
+      {
+        "name": "pinky_dip",
+        "type": "revolute",
+        "parent": "pinky_middle",
+        "child": "pinky_distal",
+        "origin_xyz_m": [
+          0.00275561954550002,
+          0.0,
+          0.0317024252339397
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 1.4,
+        "mimic": {
+          "joint": "pinky_pip",
+          "multiplier": 0.8917,
+          "offset": 0.0
+        }
+      },
+      {
+        "name": "ring_mcp_roll",
+        "type": "revolute",
+        "parent": "hand_base_link",
+        "child": "ring_metacarpals",
+        "origin_xyz_m": [
+          -0.0322943001717225,
+          0.0165019360798537,
+          0.1593114381003
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "lower_rad": -0.17,
+        "upper_rad": 0.17,
+        "mimic": null
+      },
+      {
+        "name": "ring_mcp_pitch",
+        "type": "revolute",
+        "parent": "ring_metacarpals",
+        "child": "ring_proximal",
+        "origin_xyz_m": [
+          0.0167698082541766,
+          -1.26288306177003e-05,
+          0.0
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 1.4,
+        "mimic": null
+      },
+      {
+        "name": "ring_pip",
+        "type": "revolute",
+        "parent": "ring_proximal",
+        "child": "ring_middle",
+        "origin_xyz_m": [
+          -0.00419455239160021,
+          0.0,
+          0.0448194355727413
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 1.57,
+        "mimic": null
+      },
+      {
+        "name": "ring_dip",
+        "type": "revolute",
+        "parent": "ring_middle",
+        "child": "ring_distal",
+        "origin_xyz_m": [
+          0.00275561954550363,
+          0.0,
+          0.0317024242175084
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 1.4,
+        "mimic": {
+          "joint": "ring_pip",
+          "multiplier": 0.8917,
+          "offset": 0.0
+        }
+      },
+      {
+        "name": "middle_mcp_roll",
+        "type": "revolute",
+        "parent": "hand_base_link",
+        "child": "middle_metacarpals",
+        "origin_xyz_m": [
+          -0.0345991283789502,
+          -0.00509806392012034,
+          0.163804328353988
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "lower_rad": -0.17,
+        "upper_rad": 0.17,
+        "mimic": null
+      },
+      {
+        "name": "middle_mcp_pitch",
+        "type": "revolute",
+        "parent": "middle_metacarpals",
+        "child": "middle_proximal",
+        "origin_xyz_m": [
+          0.0167698082541766,
+          -1.26288306171729e-05,
+          0.0
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 1.4,
+        "mimic": null
+      },
+      {
+        "name": "middle_pip",
+        "type": "revolute",
+        "parent": "middle_proximal",
+        "child": "middle_middle",
+        "origin_xyz_m": [
+          -0.00419455239160021,
+          0.0,
+          0.0448194355727413
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 1.57,
+        "mimic": null
+      },
+      {
+        "name": "middle_dip",
+        "type": "revolute",
+        "parent": "middle_middle",
+        "child": "middle_distal",
+        "origin_xyz_m": [
+          0.00275561954550102,
+          0.0,
+          0.0317024252339387
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 1.4,
+        "mimic": {
+          "joint": "middle_pip",
+          "multiplier": 0.8917,
+          "offset": 0.0
+        }
+      },
+      {
+        "name": "index_mcp_roll",
+        "type": "revolute",
+        "parent": "hand_base_link",
+        "child": "index_metacarpals",
+        "origin_xyz_m": [
+          -0.029865288607565,
+          -0.0266980639200853,
+          0.159311439204817
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "lower_rad": -0.17,
+        "upper_rad": 0.17,
+        "mimic": null
+      },
+      {
+        "name": "index_mcp_pitch",
+        "type": "revolute",
+        "parent": "index_metacarpals",
+        "child": "index_proximal",
+        "origin_xyz_m": [
+          0.0167698082541766,
+          -1.26288306177003e-05,
+          0.0
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 1.4,
+        "mimic": null
+      },
+      {
+        "name": "index_pip",
+        "type": "revolute",
+        "parent": "index_proximal",
+        "child": "index_middle",
+        "origin_xyz_m": [
+          -0.00419455239160021,
+          0.0,
+          0.0448194355727413
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 1.57,
+        "mimic": null
+      },
+      {
+        "name": "index_dip",
+        "type": "revolute",
+        "parent": "index_middle",
+        "child": "index_distal",
+        "origin_xyz_m": [
+          0.00275561954550102,
+          0.0,
+          0.0317024252339397
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 1.4,
+        "mimic": {
+          "joint": "index_pip",
+          "multiplier": 0.8917,
+          "offset": 0.0
+        }
+      },
+      {
+        "name": "thumb_cmc_yaw",
+        "type": "revolute",
+        "parent": "hand_base_link",
+        "child": "thumb_metacarpals_base2",
+        "origin_xyz_m": [
+          -0.00091528,
+          -0.0050818,
+          0.057392
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 1.4,
+        "mimic": null
+      },
+      {
+        "name": "thumb_cmc_roll",
+        "type": "revolute",
+        "parent": "thumb_metacarpals_base2",
+        "child": "thumb_metacarpals_base1",
+        "origin_xyz_m": [
+          0.024508,
+          -0.002864,
+          0.0035063
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            -0.4792532363941375,
+            -0.8776766690562903
+          ],
+          [
+            0.0,
+            0.8776766690562903,
+            -0.4792532363941375
+          ]
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 1.22,
+        "mimic": null
+      },
+      {
+        "name": "thumb_cmc_pitch",
+        "type": "revolute",
+        "parent": "thumb_metacarpals_base1",
+        "child": "thumb_metacarpals",
+        "origin_xyz_m": [
+          -0.0011523,
+          -0.00048559,
+          0.030795
+        ],
+        "origin_rotation": [
+          [
+            -3.2239280932255758e-06,
+            -0.9999999999932537,
+            -1.760319113533889e-06
+          ],
+          [
+            0.8776880142645958,
+            -3.673205103416066e-06,
+            0.47923245883681354
+          ],
+          [
+            -0.47923245884004656,
+            0.0,
+            0.8776880142705169
+          ]
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 0.79,
+        "mimic": null
+      },
+      {
+        "name": "thumb_mcp",
+        "type": "revolute",
+        "parent": "thumb_metacarpals",
+        "child": "thumb_proximal",
+        "origin_xyz_m": [
+          0.0064539,
+          0.0,
+          0.055858
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 1.05,
+        "mimic": null
+      },
+      {
+        "name": "thumb_ip",
+        "type": "revolute",
+        "parent": "thumb_proximal",
+        "child": "thumb_distal",
+        "origin_xyz_m": [
+          0.0053547,
+          0.0,
+          0.034485
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 1.22,
+        "mimic": {
+          "joint": "thumb_mcp",
+          "multiplier": 1.1619,
+          "offset": 0.0
+        }
+      }
+    ],
+    "mimic_relations": [
+      {
+        "name": "pinky_dip",
+        "type": "revolute",
+        "parent": "pinky_middle",
+        "child": "pinky_distal",
+        "origin_xyz_m": [
+          0.00275561954550002,
+          0.0,
+          0.0317024252339397
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 1.4,
+        "mimic": {
+          "joint": "pinky_pip",
+          "multiplier": 0.8917,
+          "offset": 0.0
+        }
+      },
+      {
+        "name": "ring_dip",
+        "type": "revolute",
+        "parent": "ring_middle",
+        "child": "ring_distal",
+        "origin_xyz_m": [
+          0.00275561954550363,
+          0.0,
+          0.0317024242175084
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 1.4,
+        "mimic": {
+          "joint": "ring_pip",
+          "multiplier": 0.8917,
+          "offset": 0.0
+        }
+      },
+      {
+        "name": "middle_dip",
+        "type": "revolute",
+        "parent": "middle_middle",
+        "child": "middle_distal",
+        "origin_xyz_m": [
+          0.00275561954550102,
+          0.0,
+          0.0317024252339387
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 1.4,
+        "mimic": {
+          "joint": "middle_pip",
+          "multiplier": 0.8917,
+          "offset": 0.0
+        }
+      },
+      {
+        "name": "index_dip",
+        "type": "revolute",
+        "parent": "index_middle",
+        "child": "index_distal",
+        "origin_xyz_m": [
+          0.00275561954550102,
+          0.0,
+          0.0317024252339397
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 1.4,
+        "mimic": {
+          "joint": "index_pip",
+          "multiplier": 0.8917,
+          "offset": 0.0
+        }
+      },
+      {
+        "name": "thumb_ip",
+        "type": "revolute",
+        "parent": "thumb_proximal",
+        "child": "thumb_distal",
+        "origin_xyz_m": [
+          0.0053547,
+          0.0,
+          0.034485
+        ],
+        "origin_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "lower_rad": 0.0,
+        "upper_rad": 1.22,
+        "mimic": {
+          "joint": "thumb_mcp",
+          "multiplier": 1.1619,
+          "offset": 0.0
+        }
+      }
+    ],
+    "point_order": [
+      "wrist",
+      "thumb_cmc",
+      "thumb_mcp",
+      "thumb_ip",
+      "thumb_tip",
+      "index_mcp",
+      "index_pip",
+      "index_dip",
+      "index_tip",
+      "middle_mcp",
+      "middle_pip",
+      "middle_dip",
+      "middle_tip",
+      "ring_mcp",
+      "ring_pip",
+      "ring_dip",
+      "ring_tip",
+      "pinky_mcp",
+      "pinky_pip",
+      "pinky_dip",
+      "pinky_tip"
+    ],
+    "point_sources": [
+      {
+        "name": "wrist",
+        "kind": "root_local",
+        "local_xyz_m": [
+          8.243276753982082e-05,
+          4.867116195718859e-06,
+          3.2295806864287654e-10
+        ]
+      },
+      {
+        "name": "thumb_cmc",
+        "kind": "joint_frame",
+        "joint": "thumb_cmc_pitch"
+      },
+      {
+        "name": "thumb_mcp",
+        "kind": "joint_frame",
+        "joint": "thumb_mcp"
+      },
+      {
+        "name": "thumb_ip",
+        "kind": "joint_frame",
+        "joint": "thumb_ip"
+      },
+      {
+        "name": "thumb_tip",
+        "kind": "link_local",
+        "link": "thumb_distal",
+        "local_xyz_m": [
+          -0.013837858573348688,
+          -0.0010547101816853978,
+          0.031237799824470024
+        ]
+      },
+      {
+        "name": "index_mcp",
+        "kind": "joint_frame",
+        "joint": "index_mcp_pitch"
+      },
+      {
+        "name": "index_pip",
+        "kind": "joint_frame",
+        "joint": "index_pip"
+      },
+      {
+        "name": "index_dip",
+        "kind": "joint_frame",
+        "joint": "index_dip"
+      },
+      {
+        "name": "index_tip",
+        "kind": "link_local",
+        "link": "index_distal",
+        "local_xyz_m": [
+          -0.015221571868374688,
+          -6.3024751544285255e-06,
+          0.022826115343828567
+        ]
+      },
+      {
+        "name": "middle_mcp",
+        "kind": "joint_frame",
+        "joint": "middle_mcp_pitch"
+      },
+      {
+        "name": "middle_pip",
+        "kind": "joint_frame",
+        "joint": "middle_pip"
+      },
+      {
+        "name": "middle_dip",
+        "kind": "joint_frame",
+        "joint": "middle_dip"
+      },
+      {
+        "name": "middle_tip",
+        "kind": "link_local",
+        "link": "middle_distal",
+        "local_xyz_m": [
+          -0.015221572685979868,
+          -6.302059091980565e-06,
+          0.022826114781985766
+        ]
+      },
+      {
+        "name": "ring_mcp",
+        "kind": "joint_frame",
+        "joint": "ring_mcp_pitch"
+      },
+      {
+        "name": "ring_pip",
+        "kind": "joint_frame",
+        "joint": "ring_pip"
+      },
+      {
+        "name": "ring_dip",
+        "kind": "joint_frame",
+        "joint": "ring_dip"
+      },
+      {
+        "name": "ring_tip",
+        "kind": "link_local",
+        "link": "ring_distal",
+        "local_xyz_m": [
+          -0.015221571125147808,
+          -6.301403990380336e-06,
+          0.022826116161137337
+        ]
+      },
+      {
+        "name": "pinky_mcp",
+        "kind": "joint_frame",
+        "joint": "pinky_mcp_pitch"
+      },
+      {
+        "name": "pinky_pip",
+        "kind": "joint_frame",
+        "joint": "pinky_pip"
+      },
+      {
+        "name": "pinky_dip",
+        "kind": "joint_frame",
+        "joint": "pinky_dip"
+      },
+      {
+        "name": "pinky_tip",
+        "kind": "link_local",
+        "link": "pinky_distal",
+        "local_xyz_m": [
+          -0.015221572858478841,
+          -6.301683254325169e-06,
+          0.022826116091462047
+        ]
+      }
+    ],
+    "mesh_count": 22,
+    "meshes": [
+      {
+        "filename": "meshes/hand_base_link.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\hand_base_link.STL",
+        "sha256": "5731b19b50b4b527114adb8de55bba15ba421756c2f9bcea60d68be94dbdd90b",
+        "size_bytes": 2145484,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "hand_base_link"
+        ]
+      },
+      {
+        "filename": "meshes/pinky_metacarpals.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\pinky_metacarpals.STL",
+        "sha256": "e31345027027f50543192446327eb52fda373ee371378ac56d59b6e3a8183100",
+        "size_bytes": 70784,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "pinky_metacarpals"
+        ]
+      },
+      {
+        "filename": "meshes/pinky_proximal.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\pinky_proximal.STL",
+        "sha256": "529e677e75e0d69a4bf1de14e0d5d7ab6aa96dd8a5d7573f2c7c3a47157d083f",
+        "size_bytes": 807334,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "pinky_proximal"
+        ]
+      },
+      {
+        "filename": "meshes/pinky_middle.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\pinky_middle.STL",
+        "sha256": "96bf50fc3dcaf709d06361eb15e30510a89399b07265bf2a6bee5532e40d0012",
+        "size_bytes": 746984,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "pinky_middle"
+        ]
+      },
+      {
+        "filename": "meshes/pinky_distal.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\pinky_distal.STL",
+        "sha256": "04180872f8a06de0c44ef7dcfb3423d40d554cfba2f9bb4056f5b7293b09024e",
+        "size_bytes": 950884,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "pinky_distal"
+        ]
+      },
+      {
+        "filename": "meshes/ring_metacarpals.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\ring_metacarpals.STL",
+        "sha256": "e31345027027f50543192446327eb52fda373ee371378ac56d59b6e3a8183100",
+        "size_bytes": 70784,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "ring_metacarpals"
+        ]
+      },
+      {
+        "filename": "meshes/ring_proximal.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\ring_proximal.STL",
+        "sha256": "1604c81101e9bb5e666123506563a8655173b3d49680e88f945be23089de209d",
+        "size_bytes": 807334,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "ring_proximal"
+        ]
+      },
+      {
+        "filename": "meshes/ring_middle.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\ring_middle.STL",
+        "sha256": "7571b16629b018e9375a9641aeadb5472006c28f8921ffe707d8a2a7e2665cb8",
+        "size_bytes": 747084,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "ring_middle"
+        ]
+      },
+      {
+        "filename": "meshes/ring_distal.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\ring_distal.STL",
+        "sha256": "cba65d8dfb49cb69cf8b6d420b69e0b313097b25e983c81ce270be3968a2ddca",
+        "size_bytes": 950884,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "ring_distal"
+        ]
+      },
+      {
+        "filename": "meshes/middle_metacarpals.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\middle_metacarpals.STL",
+        "sha256": "e31345027027f50543192446327eb52fda373ee371378ac56d59b6e3a8183100",
+        "size_bytes": 70784,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "middle_metacarpals"
+        ]
+      },
+      {
+        "filename": "meshes/middle_proximal.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\middle_proximal.STL",
+        "sha256": "1ff4af7a882a922f05e36916992b87ebaf7cc4081dbd9da813831276412a6a78",
+        "size_bytes": 807634,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "middle_proximal"
+        ]
+      },
+      {
+        "filename": "meshes/middle_middle.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\middle_middle.STL",
+        "sha256": "350d63a1bcc57f7ee4985a52b86c06d5fc432dce7a3cb6fbac310567a3c78cb4",
+        "size_bytes": 746984,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "middle_middle"
+        ]
+      },
+      {
+        "filename": "meshes/middle_distal.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\middle_distal.STL",
+        "sha256": "0d1f05f0ca13b635e062c2264e4420d55281442578033734f759539312c33610",
+        "size_bytes": 950884,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "middle_distal"
+        ]
+      },
+      {
+        "filename": "meshes/index_metacarpals.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\index_metacarpals.STL",
+        "sha256": "e31345027027f50543192446327eb52fda373ee371378ac56d59b6e3a8183100",
+        "size_bytes": 70784,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "index_metacarpals"
+        ]
+      },
+      {
+        "filename": "meshes/index_proximal.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\index_proximal.STL",
+        "sha256": "a009a4af6d042762c3c8ded32bd7151efc477e6839714112e61f20fa418b4e4c",
+        "size_bytes": 807534,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "index_proximal"
+        ]
+      },
+      {
+        "filename": "meshes/index_middle.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\index_middle.STL",
+        "sha256": "03d39565b6736c1dbd74d4fb78fc6df6a029e8830749a5c743b27434e8544a79",
+        "size_bytes": 746984,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "index_middle"
+        ]
+      },
+      {
+        "filename": "meshes/index_distal.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\index_distal.STL",
+        "sha256": "27ced01bbbc33d59f20957eb7c54bc0f23f6ba3a86832c641f3d2cb6c10c5009",
+        "size_bytes": 950884,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "index_distal"
+        ]
+      },
+      {
+        "filename": "meshes/thumb_metacarpals_base2.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\thumb_metacarpals_base2.STL",
+        "sha256": "887e48745f6324a4964dfc88099e4c8643e92cb5c53fc956e7230fae74e4d556",
+        "size_bytes": 482584,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "thumb_metacarpals_base2"
+        ]
+      },
+      {
+        "filename": "meshes/thumb_metacarpals_base1.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\thumb_metacarpals_base1.STL",
+        "sha256": "cf646ac87b6ea06bcd4a00325673067c50cda0452cf2936811fe5dde7aab5d9b",
+        "size_bytes": 286684,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "thumb_metacarpals_base1"
+        ]
+      },
+      {
+        "filename": "meshes/thumb_metacarpals.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\thumb_metacarpals.STL",
+        "sha256": "85fbc694af273729750dbd128627b2aeb259daa115f763ecd83379367ea47258",
+        "size_bytes": 1046684,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "thumb_metacarpals"
+        ]
+      },
+      {
+        "filename": "meshes/thumb_proximal.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\thumb_proximal.STL",
+        "sha256": "fd0d83782b8921a79976999e757888a950e1e5bd90d94eeed9df5024fb9d70f6",
+        "size_bytes": 676584,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "thumb_proximal"
+        ]
+      },
+      {
+        "filename": "meshes/thumb_distal.STL",
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\thumb_distal.STL",
+        "sha256": "18228b0b2bdf24f433d135a912b90305849d78a384a260043e321efdec37a58c",
+        "size_bytes": 1120784,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "visual_origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visual_origin_rpy": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "links_using_mesh": [
+          "thumb_distal"
+        ]
+      }
+    ]
+  },
+  "arrays": {
+    "npz": "r_l20_model.npz"
+  },
+  "limitations": [
+    "The MANO-R surface is a fixed reference geometry; no camera/action sequence is fitted here.",
+    "The 21 L20 points use joint-frame and distal-cap proxies, not anatomical or measured contact points.",
+    "The URDF defines q-level kinematics and mimic relations, not verified actuator commands u.",
+    "Real scale, assembly zero, contact, compliance and driver mapping remain unverified."
+  ]
+}

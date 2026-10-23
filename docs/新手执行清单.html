@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>新手执行清单 · 新手研究指南</title><style>
+:root { --ink:#18283b; --muted:#5e6d7c; --blue:#235c91; --line:#dce4ea; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; scroll-padding-top:26px; }
+body { margin:0; color:var(--ink); background:#f3f6f9;
+ font-family:'Microsoft YaHei','PingFang SC',system-ui,sans-serif; line-height:1.85; }
+.shell { max-width:1400px; margin:auto; display:grid; grid-template-columns:278px minmax(0,1fr); gap:28px; padding:32px; }
+aside { position:sticky; top:24px; align-self:start; max-height:calc(100vh - 48px); overflow:auto; padding:22px;
+ background:#edf3f8; border:1px solid var(--line); border-radius:14px; font-size:13px; }
+.brand { font-size:22px; font-weight:750; color:var(--blue); }
+.hint { color:var(--muted); font-size:12px; margin:8px 0 20px; }
+aside ul { list-style:none; margin:0; padding-left:0; }
+aside li { margin:9px 0; }
+aside li ul { padding-left:13px; font-size:12px; }
+a { color:var(--blue); text-decoration:none; overflow-wrap:anywhere; }
+a:hover { text-decoration:underline; }
+main { min-width:0; background:white; border:1px solid var(--line); border-radius:16px; padding:42px 48px; }
+.eyebrow { color:var(--blue); letter-spacing:.12em; font-size:12px; font-weight:bold; }
+.status { color:var(--muted); background:#f5f8fb; padding:12px 16px; border-radius:8px; font-size:13px; }
+h1 { font-size:30px; line-height:1.45; margin:16px 0 20px; }
+h2 { font-size:23px; line-height:1.5; margin-top:48px; padding-top:14px; border-top:2px solid var(--line); }
+h3 { font-size:18px; margin-top:28px; }
+p, li { overflow-wrap:anywhere; }
+strong { color:#102a44; }
+pre { padding:20px; background:#f0f5fa; border:1px solid var(--line); border-radius:10px;
+ overflow:auto; line-height:1.7; font-size:13px; }
+code { font-family:Consolas,'Microsoft YaHei',monospace; font-size:.88em; }
+p code, li code { background:#eff4f8; border-radius:4px; padding:2px 5px; }
+table { display:block; width:100%; overflow-x:auto; border-collapse:collapse; font-size:13px; line-height:1.7; margin:20px 0; }
+td, th { border:1px solid var(--line); padding:11px 13px; min-width:95px; vertical-align:top; }
+th { background:#eaf1f7; text-align:left; }
+tbody tr:nth-child(even) { background:#fafbfd; }
+blockquote { margin:22px 0; padding:12px 22px; border-left:4px solid #3c7bb1; background:#f3f7fb; }
+footer { margin-top:40px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; }
+@media(max-width:900px) { .shell { display:block; padding:16px; } aside { position:static; max-height:260px; margin-bottom:18px; }
+ main { padding:24px 20px; } h1 { font-size:25px; } h2 { font-size:21px; } }
+@media print { body { background:white; font-size:11pt; } .shell { display:block; padding:0; } aside { display:none; }
+ main { border:0; padding:0; } h2,h3 { break-after:avoid; } pre,blockquote,tr { break-inside:avoid; }
+ table { display:table; font-size:9pt; } a { color:inherit; } }
+</style></head>
+<body><div class="shell">
+<aside><div class="brand">dex-mapping</div>
+<div class="hint">从研究想法到可验证的两阶段映射<br>2026-10-14 · 研究文档与实施记录</div>
+<nav aria-label="文档目录"><div class="toc">
+<ul>
+<li><a href="#m0先知道自己有什么">M0：先知道自己有什么</a></li>
+<li><a href="#m1让一只机器人手在电脑里正确动起来">M1：让一只机器人手在电脑里正确动起来</a></li>
+<li><a href="#m2先复现简单方法和已有基线">M2：先复现简单方法和已有基线</a></li>
+<li><a href="#m3实现跨尺寸网络">M3：实现跨尺寸网络</a></li>
+<li><a href="#m4实现机构约束与欠驱动映射">M4：实现机构约束与欠驱动映射</a></li>
+<li><a href="#m5组合两阶段检验双重泛化">M5：组合两阶段，检验双重泛化</a></li>
+<li><a href="#m6加上摄像头与真实控制">M6：加上摄像头与真实控制</a></li>
+<li><a href="#给后续助手的具体指令">给后续助手的具体指令</a></li>
+</ul>
+</div>
+</nav></aside>
+<main><div class="eyebrow">研究思路 · 新手指南</div>
+<p class="status">当前阶段：独立环境与 MANO 加载核查已通过；L20 FK、R 拟合、基线与网络训练尚未运行。</p>
+<h1 id="新手执行清单">新手执行清单</h1>
+<p>这张清单把主文档拆成小任务。<code>[ ]</code> 是未完成，<code>[x]</code> 是完成。只有实际操作并保存验收证据后才能打勾。当前独立环境与 MANO 加载核查已完成；L20 FK、拟合、基线与训练仍未运行。</p>
+<h2 id="m0先知道自己有什么">M0：先知道自己有什么</h2>
+<p>把“待填”替换成真实情况。不清楚的保留“不知道”，可以让后续助手协助查询。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>当前信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>项目目录</td>
+<td>E:\lingqiaoshou\dex-mapping</td>
+</tr>
+<tr>
+<td>操作系统</td>
+<td>当前工作区使用 Windows / PowerShell；具体版本待记录</td>
+</tr>
+<tr>
+<td>Python 与环境</td>
+<td>项目 <code>.conda/envs/mano-l20</code> 已创建：Python 3.11.17，CPU PyTorch 2.14.1+cpu；smplx 前向/梯度核查通过</td>
+</tr>
+<tr>
+<td>GPU、显存、内存</td>
+<td>待填</td>
+</tr>
+<tr>
+<td>可用机器人手</td>
+<td>用户已有 L20 URDF，首个候选模型为左手；是否有真机与硬件版本待确认</td>
+</tr>
+<tr>
+<td>URDF 与网格资源路径</td>
+<td>E:\lingqiaoshou\linkerhand-urdf-main\linkerhand-urdf-main\l20\left；URDF 及引用的 22 个网格文件存在，FK/尺度未验证</td>
+</tr>
+<tr>
+<td>驱动 SDK、独立控制量与耦合资料</td>
+<td>在线 URDF 有 5 条 mimic，16 个独立运动学坐标；厂商资料给出 16 主动+5 被动；SDK 命令到关节角对应待核查</td>
+</tr>
+<tr>
+<td>已有数据/视频</td>
+<td>待填</td>
+</tr>
+<tr>
+<td>MANO 模型</td>
+<td>E:\dex\MANO\mano_v1_2\mano_v1_2\models\MANO_LEFT.pkl；已核查 778 顶点、10 维形状、16 原生关节并导出 21 点</td>
+</tr>
+<tr>
+<td>最近想交付的东西</td>
+<td>建议先选“离线演示 + 基线复现报告”；最终由实际需求决定</td>
+</tr>
+<tr>
+<td>投稿目标/截止日期</td>
+<td>待定</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>[ ] 填资源表，选定第一只模型可用的机器人手。</li>
+<li>[ ] 确认做右手还是左手；第一轮建议固定一侧。</li>
+<li>[ ] 阅读主文档第 1–4 节，用自己的话解释两阶段分别解决什么。</li>
+</ul>
+<p>**验收：**能说清“我拿什么作为输入、用哪只机器人、希望先交付什么”。不要在不清楚硬件和模型时直接安装一套复杂深度学习环境。</p>
+<p>L20 的具体取点、MANO 参数拟合与验收计划见 <a href="L20左手_URDF到虚拟人手R建模指南.html">L20 左手建模指南</a>。先按 <a href="MANO与L20独立环境使用说明.html">环境说明</a>激活已验证环境；机器人 M1 与拟合仍未运行。</p>
+<h2 id="m1让一只机器人手在电脑里正确动起来">M1：让一只机器人手在电脑里正确动起来</h2>
+<p>**输入：**一套完整机器人模型，包含 URDF 及其引用的网格资源。</p>
+<p><strong>操作：</strong></p>
+<ol>
+<li>读取 <code>robots/README.md</code>，建立 <code>robots/&lt;手型名&gt;/</code>。</li>
+<li>记录模型仓库、commit、许可证与资源路径，原始模型留一份。</li>
+<li>选择和后续基线匹配的显示/运动学环境。按官方说明建独立环境并记录版本；未决定环境前不同时安装多套仿真器。</li>
+<li>加载模型，给每个可控关节一次小范围变化，观察是否是预期手指与方向。</li>
+<li>打印关节名与角度，计算 FK，标出指尖坐标。核对米/毫米、弧度/角度。</li>
+<li>保存加载画面、动作演示与检查记录到 <code>复现/model_check/</code>。</li>
+</ol>
+<p><strong>输出：</strong><code>复现/model_check/复现报告.md</code>，包含模型能加载、资源完整、顺序正确、限位正确和指尖定义。</p>
+<p>**验收：**不是“窗口打开了”，而是“改变指定关节时对应手指按预期运动，FK 与画面一致”。若模型没有驱动信息，明确只完成运动学检查。</p>
+<h2 id="m2先复现简单方法和已有基线">M2：先复现简单方法和已有基线</h2>
+<p>**输入：**固定的少量离线手部样本及 M1 的机器人模型。</p>
+<p><strong>操作：</strong></p>
+<ol>
+<li>建立一个小的 smoke 样本集，用张手、弯指与捏合等姿态排查接口；它只用于调试。</li>
+<li>核对关键点顺序、左右手、腕部坐标、单位，记录到 <code>dataset.md</code>。</li>
+<li>在 <code>复现/&lt;基线名&gt;/</code> 内放外部代码或引用其位置，记录来源版本，使用独立环境。</li>
+<li>跑简单方向/尺度归一化，条件允许时再跑姿态角迁移。</li>
+<li>按 <a href="https://github.com/dexsuite/dex-retargeting/tree/main/example/vector_retargeting">dex-retargeting 官方例子</a> 选择与你模型匹配的模式，保存输入、配置和输出。</li>
+<li>用 FK 检查实际指尖，而不是只看输出数组长度是否正确。</li>
+<li>建立正式的独立验证/测试名单，冻结测评规则；smoke 样本不充当正式泛化证据。</li>
+<li>将完成的运行追加到 <code>experiment/results.md</code>，失败也记。</li>
+</ol>
+<p>**输出：**基线复现报告、参数配置、环境记录、样本清单和初始测评。</p>
+<p>**验收：**另一个窗口按照报告中的确切命令可重跑，并取得相同口径的输出。如果论文数字与本地数据不可比较，明确记录差异，不强行声称复现原论文结果。</p>
+<h2 id="m3实现跨尺寸网络">M3：实现跨尺寸网络</h2>
+<p>**输入：**源形状/动作、目标形状与参考动作，基线与正式划分已固定。</p>
+<p><strong>操作：</strong></p>
+<ol>
+<li>从合法获得的 MANO 模型或明确的骨架开始，先可视化一个形状和一个动作。</li>
+<li>生成/整理少量配对样本，检查形状变化是否合理，记录标签是姿态复制还是任务约束优化。</li>
+<li>固定训练、验证、测试的形状/操作者与序列 ID。</li>
+<li>先训练小型 MLP 候选；保存输入字段、旋转约定、配置、种子、训练日志与权重。</li>
+<li>做未见形状测试，与简单方法比较；同时检查不同动作是否被网络区分。</li>
+<li>保存目标 R 的关键点或姿态，并记录哪些样本不能保持捏合。</li>
+</ol>
+<p><strong>输出：</strong><code>experiment/&lt;版本名&gt;/</code> 内的计划、配置、日志、指标与失败样例。</p>
+<p>**验收：**在相同测试名单上比较，而不是训练误差下降就过关。若网络无新增收益，回到动作定义与标签构造，先别加更大模型。</p>
+<h2 id="m4实现机构约束与欠驱动映射">M4：实现机构约束与欠驱动映射</h2>
+<p>**输入：**第一阶段的目标动作、完整机构/驱动描述。</p>
+<p><strong>操作：</strong></p>
+<ol>
+<li>先用一个明确的固定耦合教学模型区分 <code>u</code> 与 <code>q</code>；例子不能当作真实手的驱动参数。</li>
+<li>根据真实资料整理独立控制量、范围、耦合关系与 FK 链。</li>
+<li>实现可行空间中的优化参考解，保存收敛状态与不可达目标。</li>
+<li>训练机构条件映射候选，输出执行器指令，并通过机构模型恢复关节状态。</li>
+<li>比较投影前后误差与违规；分别报告几何匹配和任务功能。</li>
+<li>缺少真实驱动模型时标明当前只在简化假设下验证。</li>
+</ol>
+<p>**验收：**输出符合真实可控制量，且耦合/限位约束被核查。给每个关节输出一个漂亮角度数组不算完成欠驱动适配。</p>
+<h2 id="m5组合两阶段检验双重泛化">M5：组合两阶段，检验双重泛化</h2>
+<ul>
+<li>[ ] 在相同预算下比较直接映射与两阶段映射。</li>
+<li>[ ] 完成主文档第 10 节的四种操作者/机器人测试条件；资源不足的条件标为未测。</li>
+<li>[ ] 对训练机构与测试机构的几何相似性做说明，明确按手型还是机构家族留出。</li>
+<li>[ ] 完成第一阶段、驱动约束、机构描述等消融。</li>
+<li>[ ] 报告配置/校准成本、推理时延和最差组。</li>
+<li>[ ] 全文阅读相近工作，更新 <code>related_work/文献索引.md</code>，重新确定贡献边界。</li>
+</ul>
+<p>**验收：**每一项论文主张都有对应实验，不用一个总平均数替代所有结论。</p>
+<h2 id="m6加上摄像头与真实控制">M6：加上摄像头与真实控制</h2>
+<p>先做离线视频重放，再做实时视觉输入，最后在具备实际设备接口时开展真机验证。分别记录视觉估计、两个映射阶段和控制接口的耗时。视觉帧丢失时的保持/停止行为也要明确实现和测试。</p>
+<p>**验收：**记录端到端稳定性、指令与关节回读以及实际任务结果。仿真成功与真机成功分别写，不能互相代替。</p>
+<h2 id="给后续助手的具体指令">给后续助手的具体指令</h2>
+<blockquote>
+<p>我是新手，请先读 AGENTS.md、handoff.md 和这张清单。先做第一个尚未完成的里程碑，告诉我本次输入是什么、输出是什么、操作步骤和验收标准。遇到错误解释原因并解决，完成后保存命令和结果，更新交接记录。不要把计划写成已经完成的结果。</p>
+</blockquote>
+<footer>本页离线可读，无需加载外部资源。可编辑源文件：新手执行清单.md。<br>
+主文档与辅助记录在同一个项目文件夹中，已生成的阅读版之间可直接跳转。</footer>
+</main></div></body></html>

@@ -1,0 +1,10 @@
+<mujoco model="r_l20_only">
+  <compiler angle="radian"/>
+  <asset>
+    <mesh name="r_l20_surface" file="r_l20_surface.obj"/>
+  </asset>
+  <worldbody>
+    <geom name="r_l20_surface" type="mesh" mesh="r_l20_surface"
+          rgba="0.12 0.48 0.78 1" contype="0" conaffinity="0"/>
+  </worldbody>
+</mujoco>

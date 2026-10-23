@@ -1,0 +1,41 @@
+{
+  "schema_status": "illustrative_candidate_only",
+  "robot_id": null,
+  "source_url": null,
+  "source_revision": null,
+  "hand_side": null,
+  "urdf_path": null,
+  "length_unit": "meter",
+  "angular_unit": "radian",
+  "reference_frame": null,
+  "geometry": {
+    "palm_dimensions": null,
+    "finger_chains": [],
+    "fingertip_links": [],
+    "human_correspondence": []
+  },
+  "kinematics": {
+    "joints": [],
+    "joint_order": [],
+    "limits_verified": false,
+    "fk_verified": false
+  },
+  "actuation": {
+    "model_type": "unknown",
+    "independent_controls": [],
+    "command_order": [],
+    "command_units": [],
+    "command_limits": [],
+    "coupling_relations": [],
+    "mapping_implementation": null,
+    "state_or_contact_dependence": "unknown",
+    "verified": false
+  },
+  "missing_information": [
+    "real_robot_model",
+    "geometry_and_correspondence",
+    "joint_axes_origins_and_limits",
+    "actuator_to_joint_mapping"
+  ],
+  "notes": "Empty example fields; not a real model, driver, or validated control configuration."
+}

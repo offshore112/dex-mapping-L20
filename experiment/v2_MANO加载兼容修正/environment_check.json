@@ -1,0 +1,214 @@
+{
+  "status": "passed_model_environment_check_only",
+  "python": "3.11.17 | packaged by conda-forge | (main, Oct 13 2026, 16:36:10) [MSC v.1944 64 bit (AMD64)]",
+  "executable": "E:\\lingqiaoshou\\dex-mapping\\.conda\\envs\\mano-l20\\python.exe",
+  "packages": {
+    "torch": "2.14.1+cpu",
+    "numpy": "1.26.4",
+    "scipy": "1.17.1",
+    "matplotlib": "3.11.2",
+    "smplx": "0.1.28",
+    "trimesh": "4.12.2",
+    "Markdown": "3.11.1"
+  },
+  "cuda_available": false,
+  "mano_source": {
+    "path": "E:\\dex\\MANO\\mano_v1_2\\mano_v1_2\\models\\MANO_LEFT.pkl",
+    "size_bytes": 3821391,
+    "sha256": "c4022f7083f2ca7c78b2b3d595abbab52debd32b09d372b16923a801f0ea6a30"
+  },
+  "mano_shapes": {
+    "v_template": [
+      778,
+      3
+    ],
+    "f": [
+      1538,
+      3
+    ],
+    "shapedirs": [
+      778,
+      3,
+      10
+    ],
+    "posedirs": [
+      778,
+      3,
+      135
+    ],
+    "weights": [
+      778,
+      16
+    ]
+  },
+  "mano_joint_count_native": 16,
+  "landmark_count_exported": 21,
+  "landmark_order": [
+    "wrist",
+    "thumb_base",
+    "thumb_middle",
+    "thumb_distal",
+    "thumb_tip",
+    "index_base",
+    "index_middle",
+    "index_distal",
+    "index_tip",
+    "middle_base",
+    "middle_middle",
+    "middle_distal",
+    "middle_tip",
+    "ring_base",
+    "ring_middle",
+    "ring_distal",
+    "ring_tip",
+    "pinky_base",
+    "pinky_middle",
+    "pinky_distal",
+    "pinky_tip"
+  ],
+  "tip_vertex_ids": {
+    "thumb": 744,
+    "index": 320,
+    "middle": 443,
+    "ring": 554,
+    "pinky": 671
+  },
+  "tip_convention_source": "https://github.com/vchoutas/smplx/blob/main/smplx/vertex_ids.py",
+  "neutral_vertices_max_abs_error_model_units": 6.308303282520633e-09,
+  "neutral_joints_max_abs_error_model_units": 6.210221087377121e-10,
+  "numeric_consistency_tolerance_model_units": 1.3593493015069139e-07,
+  "numeric_tolerance_reason": "smplx to_np float32 conversion; 10*eps32*template_max_abs",
+  "shape_gradient_finite_and_nonzero": true,
+  "pose_perturbation_max_vertex_displacement_model_units": 0.002880042710342894,
+  "coordinate_unit": "metre_convention_pending_physical_calibration",
+  "coordinates": "MANO native axes; preview alone uses PCA display axes",
+  "l20_resources": {
+    "source": {
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\linkerhand_l20_left.urdf",
+      "size_bytes": 27629,
+      "sha256": "2c29f77a892d026ad92dfba6a61b3c5b70e90784c4a6dabdc09503f7f0209e3e"
+    },
+    "robot_name": "linkerhand_l20_left",
+    "links": 22,
+    "joints": 21,
+    "mimics": 5,
+    "mesh_files": [
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\hand_base_link.STL",
+        "size_bytes": 2145484,
+        "sha256": "5731b19b50b4b527114adb8de55bba15ba421756c2f9bcea60d68be94dbdd90b"
+      },
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\index_distal.STL",
+        "size_bytes": 950884,
+        "sha256": "27ced01bbbc33d59f20957eb7c54bc0f23f6ba3a86832c641f3d2cb6c10c5009"
+      },
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\index_metacarpals.STL",
+        "size_bytes": 70784,
+        "sha256": "e31345027027f50543192446327eb52fda373ee371378ac56d59b6e3a8183100"
+      },
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\index_middle.STL",
+        "size_bytes": 746984,
+        "sha256": "03d39565b6736c1dbd74d4fb78fc6df6a029e8830749a5c743b27434e8544a79"
+      },
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\index_proximal.STL",
+        "size_bytes": 807534,
+        "sha256": "a009a4af6d042762c3c8ded32bd7151efc477e6839714112e61f20fa418b4e4c"
+      },
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\middle_distal.STL",
+        "size_bytes": 950884,
+        "sha256": "0d1f05f0ca13b635e062c2264e4420d55281442578033734f759539312c33610"
+      },
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\middle_metacarpals.STL",
+        "size_bytes": 70784,
+        "sha256": "e31345027027f50543192446327eb52fda373ee371378ac56d59b6e3a8183100"
+      },
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\middle_middle.STL",
+        "size_bytes": 746984,
+        "sha256": "350d63a1bcc57f7ee4985a52b86c06d5fc432dce7a3cb6fbac310567a3c78cb4"
+      },
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\middle_proximal.STL",
+        "size_bytes": 807634,
+        "sha256": "1ff4af7a882a922f05e36916992b87ebaf7cc4081dbd9da813831276412a6a78"
+      },
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\pinky_distal.STL",
+        "size_bytes": 950884,
+        "sha256": "04180872f8a06de0c44ef7dcfb3423d40d554cfba2f9bb4056f5b7293b09024e"
+      },
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\pinky_metacarpals.STL",
+        "size_bytes": 70784,
+        "sha256": "e31345027027f50543192446327eb52fda373ee371378ac56d59b6e3a8183100"
+      },
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\pinky_middle.STL",
+        "size_bytes": 746984,
+        "sha256": "96bf50fc3dcaf709d06361eb15e30510a89399b07265bf2a6bee5532e40d0012"
+      },
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\pinky_proximal.STL",
+        "size_bytes": 807334,
+        "sha256": "529e677e75e0d69a4bf1de14e0d5d7ab6aa96dd8a5d7573f2c7c3a47157d083f"
+      },
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\ring_distal.STL",
+        "size_bytes": 950884,
+        "sha256": "cba65d8dfb49cb69cf8b6d420b69e0b313097b25e983c81ce270be3968a2ddca"
+      },
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\ring_metacarpals.STL",
+        "size_bytes": 70784,
+        "sha256": "e31345027027f50543192446327eb52fda373ee371378ac56d59b6e3a8183100"
+      },
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\ring_middle.STL",
+        "size_bytes": 747084,
+        "sha256": "7571b16629b018e9375a9641aeadb5472006c28f8921ffe707d8a2a7e2665cb8"
+      },
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\ring_proximal.STL",
+        "size_bytes": 807334,
+        "sha256": "1604c81101e9bb5e666123506563a8655173b3d49680e88f945be23089de209d"
+      },
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\thumb_distal.STL",
+        "size_bytes": 1120784,
+        "sha256": "18228b0b2bdf24f433d135a912b90305849d78a384a260043e321efdec37a58c"
+      },
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\thumb_metacarpals.STL",
+        "size_bytes": 1046684,
+        "sha256": "85fbc694af273729750dbd128627b2aeb259daa115f763ecd83379367ea47258"
+      },
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\thumb_metacarpals_base1.STL",
+        "size_bytes": 286684,
+        "sha256": "cf646ac87b6ea06bcd4a00325673067c50cda0452cf2936811fe5dde7aab5d9b"
+      },
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\thumb_metacarpals_base2.STL",
+        "size_bytes": 482584,
+        "sha256": "887e48745f6324a4964dfc88099e4c8643e92cb5c53fc956e7230fae74e4d556"
+      },
+      {
+        "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\thumb_proximal.STL",
+        "size_bytes": 676584,
+        "sha256": "fd0d83782b8921a79976999e757888a950e1e5bd90d94eeed9df5024fb9d70f6"
+      }
+    ],
+    "all_mesh_files_present": true,
+    "fk_checked": false,
+    "mesh_scale_checked": false,
+    "hardware_driver_mapping_checked": false
+  },
+  "robot_geometry_fitting_run": false,
+  "training_run": false
+}

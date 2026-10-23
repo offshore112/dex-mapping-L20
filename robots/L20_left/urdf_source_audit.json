@@ -1,0 +1,574 @@
+{
+  "status": "source_audit_only_not_simulation_or_hardware_validation",
+  "retrieved_date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "source_url": "https://raw.githubusercontent.com/linker-bot/linkerhand-urdf/main/L20/left/linkerhand_l20_left.urdf",
+  "ref": "main",
+  "commit_sha": null,
+  "local_user_file_verified": false,
+  "collection_method": "Complete numbered source lines returned by web reader; joint attributes parsed in memory.",
+  "robot": "linkerhand_l20_left",
+  "links": 22,
+  "unique_links": 22,
+  "joints": [
+    {
+      "name": "pinky_mcp_roll",
+      "type": "revolute",
+      "parent": "hand_base_link",
+      "child": "pinky_metacarpals",
+      "xyz": [
+        -0.0286705351154727,
+        0.0381019360798378,
+        0.150312712339165
+      ],
+      "rpy": [
+        0,
+        0,
+        0
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "lower": -0.17,
+      "upper": 0.17,
+      "mimic": null,
+      "multiplier": null,
+      "offset": null
+    },
+    {
+      "name": "pinky_mcp_pitch",
+      "type": "revolute",
+      "parent": "pinky_metacarpals",
+      "child": "pinky_proximal",
+      "xyz": [
+        0.0167698082541766,
+        -0.0000126288306181443,
+        0
+      ],
+      "rpy": [
+        0,
+        0,
+        0
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "lower": 0,
+      "upper": 1.4,
+      "mimic": null,
+      "multiplier": null,
+      "offset": null
+    },
+    {
+      "name": "pinky_pip",
+      "type": "revolute",
+      "parent": "pinky_proximal",
+      "child": "pinky_middle",
+      "xyz": [
+        -0.00419455239160021,
+        0,
+        0.0448194355727413
+      ],
+      "rpy": [
+        0,
+        0,
+        0
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "lower": 0,
+      "upper": 1.57,
+      "mimic": null,
+      "multiplier": null,
+      "offset": null
+    },
+    {
+      "name": "pinky_dip",
+      "type": "revolute",
+      "parent": "pinky_middle",
+      "child": "pinky_distal",
+      "xyz": [
+        0.00275561954550002,
+        0,
+        0.0317024252339397
+      ],
+      "rpy": [
+        0,
+        0,
+        0
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "lower": 0,
+      "upper": 1.4,
+      "mimic": "pinky_pip",
+      "multiplier": 0.8917,
+      "offset": 0
+    },
+    {
+      "name": "ring_mcp_roll",
+      "type": "revolute",
+      "parent": "hand_base_link",
+      "child": "ring_metacarpals",
+      "xyz": [
+        -0.0322943001717225,
+        0.0165019360798537,
+        0.1593114381003
+      ],
+      "rpy": [
+        0,
+        0,
+        0
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "lower": -0.17,
+      "upper": 0.17,
+      "mimic": null,
+      "multiplier": null,
+      "offset": null
+    },
+    {
+      "name": "ring_mcp_pitch",
+      "type": "revolute",
+      "parent": "ring_metacarpals",
+      "child": "ring_proximal",
+      "xyz": [
+        0.0167698082541766,
+        -0.0000126288306177003,
+        0
+      ],
+      "rpy": [
+        0,
+        0,
+        0
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "lower": 0,
+      "upper": 1.4,
+      "mimic": null,
+      "multiplier": null,
+      "offset": null
+    },
+    {
+      "name": "ring_pip",
+      "type": "revolute",
+      "parent": "ring_proximal",
+      "child": "ring_middle",
+      "xyz": [
+        -0.00419455239160021,
+        0,
+        0.0448194355727413
+      ],
+      "rpy": [
+        0,
+        0,
+        0
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "lower": 0,
+      "upper": 1.57,
+      "mimic": null,
+      "multiplier": null,
+      "offset": null
+    },
+    {
+      "name": "ring_dip",
+      "type": "revolute",
+      "parent": "ring_middle",
+      "child": "ring_distal",
+      "xyz": [
+        0.00275561954550363,
+        0,
+        0.0317024242175084
+      ],
+      "rpy": [
+        0,
+        0,
+        0
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "lower": 0,
+      "upper": 1.4,
+      "mimic": "ring_pip",
+      "multiplier": 0.8917,
+      "offset": 0
+    },
+    {
+      "name": "middle_mcp_roll",
+      "type": "revolute",
+      "parent": "hand_base_link",
+      "child": "middle_metacarpals",
+      "xyz": [
+        -0.0345991283789502,
+        -0.00509806392012034,
+        0.163804328353988
+      ],
+      "rpy": [
+        0,
+        0,
+        0
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "lower": -0.17,
+      "upper": 0.17,
+      "mimic": null,
+      "multiplier": null,
+      "offset": null
+    },
+    {
+      "name": "middle_mcp_pitch",
+      "type": "revolute",
+      "parent": "middle_metacarpals",
+      "child": "middle_proximal",
+      "xyz": [
+        0.0167698082541766,
+        -0.0000126288306171729,
+        0
+      ],
+      "rpy": [
+        0,
+        0,
+        0
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "lower": 0,
+      "upper": 1.4,
+      "mimic": null,
+      "multiplier": null,
+      "offset": null
+    },
+    {
+      "name": "middle_pip",
+      "type": "revolute",
+      "parent": "middle_proximal",
+      "child": "middle_middle",
+      "xyz": [
+        -0.00419455239160021,
+        0,
+        0.0448194355727413
+      ],
+      "rpy": [
+        0,
+        0,
+        0
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "lower": 0,
+      "upper": 1.57,
+      "mimic": null,
+      "multiplier": null,
+      "offset": null
+    },
+    {
+      "name": "middle_dip",
+      "type": "revolute",
+      "parent": "middle_middle",
+      "child": "middle_distal",
+      "xyz": [
+        0.00275561954550102,
+        0,
+        0.0317024252339387
+      ],
+      "rpy": [
+        0,
+        0,
+        0
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "lower": 0,
+      "upper": 1.4,
+      "mimic": "middle_pip",
+      "multiplier": 0.8917,
+      "offset": 0
+    },
+    {
+      "name": "index_mcp_roll",
+      "type": "revolute",
+      "parent": "hand_base_link",
+      "child": "index_metacarpals",
+      "xyz": [
+        -0.029865288607565,
+        -0.0266980639200853,
+        0.159311439204817
+      ],
+      "rpy": [
+        0,
+        0,
+        0
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "lower": -0.17,
+      "upper": 0.17,
+      "mimic": null,
+      "multiplier": null,
+      "offset": null
+    },
+    {
+      "name": "index_mcp_pitch",
+      "type": "revolute",
+      "parent": "index_metacarpals",
+      "child": "index_proximal",
+      "xyz": [
+        0.0167698082541766,
+        -0.0000126288306177003,
+        0
+      ],
+      "rpy": [
+        0,
+        0,
+        0
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "lower": 0,
+      "upper": 1.4,
+      "mimic": null,
+      "multiplier": null,
+      "offset": null
+    },
+    {
+      "name": "index_pip",
+      "type": "revolute",
+      "parent": "index_proximal",
+      "child": "index_middle",
+      "xyz": [
+        -0.00419455239160021,
+        0,
+        0.0448194355727413
+      ],
+      "rpy": [
+        0,
+        0,
+        0
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "lower": 0,
+      "upper": 1.57,
+      "mimic": null,
+      "multiplier": null,
+      "offset": null
+    },
+    {
+      "name": "index_dip",
+      "type": "revolute",
+      "parent": "index_middle",
+      "child": "index_distal",
+      "xyz": [
+        0.00275561954550102,
+        0,
+        0.0317024252339397
+      ],
+      "rpy": [
+        0,
+        0,
+        0
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "lower": 0,
+      "upper": 1.4,
+      "mimic": "index_pip",
+      "multiplier": 0.8917,
+      "offset": 0
+    },
+    {
+      "name": "thumb_cmc_yaw",
+      "type": "revolute",
+      "parent": "hand_base_link",
+      "child": "thumb_metacarpals_base2",
+      "xyz": [
+        -0.00091528,
+        -0.0050818,
+        0.057392
+      ],
+      "rpy": [
+        0,
+        0,
+        0
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "lower": 0,
+      "upper": 1.4,
+      "mimic": null,
+      "multiplier": null,
+      "offset": null
+    },
+    {
+      "name": "thumb_cmc_roll",
+      "type": "revolute",
+      "parent": "thumb_metacarpals_base2",
+      "child": "thumb_metacarpals_base1",
+      "xyz": [
+        0.024508,
+        -0.002864,
+        0.0035063
+      ],
+      "rpy": [
+        2.0706,
+        0,
+        0
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "lower": 0,
+      "upper": 1.22,
+      "mimic": null,
+      "multiplier": null,
+      "offset": null
+    },
+    {
+      "name": "thumb_cmc_pitch",
+      "type": "revolute",
+      "parent": "thumb_metacarpals_base1",
+      "child": "thumb_metacarpals",
+      "xyz": [
+        -0.0011523,
+        -0.00048559,
+        0.030795
+      ],
+      "rpy": [
+        0,
+        0.49978,
+        1.5708
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "lower": 0,
+      "upper": 0.79,
+      "mimic": null,
+      "multiplier": null,
+      "offset": null
+    },
+    {
+      "name": "thumb_mcp",
+      "type": "revolute",
+      "parent": "thumb_metacarpals",
+      "child": "thumb_proximal",
+      "xyz": [
+        0.0064539,
+        0,
+        0.055858
+      ],
+      "rpy": [
+        0,
+        0,
+        0
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "lower": 0,
+      "upper": 1.05,
+      "mimic": null,
+      "multiplier": null,
+      "offset": null
+    },
+    {
+      "name": "thumb_ip",
+      "type": "revolute",
+      "parent": "thumb_proximal",
+      "child": "thumb_distal",
+      "xyz": [
+        0.0053547,
+        0,
+        0.034485
+      ],
+      "rpy": [
+        0,
+        0,
+        0
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "lower": 0,
+      "upper": 1.22,
+      "mimic": "thumb_mcp",
+      "multiplier": 1.1619,
+      "offset": 0
+    }
+  ],
+  "unique_joints": 21,
+  "mimics": 5,
+  "independent_urdf_coordinates": 16,
+  "transmissions": 0,
+  "ros2_controls": 0,
+  "tip_named_links": [],
+  "units": {
+    "joint_origin": "metre_expected_by_URDF_not_mesh_verified",
+    "joint_angle": "radian_expected_by_URDF"
+  },
+  "driver_mapping_verified": false,
+  "hardware_revision": null,
+  "tip_local_points": null
+}

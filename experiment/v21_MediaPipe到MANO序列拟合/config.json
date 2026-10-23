@@ -1,0 +1,15 @@
+{
+  "version": "v21_MediaPipe_to_MANO_sequence_fit",
+  "input": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v20_离线MANO接口稳定性比较\\real_webcam_mediapipe_capture_until_q.json",
+  "mano": "E:\\dex\\MANO\\mano_v1_2\\mano_v1_2\\models\\MANO_LEFT.pkl",
+  "hand_side": "Left",
+  "selected_frames": 48,
+  "calibration_frames": 16,
+  "shape_steps": 180,
+  "motion_steps": 180,
+  "coordinate_frame": "wrist-centered, palm-aligned, right-handed; x=pinky_mcp_to_index_mcp; y=wrist_to_middle_mcp",
+  "stage_1": "MediaPipe -> per-operator MANO beta_i/scale_i/theta_i",
+  "stage_2": "fixed MANO -> shared R interface -> existing L20 q-level replay",
+  "hardware": "not used",
+  "actuator_u": "not defined"
+}

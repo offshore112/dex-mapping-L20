@@ -1,0 +1,22 @@
+﻿joint,parent,child,type,independent,lower_rad,upper_rad,axis_local,origin_base_mm,axis_base_at_zero,mimic_leader,mimic_multiplier
+pinky_mcp_roll,hand_base_link,pinky_metacarpals,revolute,True,-0.17,0.17,"[1.0, 0.0, 0.0]","[-28.670535115472703, 38.1019360798378, 150.312712339165]","[1.0, 0.0, 0.0]",,
+pinky_mcp_pitch,pinky_metacarpals,pinky_proximal,revolute,True,0.0,1.4,"[0.0, 1.0, 0.0]","[-11.9007268612961, 38.08930724921966, 150.312712339165]","[0.0, 1.0, 0.0]",,
+pinky_pip,pinky_proximal,pinky_middle,revolute,True,0.0,1.57,"[0.0, 1.0, 0.0]","[-16.09527925289631, 38.08930724921966, 195.1321479119063]","[0.0, 1.0, 0.0]",,
+pinky_dip,pinky_middle,pinky_distal,revolute,False,0.0,1.4,"[0.0, 1.0, 0.0]","[-13.339659707396292, 38.08930724921966, 226.83457314584598]","[0.0, 1.0, 0.0]",pinky_pip,0.8917
+ring_mcp_roll,hand_base_link,ring_metacarpals,revolute,True,-0.17,0.17,"[1.0, 0.0, 0.0]","[-32.294300171722504, 16.5019360798537, 159.3114381003]","[1.0, 0.0, 0.0]",,
+ring_mcp_pitch,ring_metacarpals,ring_proximal,revolute,True,0.0,1.4,"[0.0, 1.0, 0.0]","[-15.524491917545902, 16.489307249236, 159.3114381003]","[0.0, 1.0, 0.0]",,
+ring_pip,ring_proximal,ring_middle,revolute,True,0.0,1.57,"[0.0, 1.0, 0.0]","[-19.719044309146113, 16.489307249236, 204.1308736730413]","[0.0, 1.0, 0.0]",,
+ring_dip,ring_middle,ring_distal,revolute,False,0.0,1.4,"[0.0, 1.0, 0.0]","[-16.963424763642482, 16.489307249236, 235.8332978905497]","[0.0, 1.0, 0.0]",ring_pip,0.8917
+middle_mcp_roll,hand_base_link,middle_metacarpals,revolute,True,-0.17,0.17,"[1.0, 0.0, 0.0]","[-34.5991283789502, -5.09806392012034, 163.804328353988]","[1.0, 0.0, 0.0]",,
+middle_mcp_pitch,middle_metacarpals,middle_proximal,revolute,True,0.0,1.4,"[0.0, 1.0, 0.0]","[-17.8293201247736, -5.110692750737513, 163.804328353988]","[0.0, 1.0, 0.0]",,
+middle_pip,middle_proximal,middle_middle,revolute,True,0.0,1.57,"[0.0, 1.0, 0.0]","[-22.023872516373807, -5.110692750737513, 208.62376392672928]","[0.0, 1.0, 0.0]",,
+middle_dip,middle_middle,middle_distal,revolute,False,0.0,1.4,"[0.0, 1.0, 0.0]","[-19.268252970872787, -5.110692750737513, 240.326189160668]","[0.0, 1.0, 0.0]",middle_pip,0.8917
+index_mcp_roll,hand_base_link,index_metacarpals,revolute,True,-0.17,0.17,"[1.0, 0.0, 0.0]","[-29.865288607565, -26.6980639200853, 159.311439204817]","[1.0, 0.0, 0.0]",,
+index_mcp_pitch,index_metacarpals,index_proximal,revolute,True,0.0,1.4,"[0.0, 1.0, 0.0]","[-13.095480353388398, -26.710692750703, 159.311439204817]","[0.0, 1.0, 0.0]",,
+index_pip,index_proximal,index_middle,revolute,True,0.0,1.57,"[0.0, 1.0, 0.0]","[-17.290032744988608, -26.710692750703, 204.1308747775583]","[0.0, 1.0, 0.0]",,
+index_dip,index_middle,index_distal,revolute,False,0.0,1.4,"[0.0, 1.0, 0.0]","[-14.53441319948759, -26.710692750703, 235.83330001149798]","[0.0, 1.0, 0.0]",index_pip,0.8917
+thumb_cmc_yaw,hand_base_link,thumb_metacarpals_base2,revolute,True,0.0,1.4,"[-1.0, 0.0, 0.0]","[-0.91528, -5.0818, 57.391999999999996]","[-1.0, 0.0, 0.0]",,
+thumb_cmc_roll,thumb_metacarpals_base2,thumb_metacarpals_base1,revolute,True,0.0,1.22,"[0.0, 1.0, 0.0]","[23.592719999999996, -7.945799999999999, 60.8983]","[0.0, -0.4792532363941375, 0.8776766690562903]",,
+thumb_cmc_pitch,thumb_metacarpals_base1,thumb_metacarpals,revolute,True,0.0,0.79,"[0.0, 1.0, 0.0]","[22.44042, -34.74113244452783, 45.71350557151549]","[-0.9999999999932537, 1.7603954337516123e-06, -3.223886419926779e-06]",,
+thumb_mcp,thumb_metacarpals,thumb_proximal,revolute,True,0.0,1.05,"[0.0, 1.0, 0.0]","[22.440300865185435, -90.59928521326938, 52.16608323162444]","[-0.9999999999932537, 1.7603954337516123e-06, -3.223886419926779e-06]",,
+thumb_ip,thumb_proximal,thumb_distal,revolute,False,0.0,1.22,"[0.0, 1.0, 0.0]","[22.440222897413044, -125.08441196644904, 57.519966859520395]","[-0.9999999999932537, 1.7603954337516123e-06, -3.223886419926779e-06]",thumb_mcp,1.1619

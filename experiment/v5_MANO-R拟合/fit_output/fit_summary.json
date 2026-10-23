@@ -1,0 +1,326 @@
+{
+  "version": "v5_mano_r_fit",
+  "status": "completed_simulation_geometry_fit",
+  "fit_scope": "fixed flat MANO reference pose; beta + positive scale + rigid alignment",
+  "hardware": "not used; no hardware calibration",
+  "mano_source": "E:\\dex\\MANO\\mano_v1_2\\mano_v1_2\\models\\MANO_LEFT.pkl",
+  "mano_sha256": "c4022f7083f2ca7c78b2b3d595abbab52debd32b09d372b16923a801f0ea6a30",
+  "target_source": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v5_MANO-R拟合\\l20_landmarks21_v5.json",
+  "landmark_order": [
+    "wrist",
+    "thumb_cmc",
+    "thumb_mcp",
+    "thumb_ip",
+    "thumb_tip",
+    "index_mcp",
+    "index_pip",
+    "index_dip",
+    "index_tip",
+    "middle_mcp",
+    "middle_pip",
+    "middle_dip",
+    "middle_tip",
+    "ring_mcp",
+    "ring_pip",
+    "ring_dip",
+    "ring_tip",
+    "pinky_mcp",
+    "pinky_pip",
+    "pinky_dip",
+    "pinky_tip"
+  ],
+  "tip_vertex_ids": {
+    "thumb": 744,
+    "index": 320,
+    "middle": 443,
+    "ring": 554,
+    "pinky": 671
+  },
+  "weights": [
+    2.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "baseline_scale_only": {
+    "scale": 1.4920215576588036,
+    "rotation": [
+      [
+        -0.09274451350927437,
+        -0.9950717739618028,
+        0.03508019210858887
+      ],
+      [
+        -0.27279491893752084,
+        -0.00848997216314884,
+        -0.9620347460328458
+      ],
+      [
+        0.9575914512023047,
+        -0.09879314266244071,
+        -0.27066312557692274
+      ]
+    ],
+    "translation_m": [
+      -0.009654183342486354,
+      -0.011986455961527137,
+      0.16191256932051193
+    ],
+    "point_error_mm": [
+      28.81114136370725,
+      9.522901650163915,
+      26.353958690071504,
+      43.422201945888965,
+      78.18123417750039,
+      28.623704182096333,
+      41.85906303623084,
+      50.13660613504575,
+      56.1831971286684,
+      11.854150774493876,
+      15.790959398650044,
+      19.940369673756734,
+      27.498388707962807,
+      11.880741010313844,
+      12.229032837426098,
+      8.635692427820164,
+      9.026785910193684,
+      20.312730730289168,
+      38.14646237750352,
+      46.37165349638569,
+      51.34713380671674
+    ],
+    "rmse_mm": 35.52320000215482,
+    "max_mm": 78.18123417750039,
+    "group_metrics": {
+      "wrist": {
+        "rmse_mm": 28.81114136370725,
+        "mean_mm": 28.81114136370725,
+        "max_mm": 28.81114136370725,
+        "point_names": [
+          "wrist"
+        ]
+      },
+      "thumb": {
+        "rmse_mm": 46.858856670386785,
+        "mean_mm": 39.37007411590619,
+        "max_mm": 78.18123417750039,
+        "point_names": [
+          "thumb_cmc",
+          "thumb_mcp",
+          "thumb_ip",
+          "thumb_tip"
+        ]
+      },
+      "index": {
+        "rmse_mm": 45.39198308543819,
+        "mean_mm": 44.20064262051034,
+        "max_mm": 56.1831971286684,
+        "point_names": [
+          "index_mcp",
+          "index_pip",
+          "index_dip",
+          "index_tip"
+        ]
+      },
+      "middle": {
+        "rmse_mm": 19.644687663427877,
+        "mean_mm": 18.770967138715864,
+        "max_mm": 27.498388707962807,
+        "point_names": [
+          "middle_mcp",
+          "middle_pip",
+          "middle_dip",
+          "middle_tip"
+        ]
+      },
+      "ring": {
+        "rmse_mm": 10.56834067710467,
+        "mean_mm": 10.443063046438446,
+        "max_mm": 12.229032837426098,
+        "point_names": [
+          "ring_mcp",
+          "ring_pip",
+          "ring_dip",
+          "ring_tip"
+        ]
+      },
+      "pinky": {
+        "rmse_mm": 40.78792106676086,
+        "mean_mm": 39.04449510272378,
+        "max_mm": 51.34713380671674,
+        "point_names": [
+          "pinky_mcp",
+          "pinky_pip",
+          "pinky_dip",
+          "pinky_tip"
+        ]
+      }
+    },
+    "total_loss": 0.017939137377122237
+  },
+  "beta_scale_fit": {
+    "beta": [
+      1.984290874489423,
+      1.946746649886621,
+      -10.1409286027289,
+      4.494538882633884,
+      -1.4443195696455442,
+      -3.50599235018315,
+      3.892597184856881,
+      6.861944540958,
+      -4.60136715709409,
+      -3.717646677907253
+    ],
+    "scale": 1.587646643364669,
+    "rotation": [
+      [
+        -0.11542075465237889,
+        -0.9925086864514994,
+        -0.040056918425025234
+      ],
+      [
+        -0.1716422643295999,
+        0.05964797007188771,
+        -0.9833519475559291
+      ],
+      [
+        0.9783746636596828,
+        -0.1066237636952963,
+        -0.1772410520284784
+      ]
+    ],
+    "rotation_axis_angle": [
+      1.2444096348466414,
+      -1.445540472530058,
+      1.1651206193833976
+    ],
+    "translation_m": [
+      -0.010538956835578558,
+      -0.012704222348167754,
+      0.1624015091984531
+    ],
+    "point_error_mm": [
+      14.945458938722334,
+      13.635906109786353,
+      22.674202477142547,
+      27.46363263460587,
+      58.79643938191861,
+      21.684627079131957,
+      30.72724793961742,
+      36.7670426966328,
+      30.267556248462792,
+      6.364028195091012,
+      13.7847102534357,
+      21.880662556833332,
+      36.161908015805174,
+      9.262068645514518,
+      8.870399012830044,
+      4.328760472026267,
+      17.711140044203212,
+      14.820845450856158,
+      25.737919664501245,
+      33.05377730581117,
+      39.483430090312126
+    ],
+    "rmse_mm": 26.605113883330503,
+    "mean_mm": 23.258179200630508,
+    "max_mm": 58.79643938191861,
+    "group_metrics": {
+      "wrist": {
+        "rmse_mm": 14.945458938722334,
+        "mean_mm": 14.945458938722334,
+        "max_mm": 14.945458938722334,
+        "point_names": [
+          "wrist"
+        ]
+      },
+      "thumb": {
+        "rmse_mm": 35.04044019019162,
+        "mean_mm": 30.64254515086334,
+        "max_mm": 58.79643938191861,
+        "point_names": [
+          "thumb_cmc",
+          "thumb_mcp",
+          "thumb_ip",
+          "thumb_tip"
+        ]
+      },
+      "index": {
+        "rmse_mm": 30.341090979946753,
+        "mean_mm": 29.86161849096124,
+        "max_mm": 36.7670426966328,
+        "point_names": [
+          "index_mcp",
+          "index_pip",
+          "index_dip",
+          "index_tip"
+        ]
+      },
+      "middle": {
+        "rmse_mm": 22.455322737096495,
+        "mean_mm": 19.547827255291303,
+        "max_mm": 36.161908015805174,
+        "point_names": [
+          "middle_mcp",
+          "middle_pip",
+          "middle_dip",
+          "middle_tip"
+        ]
+      },
+      "ring": {
+        "rmse_mm": 11.145543314825382,
+        "mean_mm": 10.04309204364351,
+        "max_mm": 17.711140044203212,
+        "point_names": [
+          "ring_mcp",
+          "ring_pip",
+          "ring_dip",
+          "ring_tip"
+        ]
+      },
+      "pinky": {
+        "rmse_mm": 29.72200958218171,
+        "mean_mm": 28.273993127870174,
+        "max_mm": 39.483430090312126,
+        "point_names": [
+          "pinky_mcp",
+          "pinky_pip",
+          "pinky_dip",
+          "pinky_tip"
+        ]
+      }
+    },
+    "point_loss": 0.009903530691456351,
+    "beta_regularization_loss": 0.0024237665912826166,
+    "total_loss": 0.012327297282738969,
+    "optimizer": {
+      "adam_steps": 1600,
+      "lbfgs_max_iter": 120,
+      "learning_rate": 0.02,
+      "beta_regularization": 0.0001
+    }
+  },
+  "limitations": [
+    "L20 joint origins are mechanical proxies for MANO joints.",
+    "The fit uses one URDF zero-pose geometry target; it is not a dynamic retargeting result.",
+    "MANO-R does not include L20 mimic or actuator constraints; those belong to stage two.",
+    "Tip points are distal-cap centers, not measured contact centers."
+  ]
+}

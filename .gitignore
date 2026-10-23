@@ -1,0 +1,23 @@
+# Large/raw assets; keep documentation and reproducible split manifests.
+DataSet/raw/*
+DataSet/processed/*
+DataSet/models/*
+!DataSet/raw/.gitkeep
+!DataSet/processed/.gitkeep
+!DataSet/models/.gitkeep
+related_work/*/paper.pdf
+related_work/*/source/
+experiment/*/checkpoints/
+experiment/*/*.pt
+experiment/*/*.pth
+experiment/*/*.ckpt
+robots/*/model/meshes/
+__pycache__/
+*.pyc
+*.orig
+.shot-tmp/
+.venv/
+.conda/
+experiment/*/mano_neutral.obj
+experiment/*/mano_reference.npz
+.env

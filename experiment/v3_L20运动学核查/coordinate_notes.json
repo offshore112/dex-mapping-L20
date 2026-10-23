@@ -1,0 +1,24 @@
+{
+  "root": "hand_base_link",
+  "length_unit": "metre",
+  "angle_unit": "radian",
+  "rpy": "Rz(yaw) @ Ry(pitch) @ Rx(roll)",
+  "joint_axis_frame": "joint frame after origin; not global axes",
+  "positive_rotation": "right-hand rule",
+  "anatomical_wrist_defined": false,
+  "tip_points_defined": false,
+  "index_pip_at_zero_base_mm": [
+    -17.290032744988608,
+    -26.710692750703,
+    204.1308747775583
+  ],
+  "index_pip_example_q": {
+    "index_pip": 0.5,
+    "index_dip": 0.44585
+  },
+  "index_dip_origin_displacement_example_mm": [
+    14.861616407675967,
+    0.0,
+    -5.202044063790989
+  ]
+}

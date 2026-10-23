@@ -1,0 +1,37 @@
+{
+  "version": "v21_R_multiview_diagnostic",
+  "status": "completed_selected_frame_multiview",
+  "frames": [
+    {
+      "frame_id": 0,
+      "thumb_index_tip_distance_mm": 121.30069603231516,
+      "thumb_middle_tip_distance_mm": 166.11431858234175
+    },
+    {
+      "frame_id": 190,
+      "thumb_index_tip_distance_mm": 24.63147729632413,
+      "thumb_middle_tip_distance_mm": 39.94207415607868
+    },
+    {
+      "frame_id": 383,
+      "thumb_index_tip_distance_mm": 88.24783827108654,
+      "thumb_middle_tip_distance_mm": 32.934339660256164
+    },
+    {
+      "frame_id": 773,
+      "thumb_index_tip_distance_mm": 142.84710583952156,
+      "thumb_middle_tip_distance_mm": 181.74727766475357
+    }
+  ],
+  "views": [
+    "oblique",
+    "front",
+    "side",
+    "top"
+  ],
+  "limitations": [
+    "This view diagnoses MANO-R shape and point geometry only.",
+    "Tip distances are geometric distances; they are not contact success metrics.",
+    "The displayed surface follows the current v20 per-frame beta behavior."
+  ]
+}

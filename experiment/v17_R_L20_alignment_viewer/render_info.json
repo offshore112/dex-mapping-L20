@@ -1,0 +1,43 @@
+{
+  "version": "v17_R_L20_alignment_views",
+  "status": "passed_overlay_and_separated_view_render",
+  "selected_frames": [
+    0,
+    8,
+    16
+  ],
+  "records": [
+    {
+      "frame_id": 0,
+      "overlay": "frame_000_overlay.png",
+      "separate": "frame_000_separate.png",
+      "tip_pair": null
+    },
+    {
+      "frame_id": 8,
+      "overlay": "frame_008_overlay.png",
+      "separate": "frame_008_separate.png",
+      "tip_pair": [
+        "thumb_tip",
+        "index_tip"
+      ]
+    },
+    {
+      "frame_id": 16,
+      "overlay": "frame_016_overlay.png",
+      "separate": "frame_016_separate.png",
+      "tip_pair": [
+        "thumb_tip",
+        "middle_tip"
+      ]
+    }
+  ],
+  "visual_convention": {
+    "overlay": "natural blue MANO-R surface and gray L20 geometry share the root for alignment inspection",
+    "separate": "blue R is translated -0.30 m along the camera-horizontal palm axis for side-by-side inspection; L20 remains at the root"
+  },
+  "limitations": [
+    "Images show synthetic sequence endpoints, not camera playback.",
+    "The separated view is a display translation only and does not change q or feature optimization."
+  ]
+}

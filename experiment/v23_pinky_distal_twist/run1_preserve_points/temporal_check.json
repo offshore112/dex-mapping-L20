@@ -1,0 +1,37 @@
+{
+  "status": "completed_temporal_diagnostic_no_filter",
+  "before": {
+    "pinky_DIP_rotation_step_deg": {
+      "mean": 2.070717917856569,
+      "rmse": 4.232944335554888,
+      "max": 25.56587055252539,
+      "p95": 10.612920357468935
+    },
+    "pinky_DIP_rate_deg_s": {
+      "mean": 59.179118672343975,
+      "rmse": 122.77015241654888,
+      "max": 812.6597843582895,
+      "p95": 305.64536666208375
+    },
+    "max_step_frame_id": 254,
+    "max_pose_component_step_rad": 0.44370417677414764
+  },
+  "after": {
+    "pinky_DIP_rotation_step_deg": {
+      "mean": 2.0306878242353794,
+      "rmse": 4.1069960022801295,
+      "max": 25.55058042217708,
+      "p95": 10.508597614229489
+    },
+    "pinky_DIP_rate_deg_s": {
+      "mean": 57.999275850348425,
+      "rmse": 118.76263057520949,
+      "max": 789.070629535707,
+      "p95": 305.6453666620809
+    },
+    "max_step_frame_id": 253,
+    "max_pose_component_step_rad": 0.43257223697795605
+  },
+  "timestamps_unchanged": true,
+  "note": "SO(3) diagnostics for a noisy visual sequence; no anatomical speed or latency claim."
+}

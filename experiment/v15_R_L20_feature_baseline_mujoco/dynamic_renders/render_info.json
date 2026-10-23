@@ -1,0 +1,40 @@
+{
+  "version": "v15_dynamic_R_L20_feature_solution_render",
+  "status": "passed_dynamic_R_surface_and_q_solution_render",
+  "renders": [
+    {
+      "action": "open",
+      "scene": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v15_R_L20_feature_baseline_mujoco\\dynamic_renders\\scene_open.xml",
+      "mesh": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v15_R_L20_feature_baseline_mujoco\\dynamic_meshes\\mano_r_open.obj",
+      "image": "open.png",
+      "tip_pair": null,
+      "mj_ncon": 34
+    },
+    {
+      "action": "pinch_thumb_index",
+      "scene": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v15_R_L20_feature_baseline_mujoco\\dynamic_renders\\scene_pinch_thumb_index.xml",
+      "mesh": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v15_R_L20_feature_baseline_mujoco\\dynamic_meshes\\mano_r_pinch_thumb_index.obj",
+      "image": "pinch_thumb_index.png",
+      "tip_pair": [
+        "thumb_tip",
+        "index_tip"
+      ],
+      "mj_ncon": 39
+    },
+    {
+      "action": "opposition_thumb_middle",
+      "scene": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v15_R_L20_feature_baseline_mujoco\\dynamic_renders\\scene_opposition_thumb_middle.xml",
+      "mesh": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v15_R_L20_feature_baseline_mujoco\\dynamic_meshes\\mano_r_opposition_thumb_middle.obj",
+      "image": "opposition_thumb_middle.png",
+      "tip_pair": [
+        "thumb_tip",
+        "middle_tip"
+      ],
+      "mj_ncon": 33
+    }
+  ],
+  "limitations": [
+    "The image is a visual mapping check; contact/collision is not interpreted as success.",
+    "The URDF collision geometry currently has overlapping contacts and needs a separate cleaned collision descriptor."
+  ]
+}

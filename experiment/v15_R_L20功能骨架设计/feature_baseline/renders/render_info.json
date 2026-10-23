@@ -1,0 +1,34 @@
+{
+  "version": "v15_R_L20_feature_solution_render",
+  "status": "passed_feature_solution_render",
+  "renders": [
+    {
+      "action": "open",
+      "image": "open.png",
+      "tip_pair": null,
+      "note": "R surface is static visual reference; L20 is driven by feature-level q solution."
+    },
+    {
+      "action": "pinch_thumb_index",
+      "image": "pinch_thumb_index.png",
+      "tip_pair": [
+        "thumb_tip",
+        "index_tip"
+      ],
+      "note": "R surface is static visual reference; L20 is driven by feature-level q solution."
+    },
+    {
+      "action": "opposition_thumb_middle",
+      "image": "opposition_thumb_middle.png",
+      "tip_pair": [
+        "thumb_tip",
+        "middle_tip"
+      ],
+      "note": "R surface is static visual reference; L20 is driven by feature-level q solution."
+    }
+  ],
+  "limitations": [
+    "Images are a visual q-level check, not contact/collision or actuator validation.",
+    "The natural R surface and L20 mechanics are intentionally separate objects."
+  ]
+}

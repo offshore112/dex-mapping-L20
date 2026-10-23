@@ -1,0 +1,23 @@
+{
+  "version": "v7_mano_r_motion_preview",
+  "status": "generated_for_visual_motion_check",
+  "frame_count": 9,
+  "pose_channel": "MANO native hand_pose[3:6], axis-angle x increment",
+  "increment_range_rad": [
+    0.0,
+    0.45
+  ],
+  "fixed_beta": [
+    1.3184139329217517,
+    1.493310696826527,
+    -2.735756967985222,
+    -1.6068632796564655,
+    -2.3884107794597416,
+    -0.5666940375822804,
+    1.606868240396183,
+    2.4821029253875615,
+    0.7258090598600593,
+    1.0572934749283687
+  ],
+  "limitation": "Not a camera estimate or L20 retargeting result."
+}

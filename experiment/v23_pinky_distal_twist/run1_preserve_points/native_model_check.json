@@ -1,0 +1,79 @@
+{
+  "status": "passed_native_model_semantics_check",
+  "expected_left_hand": true,
+  "native_parents": [
+    4294967295,
+    0,
+    1,
+    2,
+    0,
+    4,
+    5,
+    0,
+    7,
+    8,
+    0,
+    10,
+    11,
+    0,
+    13,
+    14
+  ],
+  "chains": {
+    "thumb": [
+      13,
+      14,
+      15
+    ],
+    "index": [
+      1,
+      2,
+      3
+    ],
+    "middle": [
+      4,
+      5,
+      6
+    ],
+    "ring": [
+      10,
+      11,
+      12
+    ],
+    "pinky": [
+      7,
+      8,
+      9
+    ]
+  },
+  "tip_vertex_ids": {
+    "thumb": 744,
+    "index": 320,
+    "middle": 443,
+    "ring": 554,
+    "pinky": 671
+  },
+  "tip_skin_weights_at_expected_distal": {
+    "thumb": 1.0,
+    "index": 1.0,
+    "middle": 1.0,
+    "ring": 1.0,
+    "pinky": 1.0
+  },
+  "canonical_vs_batched_max_abs_m": 0.0,
+  "neutral_forward_vs_template_max_abs_m": 6.308303282520633e-09,
+  "pinky_DIP_perturbation_rad": 0.1,
+  "native_joint_centers_max_abs_change_m": 0.0,
+  "pinky_tip_displacements_m": [
+    0.0011136184214375353,
+    0.002015831786807111,
+    0.001825625956198073
+  ],
+  "raw_capture_canonicalization_max_abs_m": 0.0,
+  "raw_capture_all_frames_physical_left": true,
+  "raw_capture_palm_basis_determinant_range": [
+    0.9999999999999998,
+    1.0000000000000004
+  ],
+  "verify_script_sha256": "b5844944a4fe9f2c3cd4c4ddc0d469c062f73221daf12c8a5d54bce5dc092dbe"
+}

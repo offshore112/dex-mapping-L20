@@ -1,0 +1,10 @@
+{
+  "version": "v10_shared_R_L20_only_scene",
+  "status": "passed_r_only_mujoco_load_and_render",
+  "scene": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v11_R_L20_natural_reference_mujoco\\beta0\\r_l20_only.xml",
+  "body_count": 1,
+  "joint_count": 0,
+  "geom_count": 1,
+  "surface_collision_disabled": true,
+  "note": "R is rendered independently; L20 is not embedded in this scene."
+}

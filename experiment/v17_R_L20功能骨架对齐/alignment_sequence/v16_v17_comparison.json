@@ -1,0 +1,15 @@
+{
+  "version": "v17_alignment_vs_v16",
+  "status": "completed_same_sequence_evaluation",
+  "v16": {
+    "mean_semantic_point_rmse_normalized": 0.1328617030765703,
+    "mean_bone_direction_rmse_deg": 16.812075194390136,
+    "mean_bend_angle_rmse_deg": 14.11889260014318
+  },
+  "v17": {
+    "mean_semantic_point_rmse_normalized": 0.13280862648392522,
+    "mean_bone_direction_rmse_deg": 16.645564334997953,
+    "mean_bend_angle_rmse_deg": 13.860769052345308
+  },
+  "interpretation": "Both methods use the same model and synthetic sequence; v17 adds semantic point and bend-angle terms."
+}

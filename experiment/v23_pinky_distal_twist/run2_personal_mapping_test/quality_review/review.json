@@ -1,0 +1,76 @@
+{
+  "version": "v23_quality_review",
+  "quality_status": "not_accepted_by_user",
+  "engineering_checks": "previous numerical/display/repeatability passes remain valid but do not certify naturalness or human-motion accuracy",
+  "sequence_sha256": "946c6eb29004877811a88c43c491f6ea7be0c27f3dc900d02bde5fcff6e6a303",
+  "frame_count": 774,
+  "method": "swing-twist about source-shape neutral parent-joint-to-child/tip axes; exploratory descriptive audit, not anatomical limits or true measured angles",
+  "four_finger_twist": [
+    {
+      "finger": "index",
+      "joint": "PIP",
+      "native_joint": 2,
+      "absolute_twist_mean_deg": 18.53891311567635,
+      "absolute_twist_max_deg": 36.314608126433264,
+      "max_frame_id": 628
+    },
+    {
+      "finger": "index",
+      "joint": "DIP",
+      "native_joint": 3,
+      "absolute_twist_mean_deg": 22.223908133536792,
+      "absolute_twist_max_deg": 64.68511752982596,
+      "max_frame_id": 694
+    },
+    {
+      "finger": "middle",
+      "joint": "PIP",
+      "native_joint": 5,
+      "absolute_twist_mean_deg": 28.61271490401399,
+      "absolute_twist_max_deg": 54.18142042885251,
+      "max_frame_id": 625
+    },
+    {
+      "finger": "middle",
+      "joint": "DIP",
+      "native_joint": 6,
+      "absolute_twist_mean_deg": 16.461529863677,
+      "absolute_twist_max_deg": 62.16561272272096,
+      "max_frame_id": 202
+    },
+    {
+      "finger": "ring",
+      "joint": "PIP",
+      "native_joint": 11,
+      "absolute_twist_mean_deg": 24.100887659744693,
+      "absolute_twist_max_deg": 48.188838019943084,
+      "max_frame_id": 517
+    },
+    {
+      "finger": "ring",
+      "joint": "DIP",
+      "native_joint": 12,
+      "absolute_twist_mean_deg": 16.465999705747826,
+      "absolute_twist_max_deg": 72.81089881228546,
+      "max_frame_id": 215
+    },
+    {
+      "finger": "pinky",
+      "joint": "PIP",
+      "native_joint": 8,
+      "absolute_twist_mean_deg": 8.589717470225374,
+      "absolute_twist_max_deg": 28.989148838454078,
+      "max_frame_id": 453
+    },
+    {
+      "finger": "pinky",
+      "joint": "DIP",
+      "native_joint": 9,
+      "absolute_twist_mean_deg": 15.962829072074014,
+      "absolute_twist_max_deg": 51.82022342952717,
+      "max_frame_id": 640
+    }
+  ],
+  "known_fitter_limits": "generic tanh bounds and pose magnitude prior, no per-joint anatomical flexion/abduction/twist constraints; no collision term",
+  "scope": "read-only diagnosis; no new fitting, geometry edits, L20 q solve, actuator command or camera recording"
+}

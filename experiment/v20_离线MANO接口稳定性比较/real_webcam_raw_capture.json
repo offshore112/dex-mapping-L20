@@ -1,0 +1,774 @@
+{
+  "version": "v20_real_webcam_mediapipe_capture",
+  "status": "completed_real_webcam_raw_capture_only",
+  "camera_index": 0,
+  "requested_seconds": 3.0,
+  "mirror_display": true,
+  "units": {
+    "world_landmarks": "m",
+    "image_landmarks": "normalized"
+  },
+  "frame_count": 83,
+  "detected_frame_count": 0,
+  "detector": null,
+  "handedness_counts": {
+    "Left": 0,
+    "Right": 0,
+    "null": 0
+  },
+  "frames": [
+    {
+      "frame_id": 0,
+      "timestamp_s": 0.19012110005132854,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 1,
+      "timestamp_s": 0.1975975000532344,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 2,
+      "timestamp_s": 0.22886490006931126,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 3,
+      "timestamp_s": 0.26102330000139773,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 4,
+      "timestamp_s": 0.3090687000658363,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 5,
+      "timestamp_s": 0.34152829996310174,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 6,
+      "timestamp_s": 0.3730714999837801,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 7,
+      "timestamp_s": 0.4051441999617964,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 8,
+      "timestamp_s": 0.436857599997893,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 9,
+      "timestamp_s": 0.4689118000678718,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 10,
+      "timestamp_s": 0.5008674999698997,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 11,
+      "timestamp_s": 0.533043000032194,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 12,
+      "timestamp_s": 0.5651810000417754,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 13,
+      "timestamp_s": 0.5968970999820158,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 14,
+      "timestamp_s": 0.6289155000122264,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 15,
+      "timestamp_s": 0.6609476000303403,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 16,
+      "timestamp_s": 0.6928627999732271,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 17,
+      "timestamp_s": 0.7408810000633821,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 18,
+      "timestamp_s": 0.7728344000643119,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 19,
+      "timestamp_s": 0.8050813999725506,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 20,
+      "timestamp_s": 0.8369257000740618,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 21,
+      "timestamp_s": 0.8688727000262588,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 22,
+      "timestamp_s": 0.901062099961564,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 23,
+      "timestamp_s": 0.9331245999783278,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 24,
+      "timestamp_s": 0.9650110000511631,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 25,
+      "timestamp_s": 0.9970557000488043,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 26,
+      "timestamp_s": 1.0288948999950662,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 27,
+      "timestamp_s": 1.0770184000721201,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 28,
+      "timestamp_s": 1.1088357999688014,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 29,
+      "timestamp_s": 1.1408131000353023,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 30,
+      "timestamp_s": 1.172752600046806,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 31,
+      "timestamp_s": 1.2048133000498638,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 32,
+      "timestamp_s": 1.236797000048682,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 33,
+      "timestamp_s": 1.2687510000541806,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 34,
+      "timestamp_s": 1.3010891999583691,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 35,
+      "timestamp_s": 1.3331077999901026,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 36,
+      "timestamp_s": 1.3652186000254005,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 37,
+      "timestamp_s": 1.3968691000482067,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 38,
+      "timestamp_s": 1.4290197000373155,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 39,
+      "timestamp_s": 1.4610235000727698,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 40,
+      "timestamp_s": 1.5090697000268847,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 41,
+      "timestamp_s": 1.5409447000129148,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 42,
+      "timestamp_s": 1.5728808999992907,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 43,
+      "timestamp_s": 1.6050034000072628,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 44,
+      "timestamp_s": 1.6368445999687538,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 45,
+      "timestamp_s": 1.6686577000655234,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 46,
+      "timestamp_s": 1.7008414000738412,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 47,
+      "timestamp_s": 1.748785400064662,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 48,
+      "timestamp_s": 1.7806977999862283,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 49,
+      "timestamp_s": 1.812701900023967,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 50,
+      "timestamp_s": 1.844775400008075,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 51,
+      "timestamp_s": 1.8927511000074446,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 52,
+      "timestamp_s": 1.924945899983868,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 53,
+      "timestamp_s": 1.9566236999817193,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 54,
+      "timestamp_s": 1.9887489000102505,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 55,
+      "timestamp_s": 2.0366919999942183,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 56,
+      "timestamp_s": 2.0687637999653816,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 57,
+      "timestamp_s": 2.100742800044827,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 58,
+      "timestamp_s": 2.132777399965562,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 59,
+      "timestamp_s": 2.1807302000233904,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 60,
+      "timestamp_s": 2.2128128999611363,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 61,
+      "timestamp_s": 2.2447779000503942,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 62,
+      "timestamp_s": 2.292684999993071,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 63,
+      "timestamp_s": 2.324670600006357,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 64,
+      "timestamp_s": 2.356671700021252,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 65,
+      "timestamp_s": 2.3886513999896124,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 66,
+      "timestamp_s": 2.4369158999761567,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 67,
+      "timestamp_s": 2.4687142999609932,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 68,
+      "timestamp_s": 2.5010000000474975,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 69,
+      "timestamp_s": 2.533079499960877,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 70,
+      "timestamp_s": 2.581124100019224,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 71,
+      "timestamp_s": 2.613077500020154,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 72,
+      "timestamp_s": 2.644880300038494,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 73,
+      "timestamp_s": 2.6767719000345096,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 74,
+      "timestamp_s": 2.724770999979228,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 75,
+      "timestamp_s": 2.757040400058031,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 76,
+      "timestamp_s": 2.788659100071527,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 77,
+      "timestamp_s": 2.8209824999794364,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 78,
+      "timestamp_s": 2.868833899963647,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 79,
+      "timestamp_s": 2.90101000003051,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 80,
+      "timestamp_s": 2.9328358999919146,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 81,
+      "timestamp_s": 2.964611900039017,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    },
+    {
+      "frame_id": 82,
+      "timestamp_s": 3.0129186999984086,
+      "image_width": 640,
+      "image_height": 480,
+      "handedness": null,
+      "world_landmarks_m": null,
+      "image_landmarks_normalized": null
+    }
+  ],
+  "limitations": [
+    "MediaPipe world landmarks are not MANO theta/beta parameters.",
+    "Handedness and depth orientation should be checked before fitting MANO_LEFT.",
+    "No R mapping or L20 q mapping is performed by this capture script.",
+    "Raw-only mode proves camera access but contains no hand landmarks."
+  ]
+}

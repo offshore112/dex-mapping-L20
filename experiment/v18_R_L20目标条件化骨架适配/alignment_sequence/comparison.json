@@ -1,0 +1,60 @@
+{
+  "version": "v18_target_conditioned_adapter_comparison",
+  "status": "completed_same_sequence_comparison",
+  "v16_raw_R_target": {
+    "all_solver_success": true,
+    "all_limit_violations_zero": true,
+    "max_mimic_residual_rad": 0.0,
+    "mean_bone_direction_rmse_deg": 16.812075194390136,
+    "max_q_step_abs_rad": 0.4343506603941652,
+    "mean_q_step_abs_rad": 0.19736229777166353,
+    "max_q_step_norm_normalized": 0.35150041040692337,
+    "pair_mean_abs_normalized_error": {
+      "thumb_tip+index_tip": 0.0003003146093032129,
+      "thumb_tip+middle_tip": 0.00020859969697271897
+    },
+    "pair_max_abs_normalized_error": {
+      "thumb_tip+index_tip": 0.00032946245420899245,
+      "thumb_tip+middle_tip": 0.00036512104590807545
+    }
+  },
+  "v17_raw_R_target": {
+    "all_solver_success": true,
+    "all_limit_violations_zero": true,
+    "max_mimic_residual_rad": 0.0,
+    "mean_semantic_point_rmse_normalized": 0.13280862648392522,
+    "mean_bone_direction_rmse_deg": 16.64556433499795,
+    "mean_bend_angle_rmse_deg": 13.86076905234531,
+    "max_q_step_abs_rad": 0.5786763197875016,
+    "mean_q_step_abs_rad": 0.21111292836259457,
+    "max_q_step_norm_normalized": 0.5776767549822641,
+    "pair_mean_abs_normalized_error": {
+      "thumb_tip+index_tip": 0.00046013345157990546,
+      "thumb_tip+middle_tip": 0.0003448875522990202
+    },
+    "pair_max_abs_normalized_error": {
+      "thumb_tip+index_tip": 0.0005775044937036816,
+      "thumb_tip+middle_tip": 0.0007046214684439181
+    }
+  },
+  "v18_L20_conditioned_shape_target": {
+    "all_solver_success": true,
+    "all_limit_violations_zero": true,
+    "max_mimic_residual_rad": 0.0,
+    "mean_semantic_point_rmse_normalized": 0.10873720024278576,
+    "mean_bone_direction_rmse_deg": 17.001772436784375,
+    "mean_bend_angle_rmse_deg": 6.727985169702651,
+    "max_q_step_abs_rad": 0.9791514415240998,
+    "mean_q_step_abs_rad": 0.24389837851145685,
+    "max_q_step_norm_normalized": 0.7307214033345616,
+    "pair_mean_abs_normalized_error": {
+      "thumb_tip+index_tip": 0.001433947747650051,
+      "thumb_tip+middle_tip": 0.0011199113258234315
+    },
+    "pair_max_abs_normalized_error": {
+      "thumb_tip+index_tip": 0.001643898869746703,
+      "thumb_tip+middle_tip": 0.0017873002899830952
+    }
+  },
+  "interpretation": "v18 changes the shape/alignment target to a fixed L20-conditioned skeleton. Therefore v18 shape metrics are not a direct apples-to-apples replacement for v16/v17 raw-R metrics; original R task pair errors are reported separately in v18 selected_pair_metrics."
+}

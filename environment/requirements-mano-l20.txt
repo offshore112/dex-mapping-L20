@@ -1,0 +1,8 @@
+# PyTorch CPU is installed separately from its official wheel index.
+numpy==1.26.4
+scipy>=1.11,<2
+matplotlib>=3.8,<4
+smplx==0.1.28
+trimesh>=4,<5
+Markdown>=3.7,<4
+yourdfpy==0.0.60

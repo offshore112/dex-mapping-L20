@@ -1,0 +1,485 @@
+{
+  "version": "v14_R_L20_constraint_optimization_baseline",
+  "status": "completed_synthetic_R_to_L20_q_baseline",
+  "model": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v13_R_L20_constrained\\r_l20_model.json",
+  "actions": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v14_R_L20_constraint_baseline\\r_action_targets.json",
+  "optimizer": {
+    "method": "scipy.least_squares bounded multi-start",
+    "objective": "21 R landmark positions in hand_base_link; action tip pair weight=2",
+    "starts": 4,
+    "q_space": "16 independent L20 coordinates; mimic expanded by URDF",
+    "u_space": "not defined; no actuator descriptor"
+  },
+  "diagnostic_thresholds": {
+    "tip_distance_20mm": "smoke diagnostic only; not frozen formal metric"
+  },
+  "results": [
+    {
+      "name": "open",
+      "kind": "synthetic_R_target",
+      "tip_pair": null,
+      "target_tip_distance_mm": null,
+      "solver": {
+        "multi_start_count": 4,
+        "best_start_id": 2,
+        "success": true,
+        "message": "`xtol` termination condition is satisfied.",
+        "nfev": 36,
+        "cost": 0.5504916884050908
+      },
+      "q_order": [
+        "pinky_mcp_roll",
+        "pinky_mcp_pitch",
+        "pinky_pip",
+        "ring_mcp_roll",
+        "ring_mcp_pitch",
+        "ring_pip",
+        "middle_mcp_roll",
+        "middle_mcp_pitch",
+        "middle_pip",
+        "index_mcp_roll",
+        "index_mcp_pitch",
+        "index_pip",
+        "thumb_cmc_yaw",
+        "thumb_cmc_roll",
+        "thumb_cmc_pitch",
+        "thumb_mcp"
+      ],
+      "q_independent_rad": [
+        -0.16999999999999998,
+        0.1563271164015546,
+        9.994127063954652e-11,
+        -0.03860077690076389,
+        1.0200710132535101e-10,
+        0.03470754507055453,
+        0.1699999999999979,
+        6.321553466831549e-13,
+        0.023546249615743406,
+        0.16999999999999998,
+        1.783524940602963e-10,
+        0.026816777824350862,
+        1.5237808912890574e-12,
+        8.872437597992766e-15,
+        0.39358578694900476,
+        0.27477522420733436
+      ],
+      "q_full_rad": {
+        "pinky_mcp_roll": -0.16999999999999998,
+        "pinky_mcp_pitch": 0.1563271164015546,
+        "pinky_pip": 9.994127063954652e-11,
+        "pinky_dip": 8.911763102928364e-11,
+        "ring_mcp_roll": -0.03860077690076389,
+        "ring_mcp_pitch": 1.0200710132535101e-10,
+        "ring_pip": 0.03470754507055453,
+        "ring_dip": 0.030948717939413475,
+        "middle_mcp_roll": 0.1699999999999979,
+        "middle_mcp_pitch": 6.321553466831549e-13,
+        "middle_pip": 0.023546249615743406,
+        "middle_dip": 0.020996190782358395,
+        "index_mcp_roll": 0.16999999999999998,
+        "index_mcp_pitch": 1.783524940602963e-10,
+        "index_pip": 0.026816777824350862,
+        "index_dip": 0.023912520785973664,
+        "thumb_cmc_yaw": 1.5237808912890574e-12,
+        "thumb_cmc_roll": 8.872437597992766e-15,
+        "thumb_cmc_pitch": 0.39358578694900476,
+        "thumb_mcp": 0.27477522420733436,
+        "thumb_ip": 0.3192613330065018
+      },
+      "landmark_rmse_mm": 22.897113322011553,
+      "landmark_mean_mm": 20.052769657707692,
+      "landmark_max_mm": 37.392816015312235,
+      "tip_metrics": {
+        "thumb_tip": {
+          "target_xyz_m": [
+            0.01965776569118038,
+            -0.1436383362001217,
+            0.12178851502195184
+          ],
+          "actual_xyz_m": [
+            0.023494721093415882,
+            -0.13635430189045417,
+            0.11712077242261582
+          ],
+          "point_error_mm": 9.463995116060357
+        },
+        "index_tip": {
+          "target_xyz_m": [
+            -0.026442858474846148,
+            -0.08093098230857974,
+            0.2554973525303311
+          ],
+          "actual_xyz_m": [
+            -0.027729882733600324,
+            -0.043635832475246134,
+            0.2578718118417461
+          ],
+          "point_error_mm": 37.392816015312235
+        },
+        "middle_tip": {
+          "target_xyz_m": [
+            -0.03512443142283874,
+            -0.028172040903098508,
+            0.27934198373458585
+          ],
+          "actual_xyz_m": [
+            -0.03271269306131552,
+            -0.022023021158851668,
+            0.2622900701424662
+          ],
+          "point_error_mm": 18.286461737927745
+        },
+        "ring_tip": {
+          "target_xyz_m": [
+            -0.03018970278398339,
+            0.02020916481743837,
+            0.26730780942401317
+          ],
+          "actual_xyz_m": [
+            -0.029556165665463718,
+            0.02034919181153287,
+            0.2594202949497978
+          ],
+          "point_error_mm": 7.9141557617079
+        },
+        "pinky_tip": {
+          "target_xyz_m": [
+            -0.012958071154140112,
+            0.07798838242346931,
+            0.22308198391858952
+          ],
+          "actual_xyz_m": [
+            -0.012890468005802043,
+            0.05512508405805241,
+            0.24959426232755422
+          ],
+          "point_error_mm": 35.00908294666109
+        }
+      },
+      "pair_metrics": null,
+      "limit_violations": 0,
+      "mimic_residual_max_rad": 0.0
+    },
+    {
+      "name": "pinch_thumb_index",
+      "kind": "synthetic_R_target",
+      "tip_pair": [
+        "thumb_tip",
+        "index_tip"
+      ],
+      "target_tip_distance_mm": 0.46333920469545536,
+      "solver": {
+        "multi_start_count": 4,
+        "best_start_id": 1,
+        "success": true,
+        "message": "`ftol` termination condition is satisfied.",
+        "nfev": 33,
+        "cost": 0.9527684002631991
+      },
+      "q_order": [
+        "pinky_mcp_roll",
+        "pinky_mcp_pitch",
+        "pinky_pip",
+        "ring_mcp_roll",
+        "ring_mcp_pitch",
+        "ring_pip",
+        "middle_mcp_roll",
+        "middle_mcp_pitch",
+        "middle_pip",
+        "index_mcp_roll",
+        "index_mcp_pitch",
+        "index_pip",
+        "thumb_cmc_yaw",
+        "thumb_cmc_roll",
+        "thumb_cmc_pitch",
+        "thumb_mcp"
+      ],
+      "q_independent_rad": [
+        -0.16999999999999998,
+        0.1563212270499657,
+        7.55794657584818e-10,
+        -0.03859859319996497,
+        4.270846819629876e-14,
+        0.034688013340320206,
+        0.16999999999999998,
+        1.1442680223123498e-14,
+        0.024092388817240584,
+        0.16999999999999998,
+        3.5031295334687653e-14,
+        1.5699999999999998,
+        0.0212167831820313,
+        1.2914912949971912e-12,
+        0.7899999999999999,
+        0.3760428482753872
+      ],
+      "q_full_rad": {
+        "pinky_mcp_roll": -0.16999999999999998,
+        "pinky_mcp_pitch": 0.1563212270499657,
+        "pinky_pip": 7.55794657584818e-10,
+        "pinky_dip": 6.739420961683823e-10,
+        "ring_mcp_roll": -0.03859859319996497,
+        "ring_mcp_pitch": 4.270846819629876e-14,
+        "ring_pip": 0.034688013340320206,
+        "ring_dip": 0.03093130149556353,
+        "middle_mcp_roll": 0.16999999999999998,
+        "middle_mcp_pitch": 1.1442680223123498e-14,
+        "middle_pip": 0.024092388817240584,
+        "middle_dip": 0.02148318310833343,
+        "index_mcp_roll": 0.16999999999999998,
+        "index_mcp_pitch": 3.5031295334687653e-14,
+        "index_pip": 1.5699999999999998,
+        "index_dip": 1.399969,
+        "thumb_cmc_yaw": 0.0212167831820313,
+        "thumb_cmc_roll": 1.2914912949971912e-12,
+        "thumb_cmc_pitch": 0.7899999999999999,
+        "thumb_mcp": 0.3760428482753872,
+        "thumb_ip": 0.43692418541117234
+      },
+      "landmark_rmse_mm": 26.61134877701802,
+      "landmark_mean_mm": 21.877602718126294,
+      "landmark_max_mm": 63.760697373922454,
+      "tip_metrics": {
+        "thumb_tip": {
+          "target_xyz_m": [
+            0.02813731137740029,
+            -0.09223582811049652,
+            0.166456608262849
+          ],
+          "actual_xyz_m": [
+            0.023494677575807192,
+            -0.08885964096724401,
+            0.15720743375703294
+          ],
+          "point_error_mm": 10.88576672912827
+        },
+        "index_tip": {
+          "target_xyz_m": [
+            0.02818353949198517,
+            -0.09239727731551524,
+            0.1668884419510075
+          ],
+          "actual_xyz_m": [
+            0.03331082329090705,
+            -0.030472209581149174,
+            0.18118611576699623
+          ],
+          "point_error_mm": 63.760697373922454
+        },
+        "middle_tip": {
+          "target_xyz_m": [
+            -0.03507091026461677,
+            -0.0281637371106428,
+            0.2793454400245037
+          ],
+          "actual_xyz_m": [
+            -0.03267115308425955,
+            -0.02202517498436501,
+            0.2623026174183968
+          ],
+          "point_error_mm": 18.272891995687942
+        },
+        "ring_tip": {
+          "target_xyz_m": [
+            -0.030191836679572953,
+            0.020208786515850168,
+            0.26730805816972436
+          ],
+          "actual_xyz_m": [
+            -0.029557661095025757,
+            0.020348956586871584,
+            0.2594198730603034
+          ],
+          "point_error_mm": 7.914877803310457
+        },
+        "pinky_tip": {
+          "target_xyz_m": [
+            -0.01295896817450173,
+            0.07798893474415103,
+            0.2230806624963273
+          ],
+          "actual_xyz_m": [
+            -0.012891061191351102,
+            0.05512508307316464,
+            0.2495942565900149
+          ],
+          "point_error_mm": 35.01044124766288
+        }
+      },
+      "pair_metrics": {
+        "pair": [
+          "thumb_tip",
+          "index_tip"
+        ],
+        "target_distance_mm": 0.46333920469545536,
+        "actual_distance_mm": 63.87821265111401,
+        "distance_error_mm": 63.414873446418554,
+        "diagnostic_threshold_20mm": false
+      },
+      "limit_violations": 0,
+      "mimic_residual_max_rad": 0.0
+    },
+    {
+      "name": "opposition_thumb_middle",
+      "kind": "synthetic_R_target",
+      "tip_pair": [
+        "thumb_tip",
+        "middle_tip"
+      ],
+      "target_tip_distance_mm": 0.7998753675481155,
+      "solver": {
+        "multi_start_count": 4,
+        "best_start_id": 2,
+        "success": true,
+        "message": "`xtol` termination condition is satisfied.",
+        "nfev": 28,
+        "cost": 0.9421932040594885
+      },
+      "q_order": [
+        "pinky_mcp_roll",
+        "pinky_mcp_pitch",
+        "pinky_pip",
+        "ring_mcp_roll",
+        "ring_mcp_pitch",
+        "ring_pip",
+        "middle_mcp_roll",
+        "middle_mcp_pitch",
+        "middle_pip",
+        "index_mcp_roll",
+        "index_mcp_pitch",
+        "index_pip",
+        "thumb_cmc_yaw",
+        "thumb_cmc_roll",
+        "thumb_cmc_pitch",
+        "thumb_mcp"
+      ],
+      "q_independent_rad": [
+        -0.16999999999998922,
+        0.15623192301943756,
+        2.1700015293446995e-07,
+        -0.038617340960539336,
+        1.2337439604905531e-07,
+        0.034663097642382165,
+        0.16999999999991774,
+        4.038487557899647e-12,
+        1.5699983945179277,
+        0.16999999999991103,
+        1.2422759642440687e-07,
+        0.026784147406455676,
+        0.15471955877063592,
+        3.811160204133139e-12,
+        0.7899999987641801,
+        0.49685161226963864
+      ],
+      "q_full_rad": {
+        "pinky_mcp_roll": -0.16999999999998922,
+        "pinky_mcp_pitch": 0.15623192301943756,
+        "pinky_pip": 2.1700015293446995e-07,
+        "pinky_dip": 1.9349903637166686e-07,
+        "ring_mcp_roll": -0.038617340960539336,
+        "ring_mcp_pitch": 1.2337439604905531e-07,
+        "ring_pip": 0.034663097642382165,
+        "ring_dip": 0.030909084167712177,
+        "middle_mcp_roll": 0.16999999999991774,
+        "middle_mcp_pitch": 4.038487557899647e-12,
+        "middle_pip": 1.5699983945179277,
+        "middle_dip": 1.3999675683916362,
+        "index_mcp_roll": 0.16999999999991103,
+        "index_mcp_pitch": 1.2422759642440687e-07,
+        "index_pip": 0.026784147406455676,
+        "index_dip": 0.023883424242336526,
+        "thumb_cmc_yaw": 0.15471955877063592,
+        "thumb_cmc_roll": 3.811160204133139e-12,
+        "thumb_cmc_pitch": 0.7899999987641801,
+        "thumb_mcp": 0.49685161226963864,
+        "thumb_ip": 0.5772918882960931
+      },
+      "landmark_rmse_mm": 27.06608252652751,
+      "landmark_mean_mm": 23.73526990958005,
+      "landmark_max_mm": 56.76630869386041,
+      "tip_metrics": {
+        "thumb_tip": {
+          "target_xyz_m": [
+            0.010955588700614513,
+            -0.06227480101089226,
+            0.17744533000650856
+          ],
+          "actual_xyz_m": [
+            0.02349469023408555,
+            -0.06176344337303679,
+            0.16850494776781866
+          ],
+          "point_error_mm": 15.408471321788241
+        },
+        "index_tip": {
+          "target_xyz_m": [
+            -0.026444703965485865,
+            -0.08093064962396061,
+            0.2554929576724509
+          ],
+          "actual_xyz_m": [
+            -0.027732356801746395,
+            -0.04363570600295609,
+            0.2578710750677606
+          ],
+          "point_error_mm": 37.39286445120928
+        },
+        "middle_tip": {
+          "target_xyz_m": [
+            0.010939050379802567,
+            -0.062314111145678114,
+            0.17824406763605788
+          ],
+          "actual_xyz_m": [
+            0.028577049024045315,
+            -0.008872227609273451,
+            0.1856791123994539
+          ],
+          "point_error_mm": 56.76630869386041
+        },
+        "ring_tip": {
+          "target_xyz_m": [
+            -0.030192674961281123,
+            0.020211838140101905,
+            0.26730144796161615
+          ],
+          "actual_xyz_m": [
+            -0.029559556345398898,
+            0.020350812251964473,
+            0.2594192536865264
+          ],
+          "point_error_mm": 7.908801399441135
+        },
+        "pinky_tip": {
+          "target_xyz_m": [
+            -0.012947935922891346,
+            0.07798168387360489,
+            0.22308306078457973
+          ],
+          "actual_xyz_m": [
+            -0.012900039945686139,
+            0.055125068557337634,
+            0.24959417202695633
+          ],
+          "point_error_mm": 35.003802322692344
+        }
+      },
+      "pair_metrics": {
+        "pair": [
+          "thumb_tip",
+          "middle_tip"
+        ],
+        "target_distance_mm": 0.7998753675481155,
+        "actual_distance_mm": 55.84140942556302,
+        "distance_error_mm": 55.0415340580149,
+        "diagnostic_threshold_20mm": false
+      },
+      "limit_violations": 0,
+      "mimic_residual_max_rad": 0.0
+    }
+  ],
+  "limitations": [
+    "R targets are synthetic MANO pose targets, not camera estimates or a dataset.",
+    "The optimization tests q-level reachability and mimic handling, not real actuator control u.",
+    "No claim of generalization or final R_L20 suitability follows from these smoke actions."
+  ]
+}

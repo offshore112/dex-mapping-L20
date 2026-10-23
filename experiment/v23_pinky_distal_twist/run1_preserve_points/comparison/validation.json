@@ -1,0 +1,66 @@
+{
+  "version": "v23_pinky_distal_twist",
+  "status": "passed_offline_geometry_and_display_checks",
+  "all774_fields_preserved_except": [
+    "fitted_landmarks_m",
+    "phase",
+    "point_error_mm",
+    "theta_hand_pose"
+  ],
+  "original_v21_and_v22_hashes_unchanged": true,
+  "frame_count": 774,
+  "r_all21_point_change_mm": {
+    "mean": 0.03486232169680006,
+    "rmse": 0.17978295134717362,
+    "max": 1.0124755070248066,
+    "p95": 0.0006426416890776395
+  },
+  "r_pinky_tip_change_mm": {
+    "mean": 0.7311033930711152,
+    "rmse": 0.8238686929208217,
+    "max": 1.0124755070248066,
+    "p95": 1.00383545231766
+  },
+  "r_pinky_tip_direction_change_deg": {
+    "mean": 1.39004112615485,
+    "rmse": 1.560657218293022,
+    "max": 1.8521925810548128,
+    "p95": 1.8063896166930231
+  },
+  "r_pinky_tip_change_first60_mm": {
+    "mean": 0.9170574463559744,
+    "rmse": 0.9179594578837043,
+    "max": 0.9779993744677559,
+    "p95": 0.9769186533459364
+  },
+  "r_other16_points_max_change_mm": 0.0013776587052593333,
+  "pinky_mcp_pip_dip_centers_max_change_mm": 0.0,
+  "mujoco_old_and_new": {
+    "status": "passed_mujoco_visual_skin_check",
+    "body_count": 1557,
+    "checked_frame_count": 774,
+    "joint_count": 0,
+    "mocap_count": 1556,
+    "skin_count": 2,
+    "geom_count": 0,
+    "skin_vertex_max_abs_error_m": 1.4255490510262092e-08,
+    "physics": "not stepped; visual kinematic playback only"
+  },
+  "neutral_skin": {
+    "status": "passed_mujoco_visual_skin_check",
+    "body_count": 779,
+    "checked_frame_count": 1,
+    "joint_count": 0,
+    "mocap_count": 778,
+    "skin_count": 1,
+    "geom_count": 0,
+    "skin_vertex_max_abs_error_m": 1.4870901510199985e-08,
+    "physics": "not stepped; visual kinematic playback only"
+  },
+  "rendered_preview_frames": 225,
+  "preview_duration_s": 27.93,
+  "render_script_sha256": "ab62d538ec3730135707245e1a791b63e52475c45820e4db8467363944b48290",
+  "baseline_point_rmse_mm": 3.4686827022564612,
+  "candidate_point_rmse_mm": 3.4686930610932207,
+  "scope": "single recorded sequence; visual kinematics, no physics or nail-orientation ground truth"
+}

@@ -1,0 +1,23 @@
+{
+  "version": "v15_dynamic_R_action_meshes",
+  "status": "generated_dynamic_natural_MANO_R_action_meshes",
+  "source_model_manifest": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v12_R_L20_canonical_human\\r_l20_model.json",
+  "records": [
+    {
+      "action": "open",
+      "obj": "mano_r_open.obj",
+      "vertex_count": 778
+    },
+    {
+      "action": "pinch_thumb_index",
+      "obj": "mano_r_pinch_thumb_index.obj",
+      "vertex_count": 778
+    },
+    {
+      "action": "opposition_thumb_middle",
+      "obj": "mano_r_opposition_thumb_middle.obj",
+      "vertex_count": 778
+    }
+  ],
+  "limitation": "Meshes are fixed synthetic action frames, not camera estimates."
+}

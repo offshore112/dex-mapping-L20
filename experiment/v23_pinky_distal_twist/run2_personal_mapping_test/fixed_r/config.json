@@ -1,0 +1,18 @@
+{
+  "version": "v22_personal_hand_to_fixed_R",
+  "input": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v23_pinky_distal_twist\\run2_personal_mapping_test\\mano_sequence_v23.json",
+  "input_sha256": "946c6eb29004877811a88c43c491f6ea7be0c27f3dc900d02bde5fcff6e6a303",
+  "model": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v12_R_L20_canonical_human\\r_l20_model.json",
+  "model_arrays_sha256": "4b4e350134e922473b61b54500dbbfc718f768523a553663921e61cf664ec3d9",
+  "script_sha256": "798205aaae1af8e204fb24ed030b599dc53db6049df792f5ddb82d2b52f28e2d",
+  "mano": "E:\\dex\\MANO\\mano_v1_2\\mano_v1_2\\models\\MANO_LEFT.pkl",
+  "point_order": "MediaPipe-compatible 21 semantic MANO points",
+  "evaluation": "single-operator diagnostic; all input frames, all 20 bones and 10 tip pairs",
+  "no_frame_drop": true,
+  "target_wrist_anchor_m": [
+    -0.00556916583585746,
+    0.017992189216553475,
+    0.021785260100238263
+  ],
+  "mapping": "direct local pose transfer; fixed beta_R/scale_R; no extra smoothing"
+}

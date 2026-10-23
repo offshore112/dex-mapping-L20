@@ -1,0 +1,276 @@
+{
+  "version": "v23_pinky_distal_twist",
+  "status": "completed_offline_model_audit_and_neutral_twist_candidate",
+  "frame_count": 774,
+  "duration_s": 27.902376299956813,
+  "model_audit": {
+    "pinky_native_joints": [
+      7,
+      8,
+      9
+    ],
+    "pinky_parents": [
+      0,
+      7,
+      8
+    ],
+    "pinky_tip_vertex": 671,
+    "tip_skin_joint": 9,
+    "tip_skin_weight": 1.0,
+    "source_reconstruction_max_abs_m": 2.3852995134632238e-09,
+    "old_mujoco_display": "v22 full-frame scene_check; not changed by this script"
+  },
+  "unchanged_pose_components_max_abs_rad": 0.0,
+  "source_pinky_dip_twist_abs_deg_before": {
+    "mean": 93.98957491233743,
+    "rmse": 101.49602553648808,
+    "max": 137.3938097501825,
+    "p95": 127.46862703244517
+  },
+  "source_pinky_dip_twist_abs_deg_after": {
+    "mean": 0.0,
+    "rmse": 0.0,
+    "max": 0.0,
+    "p95": 0.0
+  },
+  "initial60_twist_abs_deg_before": {
+    "mean": 112.54284431790326,
+    "rmse": 112.65364792002696,
+    "max": 120.92552781123015,
+    "p95": 120.60255579195224
+  },
+  "pinky_tip_change_from_original_fit_mm": {
+    "mean": 1.637257524358025,
+    "rmse": 1.9297592285700698,
+    "max": 5.183892207136773,
+    "p95": 3.7557083432063245
+  },
+  "pinky_tip_direction_change_from_original_fit_deg": {
+    "mean": 0.6783339052595612,
+    "rmse": 0.7944797922884617,
+    "max": 1.9963986882873206,
+    "p95": 1.509798316535972
+  },
+  "all21_observation_point_error_mm_before": {
+    "mean": 2.934080106281987,
+    "rmse": 3.4686827022564612,
+    "max": 15.191663610354043,
+    "p95": 6.499375281801787
+  },
+  "all21_observation_point_error_mm_after": {
+    "mean": 2.997803263301676,
+    "rmse": 3.5042271481448926,
+    "max": 15.191664972840078,
+    "p95": 6.509482317773219
+  },
+  "pinky_tip_observation_error_mm_before": {
+    "mean": 0.8519802147803763,
+    "rmse": 1.2884847853066033,
+    "max": 6.594628923865087,
+    "p95": 2.853355511220146
+  },
+  "pinky_tip_observation_error_mm_after": {
+    "mean": 2.190178763826407,
+    "rmse": 2.6201729066548913,
+    "max": 8.18746485245714,
+    "p95": 5.294355272617873
+  },
+  "bone_length_mae_to_observation_mm_before": 3.0057169124838263,
+  "bone_length_mae_to_observation_mm_after": 3.0443105575691223,
+  "pinky_tip_direction_to_observation_deg_before": {
+    "mean": 1.8838510108643505,
+    "rmse": 2.897631916692835,
+    "max": 15.009936378281418,
+    "p95": 6.491010751489848
+  },
+  "pinky_tip_direction_to_observation_deg_after": {
+    "mean": 2.212185715549031,
+    "rmse": 3.146314800886229,
+    "max": 14.751486277713061,
+    "p95": 6.6191003943710305
+  },
+  "simple_twist_removal_tip_change_mm": {
+    "mean": 2.4737526498030022,
+    "rmse": 2.6617429671000297,
+    "max": 5.345140490032496,
+    "p95": 4.50702008304601
+  },
+  "diagnostic_frames": [
+    {
+      "frame_id": 0,
+      "relative_s": 0.0,
+      "twist_deg_before": 101.42224136141877,
+      "twist_deg_after": 0.0,
+      "tip_change_mm": 0.20571518431567018,
+      "tip_direction_change_deg": 0.10177967097303808,
+      "point_tip_error_mm_before": 1.148545719435434,
+      "point_tip_error_mm_after": 1.067626060938896
+    },
+    {
+      "frame_id": 5,
+      "relative_s": 0.20654070004820824,
+      "twist_deg_before": 107.61768362258289,
+      "twist_deg_after": 0.0,
+      "tip_change_mm": 0.19931544973892185,
+      "tip_direction_change_deg": 0.09888896313020033,
+      "point_tip_error_mm_before": 0.49638963158842564,
+      "point_tip_error_mm_after": 0.6934927820147367
+    },
+    {
+      "frame_id": 30,
+      "relative_s": 1.0702296999515966,
+      "twist_deg_before": 109.13564887775165,
+      "twist_deg_after": 0.0,
+      "tip_change_mm": 0.4548651809727812,
+      "tip_direction_change_deg": 0.221647698985111,
+      "point_tip_error_mm_before": 0.16434374422921544,
+      "point_tip_error_mm_after": 0.5412732183216348
+    },
+    {
+      "frame_id": 60,
+      "relative_s": 2.142326300032437,
+      "twist_deg_before": 117.69412802471327,
+      "twist_deg_after": 0.0,
+      "tip_change_mm": 1.686874368347543,
+      "tip_direction_change_deg": 0.7645833079673279,
+      "point_tip_error_mm_before": 0.25242285426571553,
+      "point_tip_error_mm_after": 1.9319108960651137
+    },
+    {
+      "frame_id": 120,
+      "relative_s": 4.318734899978153,
+      "twist_deg_before": 117.9620237620909,
+      "twist_deg_after": 0.0,
+      "tip_change_mm": 1.5739180810393623,
+      "tip_direction_change_deg": 0.7250075680376366,
+      "point_tip_error_mm_before": 0.3417435112351443,
+      "point_tip_error_mm_after": 1.907822975340385
+    },
+    {
+      "frame_id": 190,
+      "relative_s": 6.846430000034161,
+      "twist_deg_before": 84.09081627663872,
+      "twist_deg_after": 0.0,
+      "tip_change_mm": 0.6996288895361363,
+      "tip_direction_change_deg": 0.15050260834266893,
+      "point_tip_error_mm_before": 3.1185961212320708,
+      "point_tip_error_mm_after": 3.7845563428253763
+    },
+    {
+      "frame_id": 250,
+      "relative_s": 9.006649799994193,
+      "twist_deg_before": -22.797268780925094,
+      "twist_deg_after": 0.0,
+      "tip_change_mm": 2.210296308449635,
+      "tip_direction_change_deg": 0.616514171501196,
+      "point_tip_error_mm_before": 5.980811885250477,
+      "point_tip_error_mm_after": 8.18746485245714
+    },
+    {
+      "frame_id": 383,
+      "relative_s": 13.822762800031342,
+      "twist_deg_before": -42.1436145313907,
+      "twist_deg_after": 0.0,
+      "tip_change_mm": 5.174581804311546,
+      "tip_direction_change_deg": 1.9923855336475513,
+      "point_tip_error_mm_before": 0.43451718431502045,
+      "point_tip_error_mm_after": 5.6005139604161736
+    },
+    {
+      "frame_id": 773,
+      "relative_s": 27.902376299956813,
+      "twist_deg_before": 117.49167378656587,
+      "twist_deg_after": 0.0,
+      "tip_change_mm": 1.8710986829542307,
+      "tip_direction_change_deg": 0.8140755654137986,
+      "point_tip_error_mm_before": 0.4838549781434144,
+      "point_tip_error_mm_after": 2.323364700798605
+    }
+  ],
+  "solver_history": [
+    {
+      "start": 0,
+      "stop_exclusive": 64,
+      "iterations": 18,
+      "point_residual_sum_m2": 7.603215643703963e-05
+    },
+    {
+      "start": 64,
+      "stop_exclusive": 128,
+      "iterations": 18,
+      "point_residual_sum_m2": 0.00015219113659155565
+    },
+    {
+      "start": 128,
+      "stop_exclusive": 192,
+      "iterations": 18,
+      "point_residual_sum_m2": 0.0001662468744806247
+    },
+    {
+      "start": 192,
+      "stop_exclusive": 256,
+      "iterations": 18,
+      "point_residual_sum_m2": 7.794879874630783e-05
+    },
+    {
+      "start": 256,
+      "stop_exclusive": 320,
+      "iterations": 18,
+      "point_residual_sum_m2": 0.00022823033471394504
+    },
+    {
+      "start": 320,
+      "stop_exclusive": 384,
+      "iterations": 18,
+      "point_residual_sum_m2": 0.0004286789772514753
+    },
+    {
+      "start": 384,
+      "stop_exclusive": 448,
+      "iterations": 18,
+      "point_residual_sum_m2": 0.0003642718986214
+    },
+    {
+      "start": 448,
+      "stop_exclusive": 512,
+      "iterations": 18,
+      "point_residual_sum_m2": 0.0003883698283771445
+    },
+    {
+      "start": 512,
+      "stop_exclusive": 576,
+      "iterations": 18,
+      "point_residual_sum_m2": 0.00019395862108578227
+    },
+    {
+      "start": 576,
+      "stop_exclusive": 640,
+      "iterations": 18,
+      "point_residual_sum_m2": 3.9824875268951355e-05
+    },
+    {
+      "start": 640,
+      "stop_exclusive": 704,
+      "iterations": 18,
+      "point_residual_sum_m2": 0.00015730378005991615
+    },
+    {
+      "start": 704,
+      "stop_exclusive": 768,
+      "iterations": 18,
+      "point_residual_sum_m2": 0.00018966479119888796
+    },
+    {
+      "start": 768,
+      "stop_exclusive": 774,
+      "iterations": 18,
+      "point_residual_sum_m2": 1.9083705715670082e-05
+    }
+  ],
+  "limitations": [
+    "Neutral-twist prior, not ground-truth nail orientation or measured anatomy.",
+    "Only pinky DIP is corrected; other finger twists are not addressed.",
+    "No new shape, camera capture, temporal filter, network, L20 q/u or physics.",
+    "Single-operator offline diagnostic; observation errors are relative to MediaPipe."
+  ]
+}

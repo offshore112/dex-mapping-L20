@@ -1,0 +1,169 @@
+{
+  "version": "v16_R_L20_sequence_render",
+  "status": "passed_sequence_render_and_gif",
+  "frame_count": 17,
+  "records": [
+    {
+      "frame_id": 0,
+      "image": "frame_000.png",
+      "phase": "open_to_pinch",
+      "tip_pair": null,
+      "raw_contact_count": 34
+    },
+    {
+      "frame_id": 1,
+      "image": "frame_001.png",
+      "phase": "open_to_pinch",
+      "tip_pair": null,
+      "raw_contact_count": 34
+    },
+    {
+      "frame_id": 2,
+      "image": "frame_002.png",
+      "phase": "open_to_pinch",
+      "tip_pair": null,
+      "raw_contact_count": 34
+    },
+    {
+      "frame_id": 3,
+      "image": "frame_003.png",
+      "phase": "open_to_pinch",
+      "tip_pair": null,
+      "raw_contact_count": 34
+    },
+    {
+      "frame_id": 4,
+      "image": "frame_004.png",
+      "phase": "open_to_pinch",
+      "tip_pair": [
+        "thumb_tip",
+        "index_tip"
+      ],
+      "raw_contact_count": 34
+    },
+    {
+      "frame_id": 5,
+      "image": "frame_005.png",
+      "phase": "open_to_pinch",
+      "tip_pair": [
+        "thumb_tip",
+        "index_tip"
+      ],
+      "raw_contact_count": 32
+    },
+    {
+      "frame_id": 6,
+      "image": "frame_006.png",
+      "phase": "open_to_pinch",
+      "tip_pair": [
+        "thumb_tip",
+        "index_tip"
+      ],
+      "raw_contact_count": 33
+    },
+    {
+      "frame_id": 7,
+      "image": "frame_007.png",
+      "phase": "open_to_pinch",
+      "tip_pair": [
+        "thumb_tip",
+        "index_tip"
+      ],
+      "raw_contact_count": 35
+    },
+    {
+      "frame_id": 8,
+      "image": "frame_008.png",
+      "phase": "open_to_pinch",
+      "tip_pair": [
+        "thumb_tip",
+        "index_tip"
+      ],
+      "raw_contact_count": 39
+    },
+    {
+      "frame_id": 9,
+      "image": "frame_009.png",
+      "phase": "pinch_to_opposition",
+      "tip_pair": [
+        "thumb_tip",
+        "middle_tip"
+      ],
+      "raw_contact_count": 33
+    },
+    {
+      "frame_id": 10,
+      "image": "frame_010.png",
+      "phase": "pinch_to_opposition",
+      "tip_pair": [
+        "thumb_tip",
+        "middle_tip"
+      ],
+      "raw_contact_count": 32
+    },
+    {
+      "frame_id": 11,
+      "image": "frame_011.png",
+      "phase": "pinch_to_opposition",
+      "tip_pair": [
+        "thumb_tip",
+        "middle_tip"
+      ],
+      "raw_contact_count": 34
+    },
+    {
+      "frame_id": 12,
+      "image": "frame_012.png",
+      "phase": "pinch_to_opposition",
+      "tip_pair": [
+        "thumb_tip",
+        "middle_tip"
+      ],
+      "raw_contact_count": 35
+    },
+    {
+      "frame_id": 13,
+      "image": "frame_013.png",
+      "phase": "pinch_to_opposition",
+      "tip_pair": [
+        "thumb_tip",
+        "middle_tip"
+      ],
+      "raw_contact_count": 33
+    },
+    {
+      "frame_id": 14,
+      "image": "frame_014.png",
+      "phase": "pinch_to_opposition",
+      "tip_pair": [
+        "thumb_tip",
+        "middle_tip"
+      ],
+      "raw_contact_count": 31
+    },
+    {
+      "frame_id": 15,
+      "image": "frame_015.png",
+      "phase": "pinch_to_opposition",
+      "tip_pair": [
+        "thumb_tip",
+        "middle_tip"
+      ],
+      "raw_contact_count": 33
+    },
+    {
+      "frame_id": 16,
+      "image": "frame_016.png",
+      "phase": "pinch_to_opposition",
+      "tip_pair": [
+        "thumb_tip",
+        "middle_tip"
+      ],
+      "raw_contact_count": 36
+    }
+  ],
+  "limitations": [
+    "The GIF visualizes synthetic MANO-R and q outputs; it is not camera playback.",
+    "Contact counts are diagnostic only because the current URDF collision meshes overlap."
+  ]
+}

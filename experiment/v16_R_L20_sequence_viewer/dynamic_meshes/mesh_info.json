@@ -1,0 +1,111 @@
+{
+  "version": "v16_dynamic_R_sequence_meshes",
+  "status": "generated_dynamic_MANO_R_sequence_meshes",
+  "source_model_manifest": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v12_R_L20_canonical_human\\r_l20_model.json",
+  "source_sequence": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v16_R_L20序列平滑与碰撞诊断\\r_action_sequence_v16.json",
+  "records": [
+    {
+      "frame_id": 0,
+      "name": "frame_000",
+      "obj": "mano_r_000.obj",
+      "vertex_count": 778
+    },
+    {
+      "frame_id": 1,
+      "name": "frame_001",
+      "obj": "mano_r_001.obj",
+      "vertex_count": 778
+    },
+    {
+      "frame_id": 2,
+      "name": "frame_002",
+      "obj": "mano_r_002.obj",
+      "vertex_count": 778
+    },
+    {
+      "frame_id": 3,
+      "name": "frame_003",
+      "obj": "mano_r_003.obj",
+      "vertex_count": 778
+    },
+    {
+      "frame_id": 4,
+      "name": "frame_004",
+      "obj": "mano_r_004.obj",
+      "vertex_count": 778
+    },
+    {
+      "frame_id": 5,
+      "name": "frame_005",
+      "obj": "mano_r_005.obj",
+      "vertex_count": 778
+    },
+    {
+      "frame_id": 6,
+      "name": "frame_006",
+      "obj": "mano_r_006.obj",
+      "vertex_count": 778
+    },
+    {
+      "frame_id": 7,
+      "name": "frame_007",
+      "obj": "mano_r_007.obj",
+      "vertex_count": 778
+    },
+    {
+      "frame_id": 8,
+      "name": "frame_008",
+      "obj": "mano_r_008.obj",
+      "vertex_count": 778
+    },
+    {
+      "frame_id": 9,
+      "name": "frame_009",
+      "obj": "mano_r_009.obj",
+      "vertex_count": 778
+    },
+    {
+      "frame_id": 10,
+      "name": "frame_010",
+      "obj": "mano_r_010.obj",
+      "vertex_count": 778
+    },
+    {
+      "frame_id": 11,
+      "name": "frame_011",
+      "obj": "mano_r_011.obj",
+      "vertex_count": 778
+    },
+    {
+      "frame_id": 12,
+      "name": "frame_012",
+      "obj": "mano_r_012.obj",
+      "vertex_count": 778
+    },
+    {
+      "frame_id": 13,
+      "name": "frame_013",
+      "obj": "mano_r_013.obj",
+      "vertex_count": 778
+    },
+    {
+      "frame_id": 14,
+      "name": "frame_014",
+      "obj": "mano_r_014.obj",
+      "vertex_count": 778
+    },
+    {
+      "frame_id": 15,
+      "name": "frame_015",
+      "obj": "mano_r_015.obj",
+      "vertex_count": 778
+    },
+    {
+      "frame_id": 16,
+      "name": "frame_016",
+      "obj": "mano_r_016.obj",
+      "vertex_count": 778
+    }
+  ],
+  "limitation": "The sequence is synthetic interpolation, not camera data."
+}

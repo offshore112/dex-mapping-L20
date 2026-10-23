@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>L20 左手：从 URDF 建立 MANO 虚拟人手 R · 新手研究指南</title><style>
+:root { --ink:#18283b; --muted:#5e6d7c; --blue:#235c91; --line:#dce4ea; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; scroll-padding-top:26px; }
+body { margin:0; color:var(--ink); background:#f3f6f9;
+ font-family:'Microsoft YaHei','PingFang SC',system-ui,sans-serif; line-height:1.85; }
+.shell { max-width:1400px; margin:auto; display:grid; grid-template-columns:278px minmax(0,1fr); gap:28px; padding:32px; }
+aside { position:sticky; top:24px; align-self:start; max-height:calc(100vh - 48px); overflow:auto; padding:22px;
+ background:#edf3f8; border:1px solid var(--line); border-radius:14px; font-size:13px; }
+.brand { font-size:22px; font-weight:750; color:var(--blue); }
+.hint { color:var(--muted); font-size:12px; margin:8px 0 20px; }
+aside ul { list-style:none; margin:0; padding-left:0; }
+aside li { margin:9px 0; }
+aside li ul { padding-left:13px; font-size:12px; }
+a { color:var(--blue); text-decoration:none; overflow-wrap:anywhere; }
+a:hover { text-decoration:underline; }
+main { min-width:0; background:white; border:1px solid var(--line); border-radius:16px; padding:42px 48px; }
+.eyebrow { color:var(--blue); letter-spacing:.12em; font-size:12px; font-weight:bold; }
+.status { color:var(--muted); background:#f5f8fb; padding:12px 16px; border-radius:8px; font-size:13px; }
+h1 { font-size:30px; line-height:1.45; margin:16px 0 20px; }
+h2 { font-size:23px; line-height:1.5; margin-top:48px; padding-top:14px; border-top:2px solid var(--line); }
+h3 { font-size:18px; margin-top:28px; }
+p, li { overflow-wrap:anywhere; }
+strong { color:#102a44; }
+pre { padding:20px; background:#f0f5fa; border:1px solid var(--line); border-radius:10px;
+ overflow:auto; line-height:1.7; font-size:13px; }
+code { font-family:Consolas,'Microsoft YaHei',monospace; font-size:.88em; }
+p code, li code { background:#eff4f8; border-radius:4px; padding:2px 5px; }
+table { display:block; width:100%; overflow-x:auto; border-collapse:collapse; font-size:13px; line-height:1.7; margin:20px 0; }
+td, th { border:1px solid var(--line); padding:11px 13px; min-width:95px; vertical-align:top; }
+th { background:#eaf1f7; text-align:left; }
+tbody tr:nth-child(even) { background:#fafbfd; }
+blockquote { margin:22px 0; padding:12px 22px; border-left:4px solid #3c7bb1; background:#f3f7fb; }
+footer { margin-top:40px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; }
+@media(max-width:900px) { .shell { display:block; padding:16px; } aside { position:static; max-height:260px; margin-bottom:18px; }
+ main { padding:24px 20px; } h1 { font-size:25px; } h2 { font-size:21px; } }
+@media print { body { background:white; font-size:11pt; } .shell { display:block; padding:0; } aside { display:none; }
+ main { border:0; padding:0; } h2,h3 { break-after:avoid; } pre,blockquote,tr { break-inside:avoid; }
+ table { display:table; font-size:9pt; } a { color:inherit; } }
+</style></head>
+<body><div class="shell">
+<aside><div class="brand">dex-mapping</div>
+<div class="hint">从研究想法到可验证的两阶段映射<br>2026-10-14 · 研究文档与实施记录</div>
+<nav aria-label="文档目录"><div class="toc">
+<ul>
+<li><a href="#1-可以建立什么">1. 可以建立什么</a></li>
+<li><a href="#2-这份-l20-urdf-已核查到的内容">2. 这份 L20 URDF 已核查到的内容</a></li>
+<li><a href="#3-第一步准备两套模型先确定接口">3. 第一步：准备两套模型，先确定接口</a></li>
+<li><a href="#4-第二步从机器人提取有语义的几何点">4. 第二步：从机器人提取有语义的几何点</a><ul>
+<li><a href="#41-先固定单位坐标和参考姿态">4.1 先固定单位、坐标和参考姿态</a></li>
+<li><a href="#42-计划的-21-点对应">4.2 计划的 21 点对应</a></li>
+<li><a href="#43-一个已能从关节原点得到的长度例子">4.3 一个已能从关节原点得到的长度例子</a></li>
+</ul>
+</li>
+<li><a href="#5-第三步拟合-mano-的固定几何">5. 第三步：拟合 MANO 的固定几何</a><ul>
+<li><a href="#51-建立不会随姿态轻易变化的尺寸目标">5.1 建立不会随姿态轻易变化的尺寸目标</a></li>
+<li><a href="#52-再对齐参考姿态的点布局">5.2 再对齐参考姿态的点布局</a></li>
+</ul>
+</li>
+<li><a href="#6-第四步检查拟合是否适合后续映射">6. 第四步：检查拟合是否适合后续映射</a></li>
+<li><a href="#7-怎样接回两阶段网络">7. 怎样接回两阶段网络</a></li>
+<li><a href="#8-当前的具体下一步">8. 当前的具体下一步</a></li>
+</ul>
+</div>
+</nav></aside>
+<main><div class="eyebrow">研究思路 · 新手指南</div>
+<p class="status">当前阶段：独立环境与 MANO 加载核查已通过；L20 FK、R 拟合、基线与网络训练尚未运行。</p>
+<h1 id="l20-左手从-urdf-建立-mano-虚拟人手-r">L20 左手：从 URDF 建立 MANO 虚拟人手 R</h1>
+<p>日期：2026-10-14（Asia/Shanghai）。状态：<strong>来源核查与建模计划；MANO 拟合、FK 可视化、基线与训练均未运行。</strong></p>
+<p>用户已提供 L20 左手 URDF 的官方仓库入口及本地 URDF/网格、MANO_LEFT.pkl。独立环境与 MANO 加载检查已完成，见 <a href="MANO与L20独立环境使用说明.html">环境使用说明</a>；硬件批次、L20 FK 与几何拟合仍待验证。本指南延续 <a href="研究思路与新手指南.html">两阶段研究主线</a>：先跨人手尺寸，再处理目标机器人的驱动与耦合。URDF→R 是目标几何准备模块。</p>
+<h2 id="1-可以建立什么">1. 可以建立什么</h2>
+<p>可以尝试用 L20 的几何信息，拟合一个尺寸、指节比例和指根布局尽量接近它的 MANO 虚拟人手 R。拟合结果需要有逐部位残差；能否满足后续映射要求，必须实际运行后判断。</p>
+<p>URDF 与 MANO 是两套不同的模型，不能直接按字段转换：URDF 描述机器人刚性部件与运动连接；MANO 的形状空间来自人手扫描，具有固定的人手拓扑与统计相关性。MANO 的 β 不能逐项任意指定每根指骨、关节轴或驱动耦合。</p>
+<p>把 R 分为两个部分：</p>
+<ul>
+<li><strong>固定几何</strong>：拟合得到的 β_R、全局尺度 s、选定的关键点规则和与机器人掌部坐标系的对齐。每个目标机器人/模型版本固定一套。</li>
+<li><strong>变化动作</strong>：每一帧的 θ_R(t)，由第一阶段产生。不要每帧重新拟合 β_R，否则机器人几何会随动作漂移。</li>
+</ul>
+<p>一个候选表达是 <code>X_R(t) = s · A · K(MANO_left(β_R, θ_R(t))) + b</code>。K 提取事先定义的对应点；A 是三维旋转矩阵；b 是坐标平移；s 是额外的正尺度。尺度、旋转、平移不属于 MANO 形状参数 β。</p>
+<p>R 的动作空间保留虚拟人手的能力。机器人限位、真实驱动与 <code>mimic</code> 留给第二阶段，不在 R 里预先强行施加 L20 的五条联动约束。</p>
+<h2 id="2-这份-l20-urdf-已核查到的内容">2. 这份 L20 URDF 已核查到的内容</h2>
+<p>来源：<a href="https://github.com/linker-bot/linkerhand-urdf/tree/main/L20/left">L20 左手目录</a>、<a href="https://raw.githubusercontent.com/linker-bot/linkerhand-urdf/main/L20/left/linkerhand_l20_left.urdf">原始 URDF</a>。读取的是在线 main 内容，<strong>尚未锁定 commit，也未与用户本地文件对比</strong>。统计来自对网页返回的完整 1204 行进行标签解析，不是仿真测试。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>文件中的内容</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>robot 名称</td>
+<td>linkerhand_l20_left</td>
+<td>左手模型</td>
+</tr>
+<tr>
+<td>根 link</td>
+<td>hand_base_link</td>
+<td>机器人基座参考系，不能直接当作 MANO 腕部解剖中心</td>
+</tr>
+<tr>
+<td>link</td>
+<td>22 个，名称无重复</td>
+<td>机器人刚性部件，不等于 MANO 骨架节点</td>
+</tr>
+<tr>
+<td>joint</td>
+<td>21 个，全部 revolute，名称无重复</td>
+<td>全部转动关节坐标</td>
+</tr>
+<tr>
+<td>mimic</td>
+<td>5 条</td>
+<td>四指 DIP 从动于 PIP；拇指 IP 从动于 MCP</td>
+</tr>
+<tr>
+<td>独立运动学坐标</td>
+<td>16 个</td>
+<td>对这份树模型施加五条 mimic 后的数量；不等于已验证 SDK 控制接口</td>
+</tr>
+<tr>
+<td>transmission / ros2_control</td>
+<td>未发现</td>
+<td>缺少完整的执行器接口与命令到角度转换</td>
+</tr>
+<tr>
+<td>单独命名的 tip link</td>
+<td>未发现</td>
+<td>五个指尖仍需在末节网格上定义局部点</td>
+</tr>
+<tr>
+<td>网格引用</td>
+<td>meshes/*.STL，相对路径</td>
+<td>加载显示模型时必须保留 URDF 与 meshes 的相对目录结构</td>
+</tr>
+</tbody>
+</table>
+<p>四指的简化链：<code>hand_base_link → *_metacarpals → *_proximal → *_middle → *_distal</code>。对应关节依次是 <code>*_mcp_roll → *_mcp_pitch → *_pip → *_dip</code>，其中 <code>*</code> 是 index、middle、ring、pinky。</p>
+<p>拇指链不同：<code>hand_base_link → thumb_metacarpals_base2 → thumb_metacarpals_base1 → thumb_metacarpals → thumb_proximal → thumb_distal</code>。关节依次是 <code>thumb_cmc_yaw → thumb_cmc_roll → thumb_cmc_pitch → thumb_mcp → thumb_ip</code>。三个 CMC 关节原点有空间偏移，不能把它们的名称当成与 MANO 单一基部节点严格重合的证据。</p>
+<p>文件写明：</p>
+<pre><code class="language-text">q_index_dip  = 0.8917 · q_index_pip
+q_middle_dip = 0.8917 · q_middle_pip
+q_ring_dip   = 0.8917 · q_ring_pip
+q_pinky_dip  = 0.8917 · q_pinky_pip
+q_thumb_ip   = 1.1619 · q_thumb_mcp
+</code></pre>
+<p>全部 offset 为 0。这是<strong>该 URDF 的固定线性近似</strong>，并非对真实连杆在全部工况下准确性的验证。所选 FK/仿真库是否自动处理 mimic，也需要显式检查。</p>
+<p><a href="https://www.linkerbot.cn/details/LinkerHandL20/">厂商 L20 页面</a>标注 16 个主动自由度与 5 个被动自由度；<a href="https://github.com/linker-bot/linkerhand-ros-sdk#position-to-finger-joint-mapping-table">厂商 ROS SDK</a>的 L20 数组有 20 个槽位，其中 4 个为 Reserved。两者与本文件的数量结构相容，但 <strong>SDK 槽位顺序、单位、零点、方向、硬件版本与 URDF 的具体对应仍待核查</strong>。L20 与 L20 Lite 也不能混用。</p>
+<h2 id="3-第一步准备两套模型先确定接口">3. 第一步：准备两套模型，先确定接口</h2>
+<p>计划输入：</p>
+<ol>
+<li>用户现有的 <code>linkerhand_l20_left.urdf</code> 与完整 <code>meshes/</code>；保留原件并记录来源 commit 与文件哈希。</li>
+<li>合法获得的 <code>MANO_LEFT.pkl</code> 与其模型版本。模型需从 <a href="https://mano.is.tue.mpg.de/">MANO 官方入口</a>注册、同意相应许可后获取；安装 Python 包不自动带来模型文件。</li>
+<li>一套能够计算机器人正运动学（FK）的环境，以及可微的 MANO 实现。候选为 PyTorch 配合作者维护的 <a href="https://github.com/vchoutas/smplx">smplx</a>；这是拟实施工具选择，当前未安装项目环境。</li>
+</ol>
+<p>只算关节原点的 FK 可以先不加载网格；掌部外形、末节长度与指尖接触点需要网格或额外几何资料。</p>
+<p>候选 MANO 设置：<code>is_rhand=False</code>、<code>use_pca=False</code>、<code>flat_hand_mean=True</code>、<code>num_betas=10</code>。其中前者固定左手；后两者避免把零姿态输入误解为统计平均弯曲姿态。β 的实际可用维数仍须检查模型文件。</p>
+<p>作者实现的 MANO 定义 15 个局部手关节，完整轴角表示通常有 45 个局部姿态参数，另有 3 个整体旋转参数。常用的 21 点是 16 个骨架点再加 5 个指尖点，但具体输出顺序与是否自动追加指尖必须按实现确认。<a href="https://github.com/vchoutas/smplx/blob/main/smplx/body_models.py">实现依据</a></p>
+<h2 id="4-第二步从机器人提取有语义的几何点">4. 第二步：从机器人提取有语义的几何点</h2>
+<h3 id="41-先固定单位坐标和参考姿态">4.1 先固定单位、坐标和参考姿态</h3>
+<p>计算采用米与弧度；报告距离时再转换为毫米。核对 STL 尺度是否与 URDF 一致，不能因为 STL 文件没有单位字段就默认其尺寸正确。</p>
+<p>先用所有独立关节角为零作为<strong>文件参考姿态</strong>，按 mimic 补全从动关节。零姿态是否适合作为张手，需要看模型；尤其拇指有非零固定 rpy，不可把全部 rpy 清零。若选其他参考姿态，保存确切 q_ref。</p>
+<p>URDF 的关节位置相对父 link。对每个关节沿整条链计算：</p>
+<pre><code class="language-text">T_child(q) = T_parent(q) · T_origin(xyz, rpy) · T_axis_rotation(q_joint)
+</code></pre>
+<p>关节轴是在关节局部系定义的。不要直接把各关节 <code>&lt;origin xyz&gt;</code> 堆成全局点，也不要用 <code>&lt;inertial origin&gt;</code> 的质心作为关节中心。</p>
+<p>定义虚拟腕部位置，并保存其相对 <code>hand_base_link</code> 的变换。掌面方向可由已选指根点建立；使用一致的右手坐标系，轴方向写清。MANO 与机器人必须是同一侧，避免通过镜像反射掩盖错误。</p>
+<h3 id="42-计划的-21-点对应">4.2 计划的 21 点对应</h3>
+<p>下表是候选语义对应，必须在叠图后确认。机器人机械关节中心与人体关节中心只作近似对应。</p>
+<table>
+<thead>
+<tr>
+<th>点组</th>
+<th>机器人取点规则</th>
+<th>MANO 一侧</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>腕部 1 点</td>
+<td>选定的腕/掌基准点，保存局部坐标</td>
+<td>腕部骨架点</td>
+</tr>
+<tr>
+<td>四指各 4 点</td>
+<td><code>*_mcp_pitch</code>、<code>*_pip</code>、<code>*_dip</code> 的 FK 关节原点，再加 <code>*_distal</code> 内定义的指尖点</td>
+<td>掌指关节 MCP、近端指间关节 PIP、远端指间关节 DIP、指尖</td>
+</tr>
+<tr>
+<td>拇指 4 点</td>
+<td>暂以 <code>thumb_cmc_pitch</code> 原点作为基部候选，接 <code>thumb_mcp</code>、<code>thumb_ip</code> 原点与 distal 内指尖</td>
+<td>基部 CMC、MCP、IP、指尖</td>
+</tr>
+</tbody>
+</table>
+<p>四指 <code>mcp_roll</code> 与 <code>mcp_pitch</code> 原点相距约 16.77 mm，所以不能把这两个机械轴都强塞进一个人体 MCP 点。拇指基部多轴且有偏移，选 <code>cmc_pitch</code> 是候选几何代理；若拟合或动作误差集中于这里，需要重新评估代理或改用更多辅助点。</p>
+<p>在每个末节 STL 上标注一个约定明确的末端点，例如指腹末端中心。保存 <code>tip_local_xyz</code>，并把网格坐标经 visual 的 origin/scale 转成 link 坐标，再由 FK 转成掌部坐标。不要把 distal link 原点当指尖，也不要把网格包围盒的某个最大坐标未经检查直接当指尖。</p>
+<p><strong>提取结果计划保存为</strong> <code>landmarks_reference.json</code>：点名、所属 link/关节、局部点、参考姿态下的全局位置、单位、左右手、坐标系、对应规则和来源版本。指尖尚未选定时标记缺失，不填猜测坐标。</p>
+<h3 id="43-一个已能从关节原点得到的长度例子">4.3 一个已能从关节原点得到的长度例子</h3>
+<p>食指 MCP_pitch→PIP 的中心距为：</p>
+<pre><code class="language-text">sqrt((-0.0041945524)^2 + 0^2 + (0.0448194356)^2)
+≈ 0.0450153 m = 45.02 mm
+</code></pre>
+<p>PIP→DIP 中心距约 31.82 mm。这是对当前文件坐标的算术计算，不是机器人实测。DIP→指尖仍缺 <code>tip_local_xyz</code>，不能通过质心位置推断。全手指长还包括这个末段，不能只用已知两段之和替代。</p>
+<h2 id="5-第三步拟合-mano-的固定几何">5. 第三步：拟合 MANO 的固定几何</h2>
+<p><strong>先做尺度基线，再做形状拟合；这一阶段不需要训练网络。</strong></p>
+<h3 id="51-建立不会随姿态轻易变化的尺寸目标">5.1 建立不会随姿态轻易变化的尺寸目标</h3>
+<p>从选定的点得到指节中心距、指根间距与掌部参考距离。选用来自已定义掌部点的掌宽；如果使用网格外轮廓掌宽，MANO 一侧也应取表面外轮廓，不能一边用关节中心、一边用外壳边缘。</p>
+<p>参考姿态下的 MANO 几何描述记作 g_M(β)，L20 的目标描述记作 g_L20。对于采用表面指尖的末段，MANO 姿态校正可能改变其距离，因此在固定参考姿态计算，并另行记录动作下的变化。</p>
+<p>计划的第一步：固定 β=0 与定义好的参考姿态，仅拟合正尺度 s，使总体大小接近。这是必须保留的几何基线。</p>
+<p>计划的第二步：优化 s 与 β，比较新增形状参数是否改善比例误差：</p>
+<pre><code class="language-text">min_{β, s&gt;0}  Σ_r w_r · ((s·g_M,r(β) − g_L20,r) / d_ref)^2
+              + λ_β · ||β||²
+</code></pre>
+<p>d_ref 是事先定义的掌部尺度，用于无量纲化；w_r 是各部位权重；λ_β 防止形状参数过度偏离人手统计范围。β 不是“第 1 个参数=食指长度”的控制杆，通常需优化求解。权重、范围与停止条件都是计划，需用开发/验证样本确定后冻结，不能用正式测试样本调参。</p>
+<h3 id="52-再对齐参考姿态的点布局">5.2 再对齐参考姿态的点布局</h3>
+<p>通过掌部点先求旋转 A 与平移 b。然后用关键点位置细化，候选目标是：</p>
+<pre><code class="language-text">L = L_尺寸 + λ_p Σ_k w_k ||s·A·x_M,k(β, θ_ref) + b − x_L20,k(q_ref)||² / d_ref²
+    + λ_β||β||² + λ_θ||θ_ref − θ_neutral||²
+</code></pre>
+<p>形状阶段优先固定 θ_ref；如果机器人拇指基部布局与中性人手差异较大，再允许少量已指定的基部旋转调整，并保存其偏离值。<strong>不要第一次就让 45 个姿态参数与 β 完全自由地联合拟合一个张手姿态</strong>，否则可以靠弯曲/扭转把点凑近，掩盖比例不匹配；单个姿态也不能确定唯一的真实 β。</p>
+<p>可用 Adam 做初步优化，或用适当的非线性最小二乘法。保存多次初始化、收敛状态与最终残差；当前不指定未经验证的迭代数、学习率或精度。</p>
+<p>输出至少包括 <code>beta_R</code>、<code>scale</code>、<code>alignment</code>、<code>theta_ref</code>、点提取规则、模型版本、目标单位以及逐部位误差。没有 MANO 模型与指尖定义时，这一步仍是未运行。</p>
+<h2 id="6-第四步检查拟合是否适合后续映射">6. 第四步：检查拟合是否适合后续映射</h2>
+<p>计划验证按 <a href="../experiment/evaluation.html">统一测评规则</a>进行：</p>
+<ol>
+<li>固定参考姿态画机器人点与 MANO 点叠图，分别看掌部、拇指和四指，而不只看整体外观。</li>
+<li>比较“仅尺度”与“尺度+β”的逐指长度相对误差、关键点绝对误差（mm）和最大部位误差；结果均待运行。</li>
+<li>冻结 β_R、s 与对齐，再在事先选定的张手、弯指、握拳、拇食指/拇中指捏合、展开等调试动作上检查。动作姿态通过明确的旋转转换或优化获得，不逐项复制 URDF 标量角到 MANO 轴角数组。</li>
+<li>报告动态动作的任务残差、求解失败及不可达样本。机器人与 MANO 可达空间不同，动态点不完全重合不必然说明静态 β 拟合错误。</li>
+<li>按后续任务要求在运行前确定可接受阈值；不把单个漂亮姿态、均值下降或固定 1 mm 阈值当作已经验收。</li>
+</ol>
+<p>纯 MANO 拟合如果残差过大，可以比较：原始 MANO β+尺度；MANO 关节语义下的可调骨长骨架；直接几何关键点中间表示。后两者是扩展/替代表示，不能继续声称是未经修改的标准 MANO 参数模型。修改骨架后，原有 MANO 蒙皮与姿态校正也需要重新验证。</p>
+<h2 id="7-怎样接回两阶段网络">7. 怎样接回两阶段网络</h2>
+<pre><code class="language-text">准备目标几何：L20 URDF + 指尖定义 → 拟合并冻结 β_R、s、对齐
+准备机构描述：URDF mimic + 匹配版本的 SDK/标定 → E_L20
+
+源人手动作 + 源几何 + 固定目标几何
+                  ↓ 第一阶段：跨人手尺寸网络
+              θ_R(t) 或 X_R(t)
+                  ↓ 第二阶段：机构与驱动约束映射
+              u_L20(t)
+                  ↓ 已核查的命令/机构关系 ψ
+              q_L20(t) → FK → 任务表现
+</code></pre>
+<p>当前文件可先构造从 16 个独立运动学角度到 21 个 q 的线性 mimic 展开。但独立运动学角度仍不是硬件执行器命令 u；只有补齐 SDK 槽位、单位、零点与方向后，才能构成实际 <code>q=ψ(u;E)</code>。</p>
+<p>基线仍按项目顺序推进：先模型/FK 核查，随后简单归一化、角度迁移和已有优化重定向。固定 R 的几何可以先准备，不必先训练 URDF→MANO 网络；两个核心网络的新增收益另行实验检验。</p>
+<h2 id="8-当前的具体下一步">8. 当前的具体下一步</h2>
+<p>环境与 MANO 加载核查已经记录 v1 失败和 v2 修正通过。下一个交付是 <strong>L20 左手 FK/坐标检查 + 对应点定义</strong>；几何拟合的版本号按实际执行顺序在实验总表分配，不复用 v1。</p>
+<ul>
+<li>[x] 用户本地 URDF 路径已确认，结构属性已与在线审计核对；来源 commit 仍待确认。</li>
+<li>[x] meshes 引用文件齐全，文件哈希已保存；实际尺度仍未验证。</li>
+<li>[x] 用户提供 MANO_LEFT.pkl，读取/前向/梯度核查通过；原始包保留本地许可证。</li>
+<li>[ ] 完成 L20 FK，检查 mimic 与拇指固定 rpy。</li>
+<li>[ ] 定义腕部与五个指尖，冻结语义对应。</li>
+<li>[ ] 运行仅尺度基线与 β+尺度拟合，保存叠图与误差表。</li>
+<li>[ ] 确认真实硬件/SDK 版本，再补齐 E_L20 的驱动字段。</li>
+</ul>
+<p>电脑/GPU、真实 L20 硬件、数据规模、投稿目标和 deadline 仍待确认。当前结果总表无新实验行。</p>
+<footer>本页离线可读，无需加载外部资源。可编辑源文件：L20左手_URDF到虚拟人手R建模指南.md。<br>
+主文档与辅助记录在同一个项目文件夹中，已生成的阅读版之间可直接跳转。</footer>
+</main></div></body></html>

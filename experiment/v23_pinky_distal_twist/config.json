@@ -1,0 +1,71 @@
+{
+  "version": "v23_pinky_distal_twist",
+  "input": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v21_MediaPipe到MANO序列拟合\\my_mano_sequence_v21_all.json",
+  "input_sha256": "7cd459ff4afcc177c293b555df08a2eddfa21933b68e13814680ea6be0289184",
+  "mano_sha256": "c4022f7083f2ca7c78b2b3d595abbab52debd32b09d372b16923a801f0ea6a30",
+  "script_sha256": "7ab34c4b163b831be52d62fdb294aeaecc60687624edd9d66d7506cf63529107",
+  "manifest_sha256": "28935c67fabf6160c01050ebf101e808d43fcf6836e0aa60e11a0c26baabee2d",
+  "baseline_geometry_sha256": "c0b9a2a424becbe6b262ceef2740579304a572f7907cebde979e62031736dece",
+  "units": {
+    "points": "m",
+    "pose": "rad",
+    "angles_reported": "deg"
+  },
+  "hand_side": "left",
+  "target": "original v21 fitted 21 points, fixed shape and root",
+  "changed_pose_slice": [
+    24,
+    27
+  ],
+  "native_joint": 9,
+  "semantic_joint": "pinky DIP",
+  "twist_axis": "shape-specific neutral DIP-to-tip (includes fingertip surface offset)",
+  "source_neutral_axis": [
+    0.8628499378516025,
+    0.07959310707445245,
+    -0.4991542066893962
+  ],
+  "swing_basis": [
+    [
+      0.5007428453777559,
+      0.06889548281617966
+    ],
+    [
+      -0.0,
+      -0.9968274360721794
+    ],
+    [
+      0.8655960968043864,
+      -0.039855678908917724
+    ]
+  ],
+  "prior": "zero axial twist relative to MANO neutral; nail orientation is not observed",
+  "least_squares": {
+    "batch_size": 64,
+    "iterations_max": 18,
+    "finite_difference_rad": 1e-05,
+    "damping": 1e-09,
+    "step_cap_rad": 0.2,
+    "line_search": [
+      1,
+      0.5,
+      0.25,
+      0.125
+    ]
+  },
+  "evaluation": "all input frames; diagnostic only, no train/test or generalization claim",
+  "initial_window": "first min(60,N) frames by sequence index; descriptive, not acceptance threshold",
+  "existing_diagnostic_frame_ids": [
+    0,
+    190,
+    383,
+    773
+  ],
+  "added_failure_frame_ids": [
+    5,
+    30,
+    60,
+    120,
+    250
+  ]
+}

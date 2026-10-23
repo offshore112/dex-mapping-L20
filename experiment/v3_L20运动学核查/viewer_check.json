@@ -1,0 +1,9 @@
+{
+  "status": "passed_numerical_and_syntax_checks",
+  "javascript_syntax_valid": true,
+  "fk_case_count": 114,
+  "link_transform_comparisons": 2508,
+  "max_matrix_abs_error_against_python": 3.3306690738754696e-16,
+  "full_browser_click_test": "not_run_browser_tool_rejects_local_file_protocol",
+  "note": "DOM layout and canvas event interactions require a user browser check."
+}

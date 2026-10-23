@@ -1,0 +1,276 @@
+{
+  "version": "v5_l20_fit_target",
+  "status": "generated_for_initial_simulation_fit",
+  "coordinate_frame": "hand_base_link",
+  "unit": "m",
+  "reference_pose": "all independent URDF coordinates zero; mimic coordinates expanded by URDF",
+  "point_order": [
+    "wrist",
+    "thumb_cmc",
+    "thumb_mcp",
+    "thumb_ip",
+    "thumb_tip",
+    "index_mcp",
+    "index_pip",
+    "index_dip",
+    "index_tip",
+    "middle_mcp",
+    "middle_pip",
+    "middle_dip",
+    "middle_tip",
+    "ring_mcp",
+    "ring_pip",
+    "ring_dip",
+    "ring_tip",
+    "pinky_mcp",
+    "pinky_pip",
+    "pinky_dip",
+    "pinky_tip"
+  ],
+  "points": [
+    {
+      "name": "wrist",
+      "xyz_m": [
+        8.243276753982082e-05,
+        4.867116195718859e-06,
+        3.2295806864287654e-10
+      ],
+      "source": "v4_mesh_reference_point",
+      "link": "hand_base_link"
+    },
+    {
+      "name": "thumb_cmc",
+      "xyz_m": [
+        0.02244042,
+        -0.034741132444527825,
+        0.04571350557151549
+      ],
+      "source": "urdf_joint_frame_origin",
+      "joint": "thumb_cmc_pitch"
+    },
+    {
+      "name": "thumb_mcp",
+      "xyz_m": [
+        0.022440300865185434,
+        -0.09059928521326938,
+        0.052166083231624444
+      ],
+      "source": "urdf_joint_frame_origin",
+      "joint": "thumb_mcp"
+    },
+    {
+      "name": "thumb_ip",
+      "xyz_m": [
+        0.022440222897413042,
+        -0.12508441196644904,
+        0.0575199668595204
+      ],
+      "source": "urdf_joint_frame_origin",
+      "joint": "thumb_ip"
+    },
+    {
+      "name": "thumb_tip",
+      "xyz_m": [
+        0.023494922702856236,
+        -0.15632188605239958,
+        0.043681372191456166
+      ],
+      "source": "v4_mesh_reference_point",
+      "link": "thumb_distal"
+    },
+    {
+      "name": "index_mcp",
+      "xyz_m": [
+        -0.013095480353388398,
+        -0.026710692750703,
+        0.159311439204817
+      ],
+      "source": "urdf_joint_frame_origin",
+      "joint": "index_mcp_pitch"
+    },
+    {
+      "name": "index_pip",
+      "xyz_m": [
+        -0.01729003274498861,
+        -0.026710692750703,
+        0.20413087477755829
+      ],
+      "source": "urdf_joint_frame_origin",
+      "joint": "index_pip"
+    },
+    {
+      "name": "index_dip",
+      "xyz_m": [
+        -0.01453441319948759,
+        -0.026710692750703,
+        0.235833300011498
+      ],
+      "source": "urdf_joint_frame_origin",
+      "joint": "index_dip"
+    },
+    {
+      "name": "index_tip",
+      "xyz_m": [
+        -0.029755985067862277,
+        -0.02671699522585743,
+        0.25865941535532655
+      ],
+      "source": "v4_mesh_reference_point",
+      "link": "index_distal"
+    },
+    {
+      "name": "middle_mcp",
+      "xyz_m": [
+        -0.017829320124773597,
+        -0.005110692750737513,
+        0.163804328353988
+      ],
+      "source": "urdf_joint_frame_origin",
+      "joint": "middle_mcp_pitch"
+    },
+    {
+      "name": "middle_pip",
+      "xyz_m": [
+        -0.022023872516373808,
+        -0.005110692750737513,
+        0.2086237639267293
+      ],
+      "source": "urdf_joint_frame_origin",
+      "joint": "middle_pip"
+    },
+    {
+      "name": "middle_dip",
+      "xyz_m": [
+        -0.019268252970872788,
+        -0.005110692750737513,
+        0.240326189160668
+      ],
+      "source": "urdf_joint_frame_origin",
+      "joint": "middle_dip"
+    },
+    {
+      "name": "middle_tip",
+      "xyz_m": [
+        -0.03448982565685266,
+        -0.005116994809829493,
+        0.26315230394265376
+      ],
+      "source": "v4_mesh_reference_point",
+      "link": "middle_distal"
+    },
+    {
+      "name": "ring_mcp",
+      "xyz_m": [
+        -0.015524491917545902,
+        0.016489307249235998,
+        0.1593114381003
+      ],
+      "source": "urdf_joint_frame_origin",
+      "joint": "ring_mcp_pitch"
+    },
+    {
+      "name": "ring_pip",
+      "xyz_m": [
+        -0.019719044309146113,
+        0.016489307249235998,
+        0.20413087367304128
+      ],
+      "source": "urdf_joint_frame_origin",
+      "joint": "ring_pip"
+    },
+    {
+      "name": "ring_dip",
+      "xyz_m": [
+        -0.016963424763642484,
+        0.016489307249235998,
+        0.2358332978905497
+      ],
+      "source": "urdf_joint_frame_origin",
+      "joint": "ring_dip"
+    },
+    {
+      "name": "ring_tip",
+      "xyz_m": [
+        -0.03218499588879029,
+        0.01648300584524562,
+        0.258659414051687
+      ],
+      "source": "v4_mesh_reference_point",
+      "link": "ring_distal"
+    },
+    {
+      "name": "pinky_mcp",
+      "xyz_m": [
+        -0.0119007268612961,
+        0.038089307249219655,
+        0.150312712339165
+      ],
+      "source": "urdf_joint_frame_origin",
+      "joint": "pinky_mcp_pitch"
+    },
+    {
+      "name": "pinky_pip",
+      "xyz_m": [
+        -0.016095279252896312,
+        0.038089307249219655,
+        0.19513214791190628
+      ],
+      "source": "urdf_joint_frame_origin",
+      "joint": "pinky_pip"
+    },
+    {
+      "name": "pinky_dip",
+      "xyz_m": [
+        -0.013339659707396291,
+        0.038089307249219655,
+        0.22683457314584599
+      ],
+      "source": "urdf_joint_frame_origin",
+      "joint": "pinky_dip"
+    },
+    {
+      "name": "pinky_tip",
+      "xyz_m": [
+        -0.02856123256587513,
+        0.038083005565965326,
+        0.24966068923730803
+      ],
+      "source": "v4_mesh_reference_point",
+      "link": "pinky_distal"
+    }
+  ],
+  "full_joint_values_rad": {
+    "pinky_mcp_roll": 0.0,
+    "pinky_mcp_pitch": 0.0,
+    "pinky_pip": 0.0,
+    "pinky_dip": 0.0,
+    "ring_mcp_roll": 0.0,
+    "ring_mcp_pitch": 0.0,
+    "ring_pip": 0.0,
+    "ring_dip": 0.0,
+    "middle_mcp_roll": 0.0,
+    "middle_mcp_pitch": 0.0,
+    "middle_pip": 0.0,
+    "middle_dip": 0.0,
+    "index_mcp_roll": 0.0,
+    "index_mcp_pitch": 0.0,
+    "index_pip": 0.0,
+    "index_dip": 0.0,
+    "thumb_cmc_yaw": 0.0,
+    "thumb_cmc_roll": 0.0,
+    "thumb_cmc_pitch": 0.0,
+    "thumb_mcp": 0.0,
+    "thumb_ip": 0.0
+  },
+  "source": {
+    "urdf": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\linkerhand_l20_left.urdf",
+    "reference_points": "E:\\lingqiaoshou\\dex-mapping\\robots\\L20_left\\l20_r_reference_points_v4.json",
+    "mcp_proxy_rule": "mcp_pitch joint frame for the four fingers",
+    "thumb_base_proxy_rule": "thumb_cmc_pitch joint frame"
+  },
+  "limitations": [
+    "The target is CAD/URDF geometry in the zero pose, not a hardware measurement.",
+    "Joint-frame origins are mechanical proxies for MANO joints.",
+    "Tip points are distal-cap centers, not measured contact centers."
+  ]
+}

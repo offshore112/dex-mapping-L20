@@ -1,0 +1,6 @@
+{
+  "mano_left": "E:\\dex\\MANO\\mano_v1_2\\mano_v1_2\\models\\MANO_LEFT.pkl",
+  "l20_left_urdf": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\linkerhand_l20_left.urdf",
+  "side": "left",
+  "model_coordinate_unit": "metre_convention_pending_physical_calibration"
+}

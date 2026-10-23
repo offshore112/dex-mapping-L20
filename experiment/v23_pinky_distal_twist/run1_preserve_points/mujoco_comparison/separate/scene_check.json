@@ -1,0 +1,11 @@
+{
+  "status": "passed_mujoco_visual_skin_check",
+  "body_count": 1557,
+  "checked_frame_count": 774,
+  "joint_count": 0,
+  "mocap_count": 1556,
+  "skin_count": 2,
+  "geom_count": 0,
+  "skin_vertex_max_abs_error_m": 1.4255490510262092e-08,
+  "physics": "not stepped; visual kinematic playback only"
+}

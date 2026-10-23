@@ -1,0 +1,257 @@
+{
+  "version": "v4_mesh_reference_points",
+  "status": "initial_simulation_geometry; not_hardware_calibrated",
+  "purpose": "Initial fixed points for MANO-R geometric fitting in simulation",
+  "coordinate_convention": {
+    "urdf_root": "hand_base_link",
+    "units": "m",
+    "angles": "rad",
+    "local_xyz_frame": "the link frame named in each point record",
+    "root_xyz_frame": "hand_base_link at URDF zero pose",
+    "tip_semantics": "distal-end cap center; not a measured contact-patch center",
+    "wrist_semantics": "bottom installation/palm reference center; not asserted anatomical wrist"
+  },
+  "source": {
+    "urdf": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\linkerhand_l20_left.urdf",
+    "urdf_sha256": "2c29f77a892d026ad92dfba6a61b3c5b70e90784c4a6dabdc09503f7f0209e3e",
+    "visual_origin_assumption": "all selected visual origins are identity and no mesh scale is specified"
+  },
+  "points": {
+    "wrist_ref": {
+      "link": "hand_base_link",
+      "local_xyz_m": [
+        8.243276753982082e-05,
+        4.867116195718859e-06,
+        3.2295806864287654e-10
+      ],
+      "zero_pose_root_xyz_m": [
+        8.243276753982082e-05,
+        4.867116195718859e-06,
+        3.2295806864287654e-10
+      ],
+      "selection_rule": "area_weighted_centroid_of_bottom_z_cap",
+      "selection_axis": "local_z",
+      "selection_side": "min",
+      "cap_band_mm": 0.1
+    },
+    "thumb_tip": {
+      "link": "thumb_distal",
+      "local_xyz_m": [
+        -0.013837858573348688,
+        -0.0010547101816853978,
+        0.031237799824470024
+      ],
+      "zero_pose_root_xyz_m": [
+        0.023494922702856236,
+        -0.15632188605239958,
+        0.043681372191456166
+      ],
+      "selection_rule": "area_weighted_centroid_of_distal_plus_z_cap",
+      "selection_axis": "local_z",
+      "selection_side": "max",
+      "cap_band_mm": 0.5
+    },
+    "index_tip": {
+      "link": "index_distal",
+      "local_xyz_m": [
+        -0.015221571868374688,
+        -6.3024751544285255e-06,
+        0.022826115343828567
+      ],
+      "zero_pose_root_xyz_m": [
+        -0.029755985067862277,
+        -0.02671699522585743,
+        0.25865941535532655
+      ],
+      "selection_rule": "area_weighted_centroid_of_distal_plus_z_cap",
+      "selection_axis": "local_z",
+      "selection_side": "max",
+      "cap_band_mm": 0.5
+    },
+    "middle_tip": {
+      "link": "middle_distal",
+      "local_xyz_m": [
+        -0.015221572685979868,
+        -6.302059091980565e-06,
+        0.022826114781985766
+      ],
+      "zero_pose_root_xyz_m": [
+        -0.03448982565685266,
+        -0.005116994809829493,
+        0.26315230394265376
+      ],
+      "selection_rule": "area_weighted_centroid_of_distal_plus_z_cap",
+      "selection_axis": "local_z",
+      "selection_side": "max",
+      "cap_band_mm": 0.5
+    },
+    "ring_tip": {
+      "link": "ring_distal",
+      "local_xyz_m": [
+        -0.015221571125147808,
+        -6.301403990380336e-06,
+        0.022826116161137337
+      ],
+      "zero_pose_root_xyz_m": [
+        -0.03218499588879029,
+        0.01648300584524562,
+        0.258659414051687
+      ],
+      "selection_rule": "area_weighted_centroid_of_distal_plus_z_cap",
+      "selection_axis": "local_z",
+      "selection_side": "max",
+      "cap_band_mm": 0.5
+    },
+    "pinky_tip": {
+      "link": "pinky_distal",
+      "local_xyz_m": [
+        -0.015221572858478841,
+        -6.301683254325169e-06,
+        0.022826116091462047
+      ],
+      "zero_pose_root_xyz_m": [
+        -0.02856123256587513,
+        0.038083005565965326,
+        0.24966068923730803
+      ],
+      "selection_rule": "area_weighted_centroid_of_distal_plus_z_cap",
+      "selection_axis": "local_z",
+      "selection_side": "max",
+      "cap_band_mm": 0.5
+    }
+  },
+  "mesh_audit": {
+    "hand_base_link": {
+      "mesh": "meshes/hand_base_link.STL",
+      "sha256": "5731b19b50b4b527114adb8de55bba15ba421756c2f9bcea60d68be94dbdd90b",
+      "vertices_after_process": 21341,
+      "faces": 42908,
+      "bounds_m": [
+        [
+          -0.03739399090409279,
+          -0.05074438452720642,
+          -1.4059576614045e-08
+        ],
+        [
+          0.03199998289346695,
+          0.05546601116657257,
+          0.16892921924591064
+        ]
+      ],
+      "cap_extreme_m": -1.4059576614045e-08,
+      "cap_triangle_count": 57,
+      "cap_area_m2": 0.00043395374552331794
+    },
+    "thumb_distal": {
+      "mesh": "meshes/thumb_distal.STL",
+      "sha256": "18228b0b2bdf24f433d135a912b90305849d78a384a260043e321efdec37a58c",
+      "vertices_after_process": 11159,
+      "faces": 22414,
+      "bounds_m": [
+        [
+          -0.016682814806699753,
+          -0.01016999687999487,
+          -0.006450880318880081
+        ],
+        [
+          0.004434412345290184,
+          0.00806994829326868,
+          0.031488727778196335
+        ]
+      ],
+      "cap_extreme_m": 0.031488727778196335,
+      "cap_triangle_count": 283,
+      "cap_area_m2": 1.696516719726538e-05
+    },
+    "index_distal": {
+      "mesh": "meshes/index_distal.STL",
+      "sha256": "27ced01bbbc33d59f20957eb7c54bc0f23f6ba3a86832c641f3d2cb6c10c5009",
+      "vertices_after_process": 9499,
+      "faces": 19016,
+      "bounds_m": [
+        [
+          -0.018445197492837906,
+          -0.007689860183745623,
+          -0.011431300081312656
+        ],
+        [
+          0.002815193496644497,
+          0.007716822903603315,
+          0.023063527420163155
+        ]
+      ],
+      "cap_extreme_m": 0.023063527420163155,
+      "cap_triangle_count": 241,
+      "cap_area_m2": 1.5095629711212574e-05
+    },
+    "middle_distal": {
+      "mesh": "meshes/middle_distal.STL",
+      "sha256": "0d1f05f0ca13b635e062c2264e4420d55281442578033734f759539312c33610",
+      "vertices_after_process": 9499,
+      "faces": 19016,
+      "bounds_m": [
+        [
+          -0.018445197492837906,
+          -0.007689860183745623,
+          -0.011431300081312656
+        ],
+        [
+          0.002815193496644497,
+          0.007716822903603315,
+          0.023063531145453453
+        ]
+      ],
+      "cap_extreme_m": 0.023063531145453453,
+      "cap_triangle_count": 241,
+      "cap_area_m2": 1.5095628083694012e-05
+    },
+    "ring_distal": {
+      "mesh": "meshes/ring_distal.STL",
+      "sha256": "cba65d8dfb49cb69cf8b6d420b69e0b313097b25e983c81ce270be3968a2ddca",
+      "vertices_after_process": 9499,
+      "faces": 19016,
+      "bounds_m": [
+        [
+          -0.018445197492837906,
+          -0.007689860183745623,
+          -0.011431300081312656
+        ],
+        [
+          0.002815193496644497,
+          0.007716822903603315,
+          0.023063529282808304
+        ]
+      ],
+      "cap_extreme_m": 0.023063529282808304,
+      "cap_triangle_count": 241,
+      "cap_area_m2": 1.5095616587795863e-05
+    },
+    "pinky_distal": {
+      "mesh": "meshes/pinky_distal.STL",
+      "sha256": "04180872f8a06de0c44ef7dcfb3423d40d554cfba2f9bb4056f5b7293b09024e",
+      "vertices_after_process": 9499,
+      "faces": 19016,
+      "bounds_m": [
+        [
+          -0.018445199355483055,
+          -0.007689860183745623,
+          -0.011431300081312656
+        ],
+        [
+          0.002815193496644497,
+          0.007716822903603315,
+          0.023063533008098602
+        ]
+      ],
+      "cap_extreme_m": 0.023063533008098602,
+      "cap_triangle_count": 241,
+      "cap_area_m2": 1.5095645708606704e-05
+    }
+  },
+  "limitations": [
+    "STL contains geometry but no semantic wrist or fingertip labels.",
+    "The distal-cap convention is for the zero-pose simulation model.",
+    "Real assembly zero, coating, compliance, and contact location are not calibrated.",
+    "This point set is not a measured MANO shape or a retargeting result."
+  ]
+}

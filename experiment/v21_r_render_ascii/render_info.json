@@ -1,0 +1,110 @@
+{
+  "version": "v21_shared_R_visualization",
+  "status": "completed_png_gif_contact_sheet",
+  "source_sequence": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v21_MediaPipe到MANO序列拟合\\my_r_sequence_v21.json",
+  "source_model_manifest": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v12_R_L20_canonical_human\\r_l20_model.json",
+  "frame_count": 24,
+  "records": [
+    {
+      "frame_id": 0,
+      "image": "frame_0000.png"
+    },
+    {
+      "frame_id": 33,
+      "image": "frame_0033.png"
+    },
+    {
+      "frame_id": 66,
+      "image": "frame_0066.png"
+    },
+    {
+      "frame_id": 99,
+      "image": "frame_0099.png"
+    },
+    {
+      "frame_id": 132,
+      "image": "frame_0132.png"
+    },
+    {
+      "frame_id": 164,
+      "image": "frame_0164.png"
+    },
+    {
+      "frame_id": 197,
+      "image": "frame_0197.png"
+    },
+    {
+      "frame_id": 230,
+      "image": "frame_0230.png"
+    },
+    {
+      "frame_id": 263,
+      "image": "frame_0263.png"
+    },
+    {
+      "frame_id": 296,
+      "image": "frame_0296.png"
+    },
+    {
+      "frame_id": 329,
+      "image": "frame_0329.png"
+    },
+    {
+      "frame_id": 362,
+      "image": "frame_0362.png"
+    },
+    {
+      "frame_id": 411,
+      "image": "frame_0411.png"
+    },
+    {
+      "frame_id": 444,
+      "image": "frame_0444.png"
+    },
+    {
+      "frame_id": 477,
+      "image": "frame_0477.png"
+    },
+    {
+      "frame_id": 510,
+      "image": "frame_0510.png"
+    },
+    {
+      "frame_id": 543,
+      "image": "frame_0543.png"
+    },
+    {
+      "frame_id": 576,
+      "image": "frame_0576.png"
+    },
+    {
+      "frame_id": 609,
+      "image": "frame_0609.png"
+    },
+    {
+      "frame_id": 641,
+      "image": "frame_0641.png"
+    },
+    {
+      "frame_id": 674,
+      "image": "frame_0674.png"
+    },
+    {
+      "frame_id": 707,
+      "image": "frame_0707.png"
+    },
+    {
+      "frame_id": 740,
+      "image": "frame_0740.png"
+    },
+    {
+      "frame_id": 773,
+      "image": "frame_0773.png"
+    }
+  ],
+  "limitations": [
+    "This renders the MANO-R surface and landmarks only.",
+    "It does not render L20 q, collision/contact, or actuator u.",
+    "The displayed surface uses beta from each frame when present; this follows the current v20 interface and is not yet the final shared-shape policy."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "version": "v14_R_L20_task_only_render",
+  "status": "passed_task_only_solution_render",
+  "renders": [
+    {
+      "pair": [
+        "thumb_tip",
+        "index_tip"
+      ],
+      "image": "thumb_tip_index_tip.png",
+      "joint_count": 21
+    },
+    {
+      "pair": [
+        "thumb_tip",
+        "middle_tip"
+      ],
+      "image": "thumb_tip_middle_tip.png",
+      "joint_count": 21
+    }
+  ],
+  "note": "Images show q-level point solutions; no contact/collision or actuator validation."
+}

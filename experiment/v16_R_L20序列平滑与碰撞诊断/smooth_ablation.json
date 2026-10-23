@@ -1,0 +1,43 @@
+{
+  "version": "v16_sequence_smooth_ablation",
+  "status": "completed",
+  "smooth_weight": {
+    "with_smooth": 0.5,
+    "without_smooth": 0.0
+  },
+  "with_smooth": {
+    "all_solver_success": true,
+    "all_limit_violations_zero": true,
+    "max_mimic_residual_rad": 0.0,
+    "mean_bone_direction_rmse_deg": 16.812075194390136,
+    "max_q_step_abs_rad": 0.4343506603941652,
+    "mean_q_step_abs_rad": 0.19736229777166353,
+    "max_q_step_norm_normalized": 0.35150041040692337,
+    "pair_mean_abs_normalized_error": {
+      "thumb_tip+index_tip": 0.0003003146093032129,
+      "thumb_tip+middle_tip": 0.00020859969697271897
+    },
+    "pair_max_abs_normalized_error": {
+      "thumb_tip+index_tip": 0.00032946245420899245,
+      "thumb_tip+middle_tip": 0.00036512104590807545
+    }
+  },
+  "without_smooth": {
+    "all_solver_success": true,
+    "all_limit_violations_zero": true,
+    "max_mimic_residual_rad": 0.0,
+    "mean_bone_direction_rmse_deg": 16.562771904853655,
+    "max_q_step_abs_rad": 0.8660593848168475,
+    "mean_q_step_abs_rad": 0.2627752854461679,
+    "max_q_step_norm_normalized": 1.160130999342314,
+    "pair_mean_abs_normalized_error": {
+      "thumb_tip+index_tip": 0.00023406573067919352,
+      "thumb_tip+middle_tip": 0.0001870748671055707
+    },
+    "pair_max_abs_normalized_error": {
+      "thumb_tip+index_tip": 0.000323663848256793,
+      "thumb_tip+middle_tip": 0.00042869566076775625
+    }
+  },
+  "interpretation": "Smoothness comparison is on the same synthetic sequence and fixed solver; it is not a latency or control-dynamics result."
+}

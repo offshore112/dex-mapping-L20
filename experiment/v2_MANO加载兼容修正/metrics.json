@@ -1,0 +1,20 @@
+{
+  "check_type": "environment_and_model_interface_debug_only",
+  "coordinate_unit": "metre_convention_pending_physical_calibration",
+  "formal_data_split": null,
+  "retargeting_task_metrics": null,
+  "robot_fk_metrics": null,
+  "training_run": false,
+  "version": "v2_MANO\u52a0\u8f7d\u517c\u5bb9\u4fee\u6b63",
+  "status": "passed_environment_model_check_only",
+  "neutral_vertices_max_abs_error_model_units": 6.308303282520633e-09,
+  "neutral_joints_max_abs_error_model_units": 6.210221087377121e-10,
+  "numeric_consistency_tolerance_model_units": 1.3593493015069139e-07,
+  "shape_gradient_finite_and_nonzero": true,
+  "pose_forward_perturbation_passed": true,
+  "conda_activation_passed": true,
+  "conda_deactivation_passed": true,
+  "native_joint_count": 16,
+  "landmark_count": 21,
+  "l20_mesh_files_present": 22
+}

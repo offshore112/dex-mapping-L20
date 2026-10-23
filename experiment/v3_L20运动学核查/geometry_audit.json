@@ -1,0 +1,572 @@
+{
+  "visuals": [
+    {
+      "link": "hand_base_link",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\hand_base_link.STL",
+      "sha256": "5731b19b50b4b527114adb8de55bba15ba421756c2f9bcea60d68be94dbdd90b",
+      "size_bytes": 2145484,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 42908,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          -0.03739399090409279,
+          -0.05074438452720642,
+          -1.4059576614045e-08
+        ],
+        [
+          0.03199998289346695,
+          0.05546601116657257,
+          0.16892921924591064
+        ]
+      ]
+    },
+    {
+      "link": "pinky_metacarpals",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\pinky_metacarpals.STL",
+      "sha256": "e31345027027f50543192446327eb52fda373ee371378ac56d59b6e3a8183100",
+      "size_bytes": 70784,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 1414,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          1.7145285191588755e-09,
+          -0.008498835377395153,
+          -0.002999961841851473
+        ],
+        [
+          0.01976987160742283,
+          0.00850000698119402,
+          0.010330314747989178
+        ]
+      ]
+    },
+    {
+      "link": "pinky_proximal",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\pinky_proximal.STL",
+      "sha256": "529e677e75e0d69a4bf1de14e0d5d7ab6aa96dd8a5d7573f2c7c3a47157d083f",
+      "size_bytes": 807334,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 16145,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          -0.010869952850043774,
+          -0.008486653678119183,
+          -0.004766182042658329
+        ],
+        [
+          0.010918763466179371,
+          0.00848632026463747,
+          0.04800986498594284
+        ]
+      ]
+    },
+    {
+      "link": "pinky_middle",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\pinky_middle.STL",
+      "sha256": "96bf50fc3dcaf709d06361eb15e30510a89399b07265bf2a6bee5532e40d0012",
+      "size_bytes": 746984,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 14938,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          -0.00992430467158556,
+          -0.008182764984667301,
+          -0.002757868729531765
+        ],
+        [
+          0.009381628595292568,
+          0.008204101584851742,
+          0.03395242616534233
+        ]
+      ]
+    },
+    {
+      "link": "pinky_distal",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\pinky_distal.STL",
+      "sha256": "04180872f8a06de0c44ef7dcfb3423d40d554cfba2f9bb4056f5b7293b09024e",
+      "size_bytes": 950884,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 19016,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          -0.018445199355483055,
+          -0.007689860183745623,
+          -0.011431300081312656
+        ],
+        [
+          0.002815193496644497,
+          0.007716822903603315,
+          0.023063533008098602
+        ]
+      ]
+    },
+    {
+      "link": "ring_metacarpals",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\ring_metacarpals.STL",
+      "sha256": "e31345027027f50543192446327eb52fda373ee371378ac56d59b6e3a8183100",
+      "size_bytes": 70784,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 1414,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          1.7145285191588755e-09,
+          -0.008498835377395153,
+          -0.002999961841851473
+        ],
+        [
+          0.01976987160742283,
+          0.00850000698119402,
+          0.010330314747989178
+        ]
+      ]
+    },
+    {
+      "link": "ring_proximal",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\ring_proximal.STL",
+      "sha256": "1604c81101e9bb5e666123506563a8655173b3d49680e88f945be23089de209d",
+      "size_bytes": 807334,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 16145,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          -0.010869952850043774,
+          -0.008486653678119183,
+          -0.004766182042658329
+        ],
+        [
+          0.010918763466179371,
+          0.00848632026463747,
+          0.04800986498594284
+        ]
+      ]
+    },
+    {
+      "link": "ring_middle",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\ring_middle.STL",
+      "sha256": "7571b16629b018e9375a9641aeadb5472006c28f8921ffe707d8a2a7e2665cb8",
+      "size_bytes": 747084,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 14940,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          -0.00992430467158556,
+          -0.008182773366570473,
+          -0.0027578668668866158
+        ],
+        [
+          0.009381628595292568,
+          0.00820409320294857,
+          0.03395242989063263
+        ]
+      ]
+    },
+    {
+      "link": "ring_distal",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\ring_distal.STL",
+      "sha256": "cba65d8dfb49cb69cf8b6d420b69e0b313097b25e983c81ce270be3968a2ddca",
+      "size_bytes": 950884,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 19016,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          -0.018445197492837906,
+          -0.007689860183745623,
+          -0.011431300081312656
+        ],
+        [
+          0.002815193496644497,
+          0.007716822903603315,
+          0.023063529282808304
+        ]
+      ]
+    },
+    {
+      "link": "middle_metacarpals",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\middle_metacarpals.STL",
+      "sha256": "e31345027027f50543192446327eb52fda373ee371378ac56d59b6e3a8183100",
+      "size_bytes": 70784,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 1414,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          1.7145285191588755e-09,
+          -0.008498835377395153,
+          -0.002999961841851473
+        ],
+        [
+          0.01976987160742283,
+          0.00850000698119402,
+          0.010330314747989178
+        ]
+      ]
+    },
+    {
+      "link": "middle_proximal",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\middle_proximal.STL",
+      "sha256": "1ff4af7a882a922f05e36916992b87ebaf7cc4081dbd9da813831276412a6a78",
+      "size_bytes": 807634,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 16151,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          -0.010869952850043774,
+          -0.008486653678119183,
+          -0.004766182042658329
+        ],
+        [
+          0.010918763466179371,
+          0.00848632026463747,
+          0.04800986498594284
+        ]
+      ]
+    },
+    {
+      "link": "middle_middle",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\middle_middle.STL",
+      "sha256": "350d63a1bcc57f7ee4985a52b86c06d5fc432dce7a3cb6fbac310567a3c78cb4",
+      "size_bytes": 746984,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 14938,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          -0.009924306534230709,
+          -0.008182765915989876,
+          -0.0027578670997172594
+        ],
+        [
+          0.009381626732647419,
+          0.008204100653529167,
+          0.03395242616534233
+        ]
+      ]
+    },
+    {
+      "link": "middle_distal",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\middle_distal.STL",
+      "sha256": "0d1f05f0ca13b635e062c2264e4420d55281442578033734f759539312c33610",
+      "size_bytes": 950884,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 19016,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          -0.018445197492837906,
+          -0.007689860183745623,
+          -0.011431300081312656
+        ],
+        [
+          0.002815193496644497,
+          0.007716822903603315,
+          0.023063531145453453
+        ]
+      ]
+    },
+    {
+      "link": "index_metacarpals",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\index_metacarpals.STL",
+      "sha256": "e31345027027f50543192446327eb52fda373ee371378ac56d59b6e3a8183100",
+      "size_bytes": 70784,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 1414,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          1.7145285191588755e-09,
+          -0.008498835377395153,
+          -0.002999961841851473
+        ],
+        [
+          0.01976987160742283,
+          0.00850000698119402,
+          0.010330314747989178
+        ]
+      ]
+    },
+    {
+      "link": "index_proximal",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\index_proximal.STL",
+      "sha256": "a009a4af6d042762c3c8ded32bd7151efc477e6839714112e61f20fa418b4e4c",
+      "size_bytes": 807534,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 16149,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          -0.010869952850043774,
+          -0.008486653678119183,
+          -0.004766182042658329
+        ],
+        [
+          0.010918763466179371,
+          0.00848632026463747,
+          0.04800986498594284
+        ]
+      ]
+    },
+    {
+      "link": "index_middle",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\index_middle.STL",
+      "sha256": "03d39565b6736c1dbd74d4fb78fc6df6a029e8830749a5c743b27434e8544a79",
+      "size_bytes": 746984,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 14938,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          -0.009924307465553284,
+          -0.008182774297893047,
+          -0.002757868031039834
+        ],
+        [
+          0.009381629526615143,
+          0.008204092271625996,
+          0.03395242616534233
+        ]
+      ]
+    },
+    {
+      "link": "index_distal",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\index_distal.STL",
+      "sha256": "27ced01bbbc33d59f20957eb7c54bc0f23f6ba3a86832c641f3d2cb6c10c5009",
+      "size_bytes": 950884,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 19016,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          -0.018445197492837906,
+          -0.007689860183745623,
+          -0.011431300081312656
+        ],
+        [
+          0.002815193496644497,
+          0.007716822903603315,
+          0.023063527420163155
+        ]
+      ]
+    },
+    {
+      "link": "thumb_metacarpals_base2",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\thumb_metacarpals_base2.STL",
+      "sha256": "887e48745f6324a4964dfc88099e4c8643e92cb5c53fc956e7230fae74e4d556",
+      "size_bytes": 482584,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 9650,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          0.008732968010008335,
+          -0.029132220894098282,
+          -0.029151350259780884
+        ],
+        [
+          0.029503529891371727,
+          0.021873852238059044,
+          0.029095185920596123
+        ]
+      ]
+    },
+    {
+      "link": "thumb_metacarpals_base1",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\thumb_metacarpals_base1.STL",
+      "sha256": "cf646ac87b6ea06bcd4a00325673067c50cda0452cf2936811fe5dde7aab5d9b",
+      "size_bytes": 286684,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 5732,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          -0.010484420694410801,
+          -0.017809944227337837,
+          -0.010499889962375164
+        ],
+        [
+          0.0130069050937891,
+          0.009864484891295433,
+          0.03329429402947426
+        ]
+      ]
+    },
+    {
+      "link": "thumb_metacarpals",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\thumb_metacarpals.STL",
+      "sha256": "85fbc694af273729750dbd128627b2aeb259daa115f763ecd83379367ea47258",
+      "size_bytes": 1046684,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 20932,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          -0.011770069599151611,
+          -0.016480280086398125,
+          -0.009765380062162876
+        ],
+        [
+          0.023024115711450577,
+          0.01445169746875763,
+          0.06404867768287659
+        ]
+      ]
+    },
+    {
+      "link": "thumb_proximal",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\thumb_proximal.STL",
+      "sha256": "fd0d83782b8921a79976999e757888a950e1e5bd90d94eeed9df5024fb9d70f6",
+      "size_bytes": 676584,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 13530,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          -0.014202841557562351,
+          -0.010661011561751366,
+          -0.00857230182737112
+        ],
+        [
+          0.010297181084752083,
+          0.008460918441414833,
+          0.034306298941373825
+        ]
+      ]
+    },
+    {
+      "link": "thumb_distal",
+      "path": "E:\\lingqiaoshou\\linkerhand-urdf-main\\linkerhand-urdf-main\\l20\\left\\meshes\\thumb_distal.STL",
+      "sha256": "18228b0b2bdf24f433d135a912b90305849d78a384a260043e321efdec37a58c",
+      "size_bytes": 1120784,
+      "mesh_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces_full": 22414,
+      "faces_display": 1200,
+      "bounds_link_m": [
+        [
+          -0.016682814806699753,
+          -0.01016999687999487,
+          -0.006450880318880081
+        ],
+        [
+          0.004434412345290184,
+          0.00806994829326868,
+          0.031488727778196335
+        ]
+      ]
+    }
+  ],
+  "zero_bounds_base_m": [
+    [
+      -0.03771345046371069,
+      -0.15657280699088388,
+      -1.4059576614045e-08
+    ],
+    [
+      0.03892062109120882,
+      0.05546601116657257,
+      0.26338972030612146
+    ]
+  ],
+  "zero_extents_base_mm": [
+    76.63407155491952,
+    212.03881815745646,
+    263.3897343656981
+  ],
+  "physical_scale_calibrated": false
+}

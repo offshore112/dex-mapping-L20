@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>来源与核查 · 新手研究指南</title><style>
+:root { --ink:#18283b; --muted:#5e6d7c; --blue:#235c91; --line:#dce4ea; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; scroll-padding-top:26px; }
+body { margin:0; color:var(--ink); background:#f3f6f9;
+ font-family:'Microsoft YaHei','PingFang SC',system-ui,sans-serif; line-height:1.85; }
+.shell { max-width:1400px; margin:auto; display:grid; grid-template-columns:278px minmax(0,1fr); gap:28px; padding:32px; }
+aside { position:sticky; top:24px; align-self:start; max-height:calc(100vh - 48px); overflow:auto; padding:22px;
+ background:#edf3f8; border:1px solid var(--line); border-radius:14px; font-size:13px; }
+.brand { font-size:22px; font-weight:750; color:var(--blue); }
+.hint { color:var(--muted); font-size:12px; margin:8px 0 20px; }
+aside ul { list-style:none; margin:0; padding-left:0; }
+aside li { margin:9px 0; }
+aside li ul { padding-left:13px; font-size:12px; }
+a { color:var(--blue); text-decoration:none; overflow-wrap:anywhere; }
+a:hover { text-decoration:underline; }
+main { min-width:0; background:white; border:1px solid var(--line); border-radius:16px; padding:42px 48px; }
+.eyebrow { color:var(--blue); letter-spacing:.12em; font-size:12px; font-weight:bold; }
+.status { color:var(--muted); background:#f5f8fb; padding:12px 16px; border-radius:8px; font-size:13px; }
+h1 { font-size:30px; line-height:1.45; margin:16px 0 20px; }
+h2 { font-size:23px; line-height:1.5; margin-top:48px; padding-top:14px; border-top:2px solid var(--line); }
+h3 { font-size:18px; margin-top:28px; }
+p, li { overflow-wrap:anywhere; }
+strong { color:#102a44; }
+pre { padding:20px; background:#f0f5fa; border:1px solid var(--line); border-radius:10px;
+ overflow:auto; line-height:1.7; font-size:13px; }
+code { font-family:Consolas,'Microsoft YaHei',monospace; font-size:.88em; }
+p code, li code { background:#eff4f8; border-radius:4px; padding:2px 5px; }
+table { display:block; width:100%; overflow-x:auto; border-collapse:collapse; font-size:13px; line-height:1.7; margin:20px 0; }
+td, th { border:1px solid var(--line); padding:11px 13px; min-width:95px; vertical-align:top; }
+th { background:#eaf1f7; text-align:left; }
+tbody tr:nth-child(even) { background:#fafbfd; }
+blockquote { margin:22px 0; padding:12px 22px; border-left:4px solid #3c7bb1; background:#f3f7fb; }
+footer { margin-top:40px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; }
+@media(max-width:900px) { .shell { display:block; padding:16px; } aside { position:static; max-height:260px; margin-bottom:18px; }
+ main { padding:24px 20px; } h1 { font-size:25px; } h2 { font-size:21px; } }
+@media print { body { background:white; font-size:11pt; } .shell { display:block; padding:0; } aside { display:none; }
+ main { border:0; padding:0; } h2,h3 { break-after:avoid; } pre,blockquote,tr { break-inside:avoid; }
+ table { display:table; font-size:9pt; } a { color:inherit; } }
+</style></head>
+<body><div class="shell">
+<aside><div class="brand">dex-mapping</div>
+<div class="hint">从研究想法到可验证的两阶段映射<br>2026-10-14 · 研究文档与实施记录</div>
+<nav aria-label="文档目录"><div class="toc">
+<ul>
+<li><a href="#1-分享对话是怎样读取的">1. 分享对话是怎样读取的</a><ul>
+<li><a href="#用户已明确的目标">用户已明确的目标</a></li>
+<li><a href="#原对话助手的建议">原对话助手的建议</a></li>
+</ul>
+</li>
+<li><a href="#2-采用的项目规范">2. 采用的项目规范</a></li>
+<li><a href="#3-对原对话说法的修正">3. 对原对话说法的修正</a></li>
+<li><a href="#4-文献核查到什么程度">4. 文献核查到什么程度</a></li>
+<li><a href="#5-整理时新增的候选内容">5. 整理时新增的候选内容</a></li>
+<li><a href="#6-l20-左手与-mano-建模来源核查2026-10-14">6. L20 左手与 MANO 建模来源核查（2026-10-14）</a></li>
+<li><a href="#7-用户本地资源与环境验证2026-10-14后续进展">7. 用户本地资源与环境验证（2026-10-14，后续进展）</a></li>
+</ul>
+</div>
+</nav></aside>
+<main><div class="eyebrow">研究思路 · 新手指南</div>
+<p class="status">当前阶段：独立环境与 MANO 加载核查已通过；L20 FK、R 拟合、基线与网络训练尚未运行。</p>
+<h1 id="来源与核查">来源与核查</h1>
+<p>核查日期：2026-10-14（Asia/Shanghai）。本文件区分用户的研究目标、原对话助手的建议和本次整理时补充的设计。</p>
+<h2 id="1-分享对话是怎样读取的">1. 分享对话是怎样读取的</h2>
+<p>来源：<a href="https://chatgpt.com/share/6acf37ac-a0e0-83ec-84b0-c30e11a67063">用户提供的 ChatGPT 分享链接</a>。网页读取器未能获取正文，随后通过浏览器读取了当前分享页的完整可见正文。</p>
+<p>页面可见内容共五个消息块：①助手解释 URDF→MANO-R 与人手/机器人映射；②用户澄清“两部分本质为网络架构，先不同尺寸人手，再同尺寸下欠驱动”；③助手改写科学问题；④用户要求检索相关文献；⑤助手给出文献比较。页面起始已是助手对前文的回应，未展示的更早对话不在本次材料中。</p>
+<h3 id="用户已明确的目标">用户已明确的目标</h3>
+<ul>
+<li>第一部分研究不同尺寸人手之间的动作 mapping，而不仅是 URDF 转换。</li>
+<li>第二部分研究尺寸对应后，欠驱动与耦合导致的可执行性差异。</li>
+<li>两部分统一，实现不同尺寸人手控制不同灵巧手，并减少逐对调参。</li>
+<li>当前请求：适合完全新手的详细思路文档，并按指定仓库创建项目文件夹。</li>
+</ul>
+<h3 id="原对话助手的建议">原对话助手的建议</h3>
+<p>MANO-R、共享潜空间、编码器/解码器、先用 LEAP、可能拆论文等，是原助手给出的候选。它们不等于用户已经选定的最终实现，也不等于已经证明的结论。本次主文档保留两阶段研究目标，把这些建议标记为候选并补充验收条件。</p>
+<h2 id="2-采用的项目规范">2. 采用的项目规范</h2>
+<p>来源：<a href="https://github.com/skJack/research-workflow">research-workflow</a>、<a href="https://github.com/skJack/research-workflow/blob/main/SKILL.md">SKILL.md</a>、<a href="https://github.com/skJack/research-workflow/blob/main/scripts/init-project.sh">初始化脚本</a>、<a href="https://github.com/skJack/research-workflow/tree/main/assets/templates">模板目录</a>。</p>
+<p>本次读取的仓库树 SHA：<code>14c882df49a7991b9833f2ff416e4dfd38668827</code>。这是读取到的树对象标识，不声称它是 commit SHA。</p>
+<p>保留上游核心文件职责与四个目录；结合本课题填入目标、术语和记录规则。新增 docs、robots 与主文档阅读版生成脚本。采用 Windows 可用方式直接创建文件，没有运行上游 Bash 脚本，也没有全局安装 skill。参考项目为 Apache-2.0；本次文字为针对该课题重新整理。</p>
+<p>项目名取当前目录 <code>dex-mapping</code>，中文研究目标取用户澄清。领域术语已有来源；会议/期刊和截止日期缺失，保留待定，不阻塞本次文档与文件夹创建。</p>
+<h2 id="3-对原对话说法的修正">3. 对原对话说法的修正</h2>
+<table>
+<thead>
+<tr>
+<th>原说法或隐含判断</th>
+<th>本次处理</th>
+<th>依据/理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MANO/人手是 21 DOF</td>
+<td>改为区分关键点、关节状态和独立控制量</td>
+<td><a href="https://developers.google.com/edge/mediapipe/solutions/vision/hand_landmarker">关键点检测官方说明</a>；不能用输出点数推出自由度</td>
+</tr>
+<tr>
+<td>MediaPipe、HaMeR、InterHand 都是 image→MANO</td>
+<td>分别定位为关键点检测、重建方法、数据资源</td>
+<td><a href="https://developers.google.com/edge/mediapipe/solutions/vision/hand_landmarker">MediaPipe</a>、<a href="https://github.com/geopavlakos/hamer">HaMeR</a>、<a href="https://mks0601.github.io/InterHand2.6M/">InterHand2.6M</a></td>
+</tr>
+<tr>
+<td>MANO β 可以生成运动等价的任意机器人手</td>
+<td>改为有限几何对应，需检查拟合残差与拓扑边界</td>
+<td><a href="https://mano.is.tue.mpg.de/">MANO 官方项目</a>是人手统计模型；运动等价还需检验工作空间、轴与驱动</td>
+</tr>
+<tr>
+<td>URDF 足够描述所有欠驱动机构</td>
+<td>拆为 URDF 运动学与附加驱动/接触模型</td>
+<td><a href="https://control.ros.org/lyrical/doc/ros2_control/hardware_interface/doc/joints_userdoc.html">关节与传动官方文档</a></td>
+</tr>
+<tr>
+<td>尺寸变了，动作角度必然不同</td>
+<td>按动作定义区分：同姿态可同角度，同物体接触未必</td>
+<td>由几何和任务约束推得，属于整理时的技术解释</td>
+</tr>
+<tr>
+<td>共享表示一定与形态完全无关</td>
+<td>改为可检验假设，加入重建、功能和泛化验证</td>
+<td>目前没有本项目实验</td>
+</tr>
+<tr>
+<td>首次、无一致论文、博士级/foundation model</td>
+<td>不作定论</td>
+<td>有相近工作且未完成系统全文查新</td>
+</tr>
+<tr>
+<td>UniDex 仅处理机器人输入</td>
+<td>修正：涉及人类视频与跨手数据/控制</td>
+<td><a href="https://unidex-ai.github.io/">UniDex 官方项目</a></td>
+</tr>
+<tr>
+<td>UniDex 与 UniDexTok 可合并描述</td>
+<td>分开列为独立工作</td>
+<td><a href="https://arxiv.org/abs/2606.10683">UniDexTok</a> 明确涉及人和机器人共享语义接口</td>
+</tr>
+<tr>
+<td>calibration-free 就是任何适配数据都不用</td>
+<td>区分校准、人工指导、微调和描述配置</td>
+<td><a href="https://arxiv.org/abs/2607.08341">AnyDexRT</a> 标题与摘要包含 few-shot human guidance</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-文献核查到什么程度">4. 文献核查到什么程度</h2>
+<p>已经核查原对话中主要名称的官方入口、论文标题和公开摘要/项目描述。详细索引在 <a href="../related_work/文献索引.html">文献索引</a>。未下载全文、未逐项审查实验设置、未复现其指标。因此索引中的差异均为“下一步比较问题”，不能写成作者从未研究某件事。</p>
+<p>原对话中的 UniDex CVF 页面未能读取，本次使用作者项目与官方代码作为依据。UniDexTok 原对话只有名字，本次补齐 arXiv 入口。2026 年的预印本不因名字或年份就自动获得会议录用身份。</p>
+<h2 id="5-整理时新增的候选内容">5. 整理时新增的候选内容</h2>
+<p>目标形状条件解码、执行器 u 与关节 q 的区分、教师标签质量记录、四种留出条件、消融矩阵和分阶段路线，是为了使用户的目标可检查而加入的候选设计。它们不是原对话中已经确定的实现，更不是已验证结果。</p>
+<p>待补信息：第一只机器人手、完整模型与驱动资料、电脑/GPU、可用数据、交付范围、投稿目标与 deadline。</p>
+<h2 id="6-l20-左手与-mano-建模来源核查2026-10-14">6. L20 左手与 MANO 建模来源核查（2026-10-14）</h2>
+<p>用户新增了 <a href="https://github.com/linker-bot/linkerhand-urdf/tree/main/L20/left">L20 左手官方 URDF 入口</a>，表示已有文件。通过网页工具读完整原始 URDF，解析得到 22 个 link、21 个 revolute joint 与 5 条 mimic；没有 transmission、ros2_control 与独立命名的 tip link。文件读取的是 main，尚未锁定 commit 或核对用户本地版本。</p>
+<p>来源与边界：</p>
+<ul>
+<li><a href="https://raw.githubusercontent.com/linker-bot/linkerhand-urdf/main/L20/left/linkerhand_l20_left.urdf">原始 URDF</a>：固定联动系数与关节原点；属于文件模型信息，未验证真机精度。</li>
+<li><a href="https://www.linkerbot.cn/details/LinkerHandL20/">厂商 L20 页面</a>：16 主动+5 被动自由度；实际批次仍需核对。</li>
+<li><a href="https://github.com/linker-bot/linkerhand-ros-sdk#position-to-finger-joint-mapping-table">厂商 ROS SDK</a>：L20 的 20 个槽位含 4 个 Reserved；命令到 URDF 角度转换仍未验证。</li>
+<li><a href="https://mano.is.tue.mpg.de/">MANO 官方项目</a>：人手统计模型、模型获取入口与版本信息。</li>
+<li><a href="https://github.com/vchoutas/smplx/blob/main/smplx/body_models.py">作者 smplx 实现</a>：MANO 15 个局部手关节、左右手和 PCA/平均姿态参数；采用 10 维 β 是计划配置，实际文件仍须检查。</li>
+</ul>
+<p>食指关节中心距 45.02 mm 与 31.82 mm 来自原点向量范数的算术计算，非实物测量。MANO 几何拟合目标、分阶段优化与替代表示均为本次整理的候选设计，不是官方现成 URDF 转换功能。完整计划见 <a href="L20左手_URDF到虚拟人手R建模指南.html">L20 建模指南</a>，审计见 <a href="../robots/L20_left/model_notes.md">模型记录</a>。</p>
+<h2 id="7-用户本地资源与环境验证2026-10-14后续进展">7. 用户本地资源与环境验证（2026-10-14，后续进展）</h2>
+<p>用户提供 MANO_LEFT.pkl 与 L20 左手本地目录，并明确授权创建独立 Conda 环境。来源路径与哈希、实际软件版本见 <a href="../experiment/v2_MANO加载兼容修正/environment_check.json">v2 检查报告</a>。此后完成真实 smplx MANO 前向、形状梯度、姿态扰动与 21 点导出；机器人 FK/几何拟合/训练仍未运行。</p>
+<p>21 点指尖索引查 <a href="https://github.com/vchoutas/smplx/blob/main/smplx/vertex_ids.py">作者 vertex_ids.py</a>，骨架语义参考 <a href="https://github.com/vchoutas/smplx/blob/main/smplx/joint_names.py">作者 joint_names.py</a>并结合本地 kintree。加载方式和 float32 转换依据本地安装的 smplx 0.1.28 源码；旧 Chumpy 存储对象通过限定的被动读取转换为相同数值数组。未声称独立复现 MANO 论文指标。</p>
+<p>环境采用 conda-forge 的 Python 与基础包，PyTorch CPU 从 <a href="https://pytorch.org/get-started/locally/">官方安装入口对应的 wheel 源</a>安装；确切版本来自实际安装输出，而非网页展示的版本号。其余包从 PyPI 安装并锁定；没有修改原始模型或 base 包。</p>
+<p>v1 数值检查与激活失败，v2 修正通过，全部保留在实验记录。使用方法见 <a href="MANO与L20独立环境使用说明.html">独立环境说明</a>。</p>
+<footer>本页离线可读，无需加载外部资源。可编辑源文件：来源与核查.md。<br>
+主文档与辅助记录在同一个项目文件夹中，已生成的阅读版之间可直接跳转。</footer>
+</main></div></body></html>

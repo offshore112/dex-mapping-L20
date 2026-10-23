@@ -1,0 +1,360 @@
+{
+  "version": "v15_R_L20_functional_feature_baseline",
+  "status": "completed_synthetic_feature_level_R_to_L20_q_baseline",
+  "model": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v12_R_L20_canonical_human\\r_l20_model.json",
+  "actions": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v15_R_L20功能骨架设计\\feature_baseline\\r_action_targets_v15.json",
+  "optimizer": {
+    "method": "scipy.least_squares bounded multi-start",
+    "objective": "root-relative palm-normalized directions, bone lengths, MCP spread, fingertip pair distances/directions",
+    "starts": 4,
+    "q_space": "16 independent L20 coordinates; 5 mimic joints expanded by URDF",
+    "u_space": "not defined; actuator descriptor unavailable"
+  },
+  "results": [
+    {
+      "name": "open",
+      "kind": "synthetic_R_target",
+      "tip_pair": null,
+      "solver": {
+        "multi_start_count": 4,
+        "best_start_id": 3,
+        "success": true,
+        "message": "`ftol` termination condition is satisfied.",
+        "nfev": 48,
+        "cost": 0.8959117003671303,
+        "feature_weights": {
+          "direction": 1.0,
+          "length": 0.65,
+          "mcp": 0.75,
+          "pair_distance": 0.7,
+          "pair_direction": 0.45,
+          "selected_pair_distance": 2.5,
+          "selected_pair_direction": 1.25,
+          "pair_direction_min_distance": 0.025,
+          "selected_pair": null
+        }
+      },
+      "q_order": [
+        "pinky_mcp_roll",
+        "pinky_mcp_pitch",
+        "pinky_pip",
+        "ring_mcp_roll",
+        "ring_mcp_pitch",
+        "ring_pip",
+        "middle_mcp_roll",
+        "middle_mcp_pitch",
+        "middle_pip",
+        "index_mcp_roll",
+        "index_mcp_pitch",
+        "index_pip",
+        "thumb_cmc_yaw",
+        "thumb_cmc_roll",
+        "thumb_cmc_pitch",
+        "thumb_mcp"
+      ],
+      "q_independent_rad": [
+        -0.16999999999999998,
+        2.2152566111254756e-11,
+        0.10229553899774024,
+        -0.16999999999999998,
+        8.035044428158231e-15,
+        0.08450178157393347,
+        -0.07014151916840818,
+        6.269585097942703e-14,
+        0.09069864597085496,
+        0.16999999997576792,
+        9.681934540575709e-14,
+        0.14215619314905256,
+        4.099937429127536e-09,
+        0.09699551907016718,
+        0.3901360736027661,
+        0.3293527619904656
+      ],
+      "q_full_rad": {
+        "pinky_mcp_roll": -0.16999999999999998,
+        "pinky_mcp_pitch": 2.2152566111254756e-11,
+        "pinky_pip": 0.10229553899774024,
+        "pinky_dip": 0.09121693212428499,
+        "ring_mcp_roll": -0.16999999999999998,
+        "ring_mcp_pitch": 8.035044428158231e-15,
+        "ring_pip": 0.08450178157393347,
+        "ring_dip": 0.07535023862947647,
+        "middle_mcp_roll": -0.07014151916840818,
+        "middle_mcp_pitch": 6.269585097942703e-14,
+        "middle_pip": 0.09069864597085496,
+        "middle_dip": 0.08087598261221138,
+        "index_mcp_roll": 0.16999999997576792,
+        "index_mcp_pitch": 9.681934540575709e-14,
+        "index_pip": 0.14215619314905256,
+        "index_dip": 0.1267606774310102,
+        "thumb_cmc_yaw": 4.099937429127536e-09,
+        "thumb_cmc_roll": 0.09699551907016718,
+        "thumb_cmc_pitch": 0.3901360736027661,
+        "thumb_mcp": 0.3293527619904656,
+        "thumb_ip": 0.38267497415672197
+      },
+      "feature_metrics": {
+        "bone_direction_rmse_deg": 12.952166443514585,
+        "bone_direction_mean_deg": 11.341529060312478,
+        "bone_direction_max_deg": 26.05252704952587,
+        "normalized_bone_length_rmse": 0.07219855525763473,
+        "normalized_mcp_position_rmse": 0.08356124874689272,
+        "normalized_all_tip_pair_distance_rmse": 0.32915060428249343,
+        "tip_pair_direction_rmse_deg": 15.424098411554327
+      },
+      "selected_pair_metrics": null,
+      "absolute_landmark_diagnostic": {
+        "rmse_mm": 15.033450155838057,
+        "max_mm": 39.69745580805417,
+        "note": "diagnostic only; absolute MANO/L20 proxy points are not the v15 objective"
+      },
+      "limit_violations": 0,
+      "mimic_residual_max_rad": 0.0,
+      "collision_contact": "not_evaluated"
+    },
+    {
+      "name": "pinch_thumb_index",
+      "kind": "synthetic_R_target",
+      "tip_pair": [
+        "thumb_tip",
+        "index_tip"
+      ],
+      "solver": {
+        "multi_start_count": 4,
+        "best_start_id": 0,
+        "success": true,
+        "message": "`xtol` termination condition is satisfied.",
+        "nfev": 93,
+        "cost": 0.2731281993666554,
+        "feature_weights": {
+          "direction": 0.5,
+          "length": 0.2,
+          "mcp": 0.2,
+          "pair_distance": 0.15,
+          "pair_direction": 0.1,
+          "selected_pair_distance": 30.0,
+          "selected_pair_direction": 0.2,
+          "pair_direction_min_distance": 0.025,
+          "selected_pair": [
+            "thumb_tip",
+            "index_tip"
+          ]
+        }
+      },
+      "q_order": [
+        "pinky_mcp_roll",
+        "pinky_mcp_pitch",
+        "pinky_pip",
+        "ring_mcp_roll",
+        "ring_mcp_pitch",
+        "ring_pip",
+        "middle_mcp_roll",
+        "middle_mcp_pitch",
+        "middle_pip",
+        "index_mcp_roll",
+        "index_mcp_pitch",
+        "index_pip",
+        "thumb_cmc_yaw",
+        "thumb_cmc_roll",
+        "thumb_cmc_pitch",
+        "thumb_mcp"
+      ],
+      "q_independent_rad": [
+        -0.16999999999999998,
+        3.114948237320734e-13,
+        0.10041692856718003,
+        -0.16999955633663233,
+        4.4783587338406817e-13,
+        0.08571032717881383,
+        -0.09949634478567948,
+        3.4034367061567784e-13,
+        0.09070342657467263,
+        0.16999999992745385,
+        1.1179449021792382e-09,
+        1.3895911080654946,
+        0.8652922452184423,
+        0.20424601000462794,
+        0.38565083910804127,
+        0.35769093015386616
+      ],
+      "q_full_rad": {
+        "pinky_mcp_roll": -0.16999999999999998,
+        "pinky_mcp_pitch": 3.114948237320734e-13,
+        "pinky_pip": 0.10041692856718003,
+        "pinky_dip": 0.08954177520335443,
+        "ring_mcp_roll": -0.16999955633663233,
+        "ring_mcp_pitch": 4.4783587338406817e-13,
+        "ring_pip": 0.08571032717881383,
+        "ring_dip": 0.07642789874534829,
+        "middle_mcp_roll": -0.09949634478567948,
+        "middle_mcp_pitch": 3.4034367061567784e-13,
+        "middle_pip": 0.09070342657467263,
+        "middle_dip": 0.0808802454766356,
+        "index_mcp_roll": 0.16999999992745385,
+        "index_mcp_pitch": 1.1179449021792382e-09,
+        "index_pip": 1.3895911080654946,
+        "index_dip": 1.2390983910620015,
+        "thumb_cmc_yaw": 0.8652922452184423,
+        "thumb_cmc_roll": 0.20424601000462794,
+        "thumb_cmc_pitch": 0.38565083910804127,
+        "thumb_mcp": 0.35769093015386616,
+        "thumb_ip": 0.4156010917457771
+      },
+      "feature_metrics": {
+        "bone_direction_rmse_deg": 17.91989878526756,
+        "bone_direction_mean_deg": 15.486648255082965,
+        "bone_direction_max_deg": 36.17209557598387,
+        "normalized_bone_length_rmse": 0.07482481262203573,
+        "normalized_mcp_position_rmse": 0.09636886107517684,
+        "normalized_all_tip_pair_distance_rmse": 0.43621085236935114,
+        "tip_pair_direction_rmse_deg": 20.341197506393492
+      },
+      "selected_pair_metrics": {
+        "pair": [
+          "thumb_tip",
+          "index_tip"
+        ],
+        "target_distance_normalized": 0.01668510872159443,
+        "actual_distance_normalized": 0.01700851842582347,
+        "normalized_distance_error": 0.00032340970422903986,
+        "target_distance_mm_in_R_input": 2.3582976071425885,
+        "actual_distance_mm_in_L20_root": 2.804047481145475,
+        "direction_error_deg": 15.421185965280104,
+        "direction_used_in_objective": false
+      },
+      "absolute_landmark_diagnostic": {
+        "rmse_mm": 21.547816545059277,
+        "max_mm": 67.3373243332696,
+        "note": "diagnostic only; absolute MANO/L20 proxy points are not the v15 objective"
+      },
+      "limit_violations": 0,
+      "mimic_residual_max_rad": 0.0,
+      "collision_contact": "not_evaluated"
+    },
+    {
+      "name": "opposition_thumb_middle",
+      "kind": "synthetic_R_target",
+      "tip_pair": [
+        "thumb_tip",
+        "middle_tip"
+      ],
+      "solver": {
+        "multi_start_count": 4,
+        "best_start_id": 0,
+        "success": true,
+        "message": "`ftol` termination condition is satisfied.",
+        "nfev": 94,
+        "cost": 0.3189237036891931,
+        "feature_weights": {
+          "direction": 0.5,
+          "length": 0.2,
+          "mcp": 0.2,
+          "pair_distance": 0.15,
+          "pair_direction": 0.1,
+          "selected_pair_distance": 30.0,
+          "selected_pair_direction": 0.2,
+          "pair_direction_min_distance": 0.025,
+          "selected_pair": [
+            "thumb_tip",
+            "middle_tip"
+          ]
+        }
+      },
+      "q_order": [
+        "pinky_mcp_roll",
+        "pinky_mcp_pitch",
+        "pinky_pip",
+        "ring_mcp_roll",
+        "ring_mcp_pitch",
+        "ring_pip",
+        "middle_mcp_roll",
+        "middle_mcp_pitch",
+        "middle_pip",
+        "index_mcp_roll",
+        "index_mcp_pitch",
+        "index_pip",
+        "thumb_cmc_yaw",
+        "thumb_cmc_roll",
+        "thumb_cmc_pitch",
+        "thumb_mcp"
+      ],
+      "q_independent_rad": [
+        -0.16999999999999998,
+        3.7327815910105746e-16,
+        0.10165115623780996,
+        -0.16999999999455048,
+        2.103155281430543e-15,
+        0.0878272271358489,
+        -0.16999999999818027,
+        0.022961360542936068,
+        1.5699999999999998,
+        0.09429673767712052,
+        1.9236825273516122e-13,
+        0.14129099712590662,
+        0.6769281674150981,
+        0.25541477920432193,
+        0.7899999548474234,
+        0.419076021031647
+      ],
+      "q_full_rad": {
+        "pinky_mcp_roll": -0.16999999999999998,
+        "pinky_mcp_pitch": 3.7327815910105746e-16,
+        "pinky_pip": 0.10165115623780996,
+        "pinky_dip": 0.09064233601725515,
+        "ring_mcp_roll": -0.16999999999455048,
+        "ring_mcp_pitch": 2.103155281430543e-15,
+        "ring_pip": 0.0878272271358489,
+        "ring_dip": 0.07831553843703647,
+        "middle_mcp_roll": -0.16999999999818027,
+        "middle_mcp_pitch": 0.022961360542936068,
+        "middle_pip": 1.5699999999999998,
+        "middle_dip": 1.399969,
+        "index_mcp_roll": 0.09429673767712052,
+        "index_mcp_pitch": 1.9236825273516122e-13,
+        "index_pip": 0.14129099712590662,
+        "index_dip": 0.12598918213717095,
+        "thumb_cmc_yaw": 0.6769281674150981,
+        "thumb_cmc_roll": 0.25541477920432193,
+        "thumb_cmc_pitch": 0.7899999548474234,
+        "thumb_mcp": 0.419076021031647,
+        "thumb_ip": 0.4869244288366706
+      },
+      "feature_metrics": {
+        "bone_direction_rmse_deg": 19.752455184300473,
+        "bone_direction_mean_deg": 16.736702546609276,
+        "bone_direction_max_deg": 45.32687912092469,
+        "normalized_bone_length_rmse": 0.07358475972724272,
+        "normalized_mcp_position_rmse": 0.09202613352169273,
+        "normalized_all_tip_pair_distance_rmse": 0.35139865142507526,
+        "tip_pair_direction_rmse_deg": 26.558079229662734
+      },
+      "selected_pair_metrics": {
+        "pair": [
+          "thumb_tip",
+          "middle_tip"
+        ],
+        "target_distance_normalized": 0.02494954890707302,
+        "actual_distance_normalized": 0.025378354664431887,
+        "normalized_distance_error": 0.00042880575735886745,
+        "target_distance_mm_in_R_input": 3.5264056392204726,
+        "actual_distance_mm_in_L20_root": 4.183932216685886,
+        "direction_error_deg": 10.05628537759548,
+        "direction_used_in_objective": false
+      },
+      "absolute_landmark_diagnostic": {
+        "rmse_mm": 21.41176093940292,
+        "max_mm": 63.212340491155985,
+        "note": "diagnostic only; absolute MANO/L20 proxy points are not the v15 objective"
+      },
+      "limit_violations": 0,
+      "mimic_residual_max_rad": 0.0,
+      "collision_contact": "not_evaluated"
+    }
+  ],
+  "limitations": [
+    "Targets are fixed synthetic MANO pose vectors, not camera estimates or a dataset.",
+    "Absolute MANO/L20 proxy point error is retained only as a diagnostic, not the v15 objective.",
+    "Collision, contact normal, object geometry, temporal smoothness and actuator u were not evaluated in this first feature baseline.",
+    "Near-zero fingertip distance alone is not called successful pinch contact."
+  ]
+}

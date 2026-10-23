@@ -1,0 +1,14 @@
+{
+  "check_type": "environment_and_model_interface_debug_only",
+  "coordinate_unit": "metre_convention_pending_physical_calibration",
+  "formal_data_split": null,
+  "retargeting_task_metrics": null,
+  "robot_fk_metrics": null,
+  "training_run": false,
+  "version": "v1_MANO\u73af\u5883\u4e0e\u52a0\u8f7d\u6838\u67e5",
+  "status": "failed",
+  "neutral_vertices_max_abs_error_model_units": 6.308303282520633e-09,
+  "numeric_consistency_tolerance_model_units": 1e-09,
+  "conda_activation_passed": false,
+  "reason": "smplx float32 buffer conversion not reflected in tolerance; Conda/PowerShell empty argument compatibility"
+}

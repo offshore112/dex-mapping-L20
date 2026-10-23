@@ -1,0 +1,54 @@
+{
+  "version": "v20_offline_MANO_v18_v19_stability_comparison",
+  "status": "completed_offline_interface_fixture_comparison",
+  "input": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v21_MediaPipe到MANO序列拟合\\mediapipe_mano_sequence_v21.json",
+  "prepared_sequence": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v21_MediaPipe到MANO序列拟合\\r_l20_compare\\offline_mano_sequence_v20.json",
+  "target_conditioned_sequence": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v21_MediaPipe到MANO序列拟合\\r_l20_compare\\target_conditioned_sequence_v20.json",
+  "methods": {
+    "v18_sequential": {
+      "metrics": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v21_MediaPipe到MANO序列拟合\\r_l20_compare\\v18_sequential\\metrics.json",
+      "summary": {
+        "all_solver_success": true,
+        "all_limit_violations_zero": true,
+        "max_mimic_residual_rad": 0.0,
+        "mean_semantic_point_rmse_normalized": 0.031328109214732724,
+        "mean_bone_direction_rmse_deg": 7.17414523679458,
+        "mean_bend_angle_rmse_deg": 3.601302746396835,
+        "max_q_step_abs_rad": 0.10781745541645871,
+        "mean_q_step_abs_rad": 0.014130020567199815,
+        "max_q_step_norm_normalized": 0.42729941290625084,
+        "pair_mean_abs_normalized_error": {},
+        "pair_max_abs_normalized_error": {}
+      }
+    },
+    "v19_global": {
+      "metrics": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v21_MediaPipe到MANO序列拟合\\r_l20_compare\\v19_global_first\\metrics.json",
+      "summary": {
+        "all_solver_success": true,
+        "all_limit_violations_zero": true,
+        "max_mimic_residual_rad": 0.0,
+        "mean_semantic_point_rmse_normalized": 0.03148838345590816,
+        "mean_bone_direction_rmse_deg": 7.205842249361499,
+        "mean_bend_angle_rmse_deg": 3.6191755585236636,
+        "max_q_step_abs_rad": 0.07003387415533191,
+        "mean_q_step_abs_rad": 0.00913651613383742,
+        "max_q_step_norm_normalized": 0.20346456925645626,
+        "pair_mean_abs_normalized_error": {},
+        "pair_max_abs_normalized_error": {}
+      }
+    }
+  },
+  "stability_delta_v19_minus_v18": {
+    "max_q_step_abs_rad": -0.0377835812611268,
+    "mean_q_step_abs_rad": -0.004993504433362396,
+    "max_q_step_norm_normalized": -0.22383484364979458,
+    "semantic_point_rmse_normalized": 0.0001602742411754357,
+    "bone_direction_rmse_deg": 0.03169701256691937
+  },
+  "interpretation": "v19 is more stable if q-step deltas are negative; this fixture is an offline synthetic MANO replay, not a camera generalization result.",
+  "limitations": [
+    "The supplied fixture is generated MANO, not a real camera recording.",
+    "The comparison uses the same fixed target-conditioned adapter and L20 model for both methods.",
+    "No collision/contact or actuator u is included."
+  ]
+}

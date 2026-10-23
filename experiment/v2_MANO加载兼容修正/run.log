@@ -1,0 +1,2 @@
+WARNING: You are using a MANO model, with only 10 shape coefficients.
+{"status": "passed_model_environment_check_only", "output": "E:\\lingqiaoshou\\dex-mapping\\experiment\\v2_MANO\u52a0\u8f7d\u517c\u5bb9\u4fee\u6b63", "vertices": 778, "native_joints": 16, "landmarks": 21, "torch": "2.14.1+cpu"}

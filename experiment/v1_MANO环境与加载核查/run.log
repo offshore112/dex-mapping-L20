@@ -1,0 +1,7 @@
+WARNING: You are using a MANO model, with only 10 shape coefficients.
+Traceback (most recent call last):
+  File "E:\lingqiaoshou\dex-mapping\scripts\check_mano_model.py", line 257, in <module>
+    main()
+  File "E:\lingqiaoshou\dex-mapping\scripts\check_mano_model.py", line 199, in main
+    raise ValueError(f'Neutral forward does not reproduce template: {neutral_error}')
+ValueError: Neutral forward does not reproduce template: 6.308303282520633e-09

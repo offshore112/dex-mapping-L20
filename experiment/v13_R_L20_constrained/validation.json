@@ -1,0 +1,16 @@
+{
+  "version": "v13_shared_R_L20_model_validation",
+  "status": "passed_structure_and_zero_pose_semantic_point_check",
+  "root": "hand_base_link",
+  "link_count": 22,
+  "joint_count": 21,
+  "independent_q_count": 16,
+  "mimic_count": 5,
+  "mesh_count": 22,
+  "zero_pose_landmark_max_abs_error_m": 3.469446951953614e-18,
+  "zero_pose_landmark_rmse_m": 4.371092296095392e-19,
+  "mid_limit_pose_finite": true,
+  "mid_limit_full_joint_count": 21,
+  "arrays_finite": true,
+  "q_semantics": "independent joint state q; actuator command u not defined"
+}

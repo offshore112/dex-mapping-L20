@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>统一测评规则 · 新手研究指南</title><style>
+:root { --ink:#18283b; --muted:#5e6d7c; --blue:#235c91; --line:#dce4ea; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; scroll-padding-top:26px; }
+body { margin:0; color:var(--ink); background:#f3f6f9;
+ font-family:'Microsoft YaHei','PingFang SC',system-ui,sans-serif; line-height:1.85; }
+.shell { max-width:1400px; margin:auto; display:grid; grid-template-columns:278px minmax(0,1fr); gap:28px; padding:32px; }
+aside { position:sticky; top:24px; align-self:start; max-height:calc(100vh - 48px); overflow:auto; padding:22px;
+ background:#edf3f8; border:1px solid var(--line); border-radius:14px; font-size:13px; }
+.brand { font-size:22px; font-weight:750; color:var(--blue); }
+.hint { color:var(--muted); font-size:12px; margin:8px 0 20px; }
+aside ul { list-style:none; margin:0; padding-left:0; }
+aside li { margin:9px 0; }
+aside li ul { padding-left:13px; font-size:12px; }
+a { color:var(--blue); text-decoration:none; overflow-wrap:anywhere; }
+a:hover { text-decoration:underline; }
+main { min-width:0; background:white; border:1px solid var(--line); border-radius:16px; padding:42px 48px; }
+.eyebrow { color:var(--blue); letter-spacing:.12em; font-size:12px; font-weight:bold; }
+.status { color:var(--muted); background:#f5f8fb; padding:12px 16px; border-radius:8px; font-size:13px; }
+h1 { font-size:30px; line-height:1.45; margin:16px 0 20px; }
+h2 { font-size:23px; line-height:1.5; margin-top:48px; padding-top:14px; border-top:2px solid var(--line); }
+h3 { font-size:18px; margin-top:28px; }
+p, li { overflow-wrap:anywhere; }
+strong { color:#102a44; }
+pre { padding:20px; background:#f0f5fa; border:1px solid var(--line); border-radius:10px;
+ overflow:auto; line-height:1.7; font-size:13px; }
+code { font-family:Consolas,'Microsoft YaHei',monospace; font-size:.88em; }
+p code, li code { background:#eff4f8; border-radius:4px; padding:2px 5px; }
+table { display:block; width:100%; overflow-x:auto; border-collapse:collapse; font-size:13px; line-height:1.7; margin:20px 0; }
+td, th { border:1px solid var(--line); padding:11px 13px; min-width:95px; vertical-align:top; }
+th { background:#eaf1f7; text-align:left; }
+tbody tr:nth-child(even) { background:#fafbfd; }
+blockquote { margin:22px 0; padding:12px 22px; border-left:4px solid #3c7bb1; background:#f3f7fb; }
+footer { margin-top:40px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; }
+@media(max-width:900px) { .shell { display:block; padding:16px; } aside { position:static; max-height:260px; margin-bottom:18px; }
+ main { padding:24px 20px; } h1 { font-size:25px; } h2 { font-size:21px; } }
+@media print { body { background:white; font-size:11pt; } .shell { display:block; padding:0; } aside { display:none; }
+ main { border:0; padding:0; } h2,h3 { break-after:avoid; } pre,blockquote,tr { break-inside:avoid; }
+ table { display:table; font-size:9pt; } a { color:inherit; } }
+</style></head>
+<body><div class="shell">
+<aside><div class="brand">dex-mapping</div>
+<div class="hint">从研究想法到可验证的两阶段映射<br>2026-10-14 · 研究文档与实施记录</div>
+<nav aria-label="文档目录"><div class="toc">
+<ul>
+<li><a href="#1-每次测评的输入">1. 每次测评的输入</a></li>
+<li><a href="#2-指标定义与冻结项">2. 指标定义与冻结项</a></li>
+<li><a href="#3-公平比较与诊断参照">3. 公平比较与诊断参照</a></li>
+<li><a href="#4-聚合分组与失败">4. 聚合、分组与失败</a></li>
+<li><a href="#5-每版输出">5. 每版输出</a></li>
+<li><a href="#6-冻结清单尚未完成">6. 冻结清单（尚未完成）</a></li>
+</ul>
+</div>
+</nav></aside>
+<main><div class="eyebrow">研究思路 · 新手指南</div>
+<p class="status">当前阶段：独立环境与 MANO 加载核查已通过；L20 FK、R 拟合、基线与网络训练尚未运行。</p>
+<h1 id="统一测评规则">统一测评规则</h1>
+<p>**状态：测评方案草案，尚未执行。**实际数据、关键点对应、阈值、硬件与样本量待 M0–M2 决定。首次正式比较前冻结这些配置并写明版本，之后改口径需要新版本与重测。</p>
+<h2 id="1-每次测评的输入">1. 每次测评的输入</h2>
+<p>输入必须包括：方法/代码版本、权重、运行配置、随机种子、输入来源（干净标注或视觉预测）、目标机器人与驱动描述、固定测试 ID 名单、关键点对应、坐标/单位、阈值及测评规则版本。</p>
+<p>按四种条件分别测：见过人+见过机器人；未见人+见过机器人；见过人+未见机器人；未见人+未见机器人。未覆盖的条件写“未测”，不扩大结论。</p>
+<p>调试 smoke 样本只验证接口，不作为泛化测试集。正式划分见 <code>dataset.md</code>。禁止测试集调权重、挑动作、生成额外适配标签或微调后仍称 zero-shot。</p>
+<h2 id="2-指标定义与冻结项">2. 指标定义与冻结项</h2>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>草案定义</th>
+<th>正式运行前要固定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>任务特征误差</td>
+<td>目标与实际 FK 产生的对应指尖/向量误差</td>
+<td>关键点对应、腕部坐标、对齐方式、缺失掩码</td>
+</tr>
+<tr>
+<td>归一化指尖误差</td>
+<td>每个有效对应指尖的欧氏距离除以预定义掌部尺度后取平均</td>
+<td>尺度定义、每帧/每序列聚合规则</td>
+</tr>
+<tr>
+<td>绝对距离误差</td>
+<td>同一米制坐标下距离，输出时可换算毫米</td>
+<td>不允许为了误差低而逐帧重新对齐/缩放</td>
+</tr>
+<tr>
+<td>方向误差</td>
+<td>对应非零指骨/任务向量的夹角，单位度</td>
+<td>零长度处理、向量集合</td>
+</tr>
+<tr>
+<td>捏合指标</td>
+<td>比较预测与固定参考捏合关系的 precision/recall/F1</td>
+<td>距离阈值、指尖对、阈值来源、零分母规则</td>
+</tr>
+<tr>
+<td>限位违规率</td>
+<td>存在任意有效关节/执行器越限的样本数 ÷ 有效样本数</td>
+<td>数值容差、限位来源，投影前后分别报告</td>
+</tr>
+<tr>
+<td>耦合残差</td>
+<td>相对于 ψ(u;E) 或真实回读的关节关系误差</td>
+<td>真实/简化模型、关节单位与聚合方式</td>
+</tr>
+<tr>
+<td>平滑与响应</td>
+<td>关节/执行器速度变化，以及动作切换延迟</td>
+<td>采样频率、过滤配置、时间对齐</td>
+</tr>
+<tr>
+<td>推理时延</td>
+<td>单阶段与端到端的 p50/p95</td>
+<td>硬件、批大小、预热、计时同步、样本数</td>
+</tr>
+<tr>
+<td>配置成本</td>
+<td>实际人工对应、标定动作数、配置时间、测试时优化成本</td>
+<td>哪些步骤计入、计时范围</td>
+</tr>
+</tbody>
+</table>
+<p>有物体时再增加：接触 F1、穿透和真实任务成功率。没有物体/接触真值就写“未测”，不要把空中指尖靠近视为实际接触成功。</p>
+<p>第一阶段用目标虚拟手的参考特征；第二阶段和组合模型用机器人可实现的目标及任务约束。精确坐标不可达时，报告不可达比例与最优参考残差，不随方法不同改变目标。</p>
+<h2 id="3-公平比较与诊断参照">3. 公平比较与诊断参照</h2>
+<p>必须有简单归一化/角度方法、已有优化基线、直接映射模型和完整两阶段模型。按数据与输入可用性明确哪些对照适用。</p>
+<p>消融：去掉源/目标尺寸条件，去掉驱动约束，去掉/打乱机构描述，去掉中间表示或直接映射。每项都在固定测试名单上做。</p>
+<p>诊断参照可以使用干净标注输入、每目标优化参考或额外信息帮助定位误差。写清使用了哪些信息；局部求解结果不是自动成立的理论上界。</p>
+<h2 id="4-聚合分组与失败">4. 聚合、分组与失败</h2>
+<ul>
+<li>同时报告全体与按操作者、尺寸、机器人、动作分组的结果，报告最差组及有效样本量。</li>
+<li>固定无效输入的处理策略，报告检测失败/求解失败/不可达比例，不能只统计成功帧。</li>
+<li>学习方法按实际独立运行报告种子与波动；统计区间以人/序列等适当独立单位计算。</li>
+<li>首次正式测评时固定 5–10 个诊断样例 ID，跨版本保持；另加每版新发现的失败，不替换固定名单。</li>
+<li>违规输出仅用于离线诊断；正式可执行结果采用一致约束策略，报告策略成本。</li>
+</ul>
+<h2 id="5-每版输出">5. 每版输出</h2>
+<p><code>experiment/&lt;版本名&gt;/metrics.json</code>：真实数值、单位、定义版本、分组、样本量、失败比例与运行配置链接。</p>
+<p><code>figures/</code>：目标/实际关键点叠图、按尺寸与机构分组图、误差或响应随时间图。结果不好也保留图。</p>
+<p><code>failure_cases.md</code>：固定诊断样例、现象、可复核证据、原因假设和下一步。未经验证的原因标为假设。</p>
+<p>完成后追加 <code>results.md</code>，更新 <code>handoff.md</code>。</p>
+<h2 id="6-冻结清单尚未完成">6. 冻结清单（尚未完成）</h2>
+<ul>
+<li>[ ] 人/序列/形状/机构留出名单与摘要。</li>
+<li>[ ] 输入质量规则、对应点与坐标/单位。</li>
+<li>[ ] 任务目标、归一化尺度与捏合阈值。</li>
+<li>[ ] 约束模型与数值容差。</li>
+<li>[ ] 统计聚合、随机种子和失败名单。</li>
+<li>[ ] 硬件、时间测量与成本记录方式。</li>
+</ul>
+<footer>本页离线可读，无需加载外部资源。可编辑源文件：evaluation.md。<br>
+主文档与辅助记录在同一个项目文件夹中，已生成的阅读版之间可直接跳转。</footer>
+</main></div></body></html>

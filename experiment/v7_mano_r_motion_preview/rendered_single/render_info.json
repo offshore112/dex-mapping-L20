@@ -1,0 +1,8 @@
+{
+  "version": "v7_mujoco_mano_r_motion",
+  "status": "passed_framewise_mesh_update_and_render",
+  "frame_count": 1,
+  "vertex_count": 778,
+  "update_method": "one OBJ and one MuJoCo compile per preview frame",
+  "l20_joint_state": "zero pose; L20 was not retargeted in this preview"
+}
