@@ -2,6 +2,14 @@
 
 最后更新：2026-10-23（Asia/Shanghai）｜用户未接受 v23 动作自然性与弯曲网格；工程检查通过不能代替动作质量验收
 
+## 2026-10-23 项目完整上传 GitHub（已完成，管理性操作）
+
+- 用户要求把整个项目上传到 `https://github.com/offshore112/dex-mapping-L20.git`；该仓库为 **public**，推送前已说明个人 774 帧录制会公开，用户选择**全部上传**（不是排除版本）。
+- 远端 `main` = 本地 `22f3bb9`（init_project）；GitHub Trees API 复核 2973 个 blob、约 717.5 MB，与本地 `git ls-files` 的 2973 个文件一致。最大单文件 29.6 MB（`audit_geometry.npz`），低于 100 MB 限制。
+- 前两次推送失败：本项目 git 配置了 `http.proxy=http://127.0.0.1:7897`，上传中途代理失效，报 `curl 55 Send failure` / `unexpected disconnect`；直连小请求正常，大 pack 分块上传仍被中断。最终成功命令为 `git -c http.proxy= -c http.version=HTTP/1.1 -c http.postBuffer=629145600 push -u origin main`（整包缓冲 + Content-Length）。
+- 后续推送注意：代理未运行时需加 `-c http.proxy=` 绕过，或先恢复 7897 代理。本机 `origin` 无认证问题（凭据管理器已缓存）。
+- 边界：上传只改变分发位置，**不改变任何实验结论**。v23 动作质量仍未通过用户验收，L20 q/真机仍未在本序列验证。
+
 ## 2026-10-23 用户动作质量复核（当前最高优先）
 
 - 用户明确反馈 v23 动作非常不自然，弯曲时手指网格有问题，并问这种 R 能否映射到自己的 L20。**当前 R 动作质量未通过用户验收**；此前 run1/run2 的“通过”只覆盖接口/数值/重复性/显示/程序运行，不能作为本人动作忠实度、自然性或 L20 可执行性结论。
