@@ -1,0 +1,143 @@
+{
+  "version": "v24_human_joint_ratio",
+  "sequence": "experiment\\v23_pinky_distal_twist\\run2_personal_mapping_test\\fixed_r\\r_sequence_v22.json",
+  "frame_count": 774,
+  "min_pip_deg": 11.459155902616466,
+  "definition": "angle between consecutive bone directions; not a goniometer reading",
+  "fingers": {
+    "index": {
+      "pip": {
+        "count": 753,
+        "mean_deg": 39.17987124860974,
+        "median_deg": 28.195382685161924,
+        "p05_deg": 14.967847229125823,
+        "p95_deg": 104.4644117683492
+      },
+      "dip": {
+        "count": 753,
+        "mean_deg": 32.59091632426797,
+        "median_deg": 33.100328144250035,
+        "p05_deg": 14.063337517384722,
+        "p95_deg": 59.74025365135991
+      },
+      "dip_over_pip": {
+        "mean": 1.2530429506382537,
+        "median": 1.1030868686414277,
+        "l20_ratio": 0.8917,
+        "l20_minus_human_median": -0.21138686864142764
+      },
+      "dip_share_of_interphalangeal_curl": {
+        "median": 0.524508466620787,
+        "mean": 0.501217775122963,
+        "l20_share": 0.4713749537453084
+      }
+    },
+    "middle": {
+      "pip": {
+        "count": 774,
+        "mean_deg": 39.14444416282253,
+        "median_deg": 31.427698146938152,
+        "p05_deg": 27.809216811868872,
+        "p95_deg": 82.0799442162983
+      },
+      "dip": {
+        "count": 774,
+        "mean_deg": 11.123410267814174,
+        "median_deg": 2.8846719471634774,
+        "p05_deg": 1.440308248873968,
+        "p95_deg": 69.39178998660978
+      },
+      "dip_over_pip": {
+        "mean": 0.18949747910497136,
+        "median": 0.09215840478809945,
+        "l20_ratio": 0.8917,
+        "l20_minus_human_median": 0.7995415952119006
+      },
+      "dip_share_of_interphalangeal_curl": {
+        "median": 0.08438190254096069,
+        "mean": 0.13554216725126458,
+        "l20_share": 0.4713749537453084
+      }
+    },
+    "ring": {
+      "pip": {
+        "count": 770,
+        "mean_deg": 27.550489447201702,
+        "median_deg": 18.86231707502774,
+        "p05_deg": 14.893477835645813,
+        "p95_deg": 84.67365082046202
+      },
+      "dip": {
+        "count": 770,
+        "mean_deg": 17.974745949697922,
+        "median_deg": 10.557445531886291,
+        "p05_deg": 7.714045419861969,
+        "p95_deg": 72.61020497585962
+      },
+      "dip_over_pip": {
+        "mean": 0.5944175896196241,
+        "median": 0.5511562822091756,
+        "l20_ratio": 0.8917,
+        "l20_minus_human_median": 0.3405437177908245
+      },
+      "dip_share_of_interphalangeal_curl": {
+        "median": 0.35531959610626107,
+        "mean": 0.3673752072991139,
+        "l20_share": 0.4713749537453084
+      }
+    },
+    "pinky": {
+      "pip": {
+        "count": 699,
+        "mean_deg": 32.72537471850524,
+        "median_deg": 30.40532239500921,
+        "p05_deg": 15.708042640694027,
+        "p95_deg": 76.43808521097677
+      },
+      "dip": {
+        "count": 699,
+        "mean_deg": 22.243238398461884,
+        "median_deg": 16.541084501706553,
+        "p05_deg": 13.41802872670542,
+        "p95_deg": 68.00200400520019
+      },
+      "dip_over_pip": {
+        "mean": 0.6834813511676755,
+        "median": 0.5350125548310932,
+        "l20_ratio": 0.8917,
+        "l20_minus_human_median": 0.3566874451689068
+      },
+      "dip_share_of_interphalangeal_curl": {
+        "median": 0.34853953027762946,
+        "mean": 0.3918758298579682,
+        "l20_share": 0.4713749537453084
+      }
+    }
+  },
+  "thumb": {
+    "mcp": {
+      "count": 108,
+      "mean_deg": 15.408974539986897,
+      "median_deg": 15.536231836247824,
+      "p05_deg": 12.38125932956957,
+      "p95_deg": 18.345210696082713
+    },
+    "ip": {
+      "count": 108,
+      "mean_deg": 24.93732184384142,
+      "median_deg": 22.186525291601065,
+      "p05_deg": 11.28603863398266,
+      "p95_deg": 41.517254314338786
+    },
+    "ip_over_mcp": {
+      "mean": 1.6235012881405397,
+      "median": 1.5451298118119972,
+      "l20_ratio": 1.1619,
+      "l20_minus_human_median": -0.3832298118119972
+    }
+  },
+  "l20_mimic": {
+    "dip_over_pip": 0.8917,
+    "thumb_ip_over_mcp": 1.1619
+  }
+}

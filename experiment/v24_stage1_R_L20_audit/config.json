@@ -1,0 +1,5 @@
+{
+  "sequence": "experiment\\v23_pinky_distal_twist\\run2_personal_mapping_test\\fixed_r\\r_sequence_v22.json",
+  "baseline": "experiment\\v22_personal_fixed_r\\r_sequence_v22.json",
+  "model": "experiment\\v12_R_L20_canonical_human\\r_l20_model.json"
+}

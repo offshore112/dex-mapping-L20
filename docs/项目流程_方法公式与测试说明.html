@@ -1,0 +1,2160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dex-mapping 项目流程、方法公式与测试说明</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true
+  },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  :root { color-scheme: light; }
+  body {
+    margin: 0 auto; max-width: 920px; padding: 48px 28px 96px;
+    font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", system-ui, sans-serif;
+    font-size: 16px; line-height: 1.75; color: #1f2328; background: #ffffff;
+  }
+  h1 { font-size: 1.9em; border-bottom: 2px solid #d8dee4; padding-bottom: .3em; }
+  h2 { font-size: 1.45em; margin-top: 2.1em; border-bottom: 1px solid #e6e9ec; padding-bottom: .25em; }
+  h3 { font-size: 1.15em; margin-top: 1.6em; }
+  a { color: #0969da; }
+  code { background: #f2f4f6; padding: .15em .35em; border-radius: 4px; font-size: .92em; }
+  pre { background: #f6f8fa; padding: 14px 16px; border-radius: 6px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  table { border-collapse: collapse; margin: 1.1em 0; width: 100%; font-size: .95em; }
+  th, td { border: 1px solid #d8dee4; padding: 7px 11px; text-align: left; vertical-align: top; }
+  th { background: #f6f8fa; }
+  blockquote { margin: 1.1em 0; padding: .3em 1em; border-left: 4px solid #d0d7de; color: #57606a; background: #fafbfc; }
+  hr { border: none; border-top: 1px solid #e6e9ec; margin: 2.2em 0; }
+  mjx-container[display="true"] { margin: 1.1em 0 !important; overflow-x: auto; overflow-y: hidden; }
+  @media print {
+    body { max-width: none; padding: 0; }
+    pre, table, mjx-container { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<h1>dex-mapping 项目流程、方法公式与测试说明</h1>
+<p>编写日期：2026-10-24（Asia/Shanghai）。</p>
+<p><strong>第一次阅读如果从步骤四开始感到困难，请先看<a href="E:/lingqiaoshou/dex-mapping/docs/项目入门讲解_从步骤四开始.md">从步骤四开始的入门讲解</a>。先理解每步输入、操作和输出，再回来查公式；不必一次读完本技术说明。</strong></p>
+<p>**用途：**把项目的研究思路、实际使用的方法与公式、输入输出和测试过程串成一条可以读懂的流程。章节按处理步骤组织，版本号只用于定位代码和证据，不作为叙事顺序。</p>
+<p>**本次范围：**仅整理已有资料，没有采集新数据、修改算法、运行拟合、求解机器人关节或训练网络。用户要求暂不继续推进项目实验。</p>
+<p>**当前状态：**已有单操作者离线拟合、固定虚拟手 R 回放和机器人关节优化基线；个人动作质量未通过用户验收。两个核心映射网络均未训练，实时控制、跨操作者/跨机器人泛化、实际执行器和真机测试尚未完成。</p>
+<p>文中“已运行”表示有运行产物，仍需阅读适用范围；“诊断”表示用于检查接口或现象；“计划”表示尚未实现或运行；“未验证”表示没有相应证据。</p>
+<h2>阅读目录</h2>
+<ol>
+<li><a href="#s1">研究思路与实际流程</a></li>
+<li><a href="#s2">符号、单位与阅读约定</a></li>
+<li><a href="#s3">准备资源与环境</a></li>
+<li><a href="#s4">MANO 如何表达形状与动作</a></li>
+<li><a href="#s5">L20 运动学与语义点</a></li>
+<li><a href="#s6">构造固定虚拟手 R</a></li>
+<li><a href="#s7">摄像头关键点采集</a></li>
+<li><a href="#s8">源手坐标规范化</a></li>
+<li><a href="#s9">个人 MANO 参数拟合</a></li>
+<li><a href="#s10">小指末节扭转处理</a></li>
+<li><a href="#s11">个人动作迁移到固定 R</a></li>
+<li><a href="#s12">功能特征与比较语言</a></li>
+<li><a href="#s13">L20 条件化目标骨架</a></li>
+<li><a href="#s14">机器人关节与轨迹求解</a></li>
+<li><a href="#s15">显示与回放</a></li>
+<li><a href="#s16">测试过程与指标定义</a></li>
+<li><a href="#s17">当前证据与适用边界</a></li>
+<li><a href="#s18">已有入口、命令与来源</a></li>
+</ol>
+<p>建议先读第 1、2 节建立全局认识，再顺着处理步骤阅读；第 16 节集中解释测试怎样做、各数字回答什么问题。</p>
+<p><a id="s1"></a></p>
+<h2>1. 研究思路与实际流程</h2>
+<h3>1.1 要分开处理的两类差异</h3>
+<p>运动重定向（motion retargeting）是把源手动作转换为目标手能够实现的动作。本项目面对：</p>
+<ul>
+<li>**人体形态差异：**掌宽、指长、指节比例不同。同样的关节姿态，不一定产生相同的指尖间距；要与同一物体接触时，不同尺寸的手可能需要不同姿态。</li>
+<li>**机器人机构与驱动差异：**机器人关节轴、中心、限位和耦合不同于人手。人手能独立改变的两个指节，在机器人上可能必须联动。</li>
+</ul>
+<p>核心假设是：把这两类差异分为两个可组合阶段，可能减少“每位操作者与每只机器人配对后重新调参”的工作，并改善泛化。<strong>该假设尚未通过正式实验验证。</strong></p>
+<h3>1.2 理想研究流程</h3>
+<p>$$
+H_i
+\xrightarrow{\ F_1(\,\cdot\,;G_j)\ }
+R_j\text{ 上的动作}
+\xrightarrow{\ F_2(\,\cdot\,;E_j)\ }
+u_j
+\xrightarrow{\ \psi_j\ }
+q_j.
+$$</p>
+<ul>
+<li>$H_i$：第 i 位操作者的手部状态，包含形状、姿态或关键点。</li>
+<li>$G_j$：目标机器人 j 的几何描述，例如指长和指根布局。</li>
+<li>$F_1$：第一阶段，处理人体尺寸与比例差异。</li>
+<li>$R_j$：与目标机器人几何建立对应的虚拟人手中间表示。</li>
+<li>$E_j$：补齐关节轴、限位、驱动和耦合等信息的机器人描述。</li>
+<li>$F_2$：第二阶段，处理目标机构、驱动和耦合约束。</li>
+<li>$u_j$：实际独立执行器指令。</li>
+<li>$\psi_j$：执行器指令到关节状态的关系，当前实际 L20 的完整关系未核实。</li>
+<li>$q_j$：机器人关节状态，可通过正运动学计算指尖位置。</li>
+</ul>
+<p>固定 L20 时，不同操作者应共用同一套目标 R 几何；换机器人后才考虑对应的 $R_j$。URDF→R 是目标几何准备模块，不能替代第一阶段的跨人体尺寸问题。</p>
+<h3>1.3 目前实际运行的支路</h3>
+<pre><code class="language-text">目标准备：
+L20 URDF + 网格 → 文件运动学、21 个语义点
+                         ├→ 标准 MANO 的尺度/旋转/平移放置 → 固定 R
+                         └→ L20 参考骨长与方向 → 条件化功能骨架
+
+当前本人序列：
+摄像头 → MediaPipe 21 点 → 腕部/掌面对齐
+       → 个人 MANO 形态校准与姿态拟合
+       → 小指 DIP 扭转后处理
+       → 复制局部姿态到固定 R → 774 帧显示、回放与诊断
+                                      └→ 本序列尚未继续求 L20 q
+
+机器人基线：
+固定合成动作；另有 48 帧旧真实输入
+       → 目标条件化功能骨架 → 16 维独立关节优化
+       → mimic 展开为 21 个关节 → 文件运动学检查与显示
+                                      └→ 实际 u / SDK / 真机未验证
+</code></pre>
+<p>第一阶段当前实际基线为：</p>
+<p>$$
+\theta_R(\tau)=\theta_i(\tau),\qquad \beta_R=\mathbf0.
+$$</p>
+<p>即把个人拟合的局部姿态复制到固定形态的虚拟手上，没有经过训练的跨尺寸映射网络。</p>
+<p>必须区分两个不同的“两阶段”：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>含义</th>
+<th>当前状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>研究中的两阶段映射</td>
+<td>人体尺寸适配 → 机器人机构/驱动适配</td>
+<td>网络未训练</td>
+</tr>
+<tr>
+<td>输入端的两步 MANO 拟合</td>
+<td>先估计个人形状 → 冻结形状后拟合动作</td>
+<td>已运行</td>
+</tr>
+</tbody>
+</table>
+<p>后者是视觉前处理，不表示前者已经完成。</p>
+<p><a id="s2"></a></p>
+<h2>2. 符号、单位与阅读约定</h2>
+<h3>2.1 统一符号</h3>
+<p>为避免虚拟手 R 与旋转矩阵混淆，本文将固定放置旋转写为 $A_R$；骨架累计齐次变换在第 4 节另外记为 $G_j$。</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+<th>维数或单位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\tau,N$</td>
+<td>帧索引、帧数</td>
+<td>当前完整个人序列 N=774</td>
+</tr>
+<tr>
+<td>$\beta_i,\beta_R$</td>
+<td>操作者、R 的 MANO 形状</td>
+<td>各 10 维，无量纲</td>
+</tr>
+<tr>
+<td>$\theta_i,\theta_R$</td>
+<td>MANO 局部姿态</td>
+<td>各 45 维轴角分量，rad</td>
+</tr>
+<tr>
+<td>$\gamma_\tau$</td>
+<td>整体朝向的轴角向量</td>
+<td>3 维，rad</td>
+</tr>
+<tr>
+<td>$\mathbf t_\tau$</td>
+<td>拟合中的平移</td>
+<td>3 维，m</td>
+</tr>
+<tr>
+<td>$s_i,s_R$</td>
+<td>操作者、R 的额外尺度</td>
+<td>正标量</td>
+</tr>
+<tr>
+<td>$\mathbf p_k$</td>
+<td>第 k 个语义点</td>
+<td>3 维，m</td>
+</tr>
+<tr>
+<td>$V,J(\beta)$</td>
+<td>MANO 表面、静止关节中心</td>
+<td>778×3、16×3</td>
+</tr>
+<tr>
+<td>$A_R,\mathbf b_R$</td>
+<td>R 固定放置的旋转、平移</td>
+<td>3×3、3 维</td>
+</tr>
+<tr>
+<td>$B_{\rm fit},B_{\rm feat}$</td>
+<td>拟合、功能特征使用的掌部正交基</td>
+<td>各 3×3</td>
+</tr>
+<tr>
+<td>$d_{\rm ref},s_{\rm palm}$</td>
+<td>拟合参考长度、功能特征参考长度</td>
+<td>m</td>
+</tr>
+<tr>
+<td>$\boldsymbol\xi$</td>
+<td>L20 独立关节坐标</td>
+<td>16 维，rad</td>
+</tr>
+<tr>
+<td>$\mathbf q=\Phi(\boldsymbol\xi)$</td>
+<td>mimic 展开后的完整关节状态</td>
+<td>21 维，rad</td>
+</tr>
+<tr>
+<td>$\mathbf u$</td>
+<td>实际执行器指令</td>
+<td>接口与单位待核实</td>
+</tr>
+<tr>
+<td>$S_R,K_R,K_R^{L20}$</td>
+<td>自然表面、人手语义骨架、L20 条件化骨架</td>
+<td>后文分别定义</td>
+</tr>
+<tr>
+<td>$z$</td>
+<td>候选共享运动表示</td>
+<td>未实现</td>
+</tr>
+</tbody>
+</table>
+<p>源码 <code>q_independent_rad</code> 对应 $\boldsymbol\xi$，<code>q_full_rad</code> 对应 $\mathbf q$；给独立角度起名 q，并不使它自动成为电机指令 u。</p>
+<h3>2.2 常用运算怎样读</h3>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\|\mathbf v\|_2$</td>
+<td>向量长度；位置差向量的长度就是两点距离</td>
+</tr>
+<tr>
+<td>$\|\mathbf v\|_2^2$</td>
+<td>距离平方，使大偏差受到更大惩罚</td>
+</tr>
+<tr>
+<td>$\mathbf a^\top\mathbf b$</td>
+<td>点积；单位向量的点积为夹角余弦</td>
+</tr>
+<tr>
+<td>$\mathbf a\times\mathbf b$</td>
+<td>叉积，产生垂直于二者的方向</td>
+</tr>
+<tr>
+<td>$\operatorname{unit}(\mathbf v)$</td>
+<td>除以自身长度，只保留方向</td>
+</tr>
+<tr>
+<td>$\operatorname{vec}$</td>
+<td>按固定顺序铺平成向量</td>
+</tr>
+<tr>
+<td>$\operatorname{mean}$</td>
+<td>对指定元素取算术平均</td>
+</tr>
+<tr>
+<td>$\operatorname{clip}(x,-1,1)$</td>
+<td>截断浮点误差，防止 arccos 输入越界</td>
+</tr>
+<tr>
+<td>$\arg\min$</td>
+<td>寻找使目标函数最小的参数</td>
+</tr>
+<tr>
+<td>$\oplus$</td>
+<td>把多组残差拼接</td>
+</tr>
+</tbody>
+</table>
+<p>公式默认列向量：$\mathbf p'=A\mathbf p+\mathbf b$。NumPy 常用每行一个点，对应 <code>points @ A.T + b</code>；注意转置方向。</p>
+<h3>2.3 不可混淆的对象</h3>
+<ul>
+<li>21 个点是几何观测，不是 21 个独立自由度。</li>
+<li>45 维姿态是 15 个三维旋转参数，不代表 45 个独立的解剖自由度。</li>
+<li>β 控制统计形态；s 整体缩放；θ 控制内部动作；γ 控制整只手朝向。</li>
+<li>拟合误差小表示接近给定观测，不自动表示接近真实手。</li>
+<li>满足文件关节约束，与碰撞、接触、执行器及真机可执行，是不同层级。</li>
+</ul>
+<p>RMSE 是均方根误差（root mean square error），对大偏差更敏感；MAE 是平均绝对误差（mean absolute error）。本文特别区分点距离 RMSE 与坐标分量 RMSE，详细定义在第 16 节。</p>
+<p><a id="s3"></a></p>
+<h2>3. 步骤一：准备资源与环境</h2>
+<h3>3.1 输入资源</h3>
+<table>
+<thead>
+<tr>
+<th>资源</th>
+<th>当前路径与作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>左手 MANO</td>
+<td><code>E:\dex\MANO\mano_v1_2\mano_v1_2\models\MANO_LEFT.pkl</code>；生成形状和动作</td>
+</tr>
+<tr>
+<td>L20 左手 URDF</td>
+<td><code>E:\lingqiaoshou\linkerhand-urdf-main\linkerhand-urdf-main\l20\left\linkerhand_l20_left.urdf</code>；描述机器人运动学</td>
+</tr>
+<tr>
+<td>STL 网格</td>
+<td>URDF 同目录的 <code>meshes</code>；显示、选取腕部/指尖代理</td>
+</tr>
+<tr>
+<td>检测模型</td>
+<td><code>E:\lingqiaoshou\dex-mapping\models\hand_landmarker.task</code>；检测摄像头手部点</td>
+</tr>
+<tr>
+<td>固定 R 清单</td>
+<td><code>E:\lingqiaoshou\dex-mapping\experiment\v12_R_L20_canonical_human\r_l20_model.json</code></td>
+</tr>
+</tbody>
+</table>
+<p>原始资源保持原件，实验产物放在项目内。目录名含 v1_2 不能单独证明模型内容版本；项目用实际文件、来源和哈希追溯。</p>
+<h3>3.2 工具分工</h3>
+<table>
+<thead>
+<tr>
+<th>环境/工具</th>
+<th>职责</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.conda/envs/mano-l20</code></td>
+<td>MANO、拟合、特征、优化、指标</td>
+</tr>
+<tr>
+<td><code>.conda/envs/mano-l20-sim</code></td>
+<td>MuJoCo 显示与回放</td>
+</tr>
+<tr>
+<td><code>D:\conda\envs\linker_hand</code></td>
+<td>OpenCV 摄像头与 MediaPipe</td>
+</tr>
+<tr>
+<td>PyTorch、smplx</td>
+<td>可微 MANO 前向与梯度</td>
+</tr>
+<tr>
+<td>NumPy、SciPy</td>
+<td>矩阵、旋转、非线性最小二乘</td>
+</tr>
+<tr>
+<td>yourdfpy</td>
+<td>独立 FK 复核</td>
+</tr>
+<tr>
+<td>Trimesh</td>
+<td>三角网格和几何处理</td>
+</tr>
+<tr>
+<td>MuJoCo</td>
+<td>模型显示；当前 R 回放不推进动力学</td>
+</tr>
+</tbody>
+</table>
+<p>既有记录为 Python 3.11.17、NumPy 1.26.4、SciPy 1.17.1、PyTorch 2.14.1+cpu、smplx 0.1.28、MuJoCo 3.16.0。本次整理未重新安装或验收环境。</p>
+<p><a id="s4"></a></p>
+<h2>4. 步骤二：MANO 如何表达形状与动作</h2>
+<p>**输入：**形状 β、局部姿态 θ、整体朝向 γ、平移 t，以及模型提供的模板、形变基、关节回归器和蒙皮权重。</p>
+<p>**输出：**778 个表面顶点、16 个原生关节，再提取为项目的 21 个语义点。</p>
+<h3>4.1 先改变静止手形</h3>
+<p>$$
+V_{\rm shaped}(\beta)
+=\bar V+\sum_{n=1}^{10}\beta_nS_n.
+$$</p>
+<ul>
+<li>$\bar V$：中性模板，大小 778×3。</li>
+<li>$S_n$：第 n 个统计形状基，与模板同样大小。</li>
+<li>$\beta_n$：叠加该形变的系数。</li>
+<li>$V_{\rm shaped}$：指定形状的静止网格。</li>
+</ul>
+<p>直观上是在模板上叠加若干种形变；β 一维可能同时改变多个部位，不能直接叫作“食指长度参数”。</p>
+<p>静止关节中心由形状网格线性回归：</p>
+<p>$$
+J(\beta)=\mathcal J V_{\rm shaped}(\beta),
+\qquad \mathcal J\in\mathbb R^{16\times778}.
+$$</p>
+<p>$\mathcal J$ 为模型给定的关节回归器。β 改变时，关节中心及静止指骨方向也变，所以不同形状使用相同 θ，骨方向仍可能略有不同。</p>
+<h3>4.2 轴角怎样变为旋转</h3>
+<p>一个关节用三维轴角向量 $\boldsymbol\omega$ 表示：</p>
+<p>$$
+\phi=\|\boldsymbol\omega\|_2,\qquad
+\hat{\mathbf a}=\boldsymbol\omega/\phi.
+$$</p>
+<p>$\phi$ 是旋转角，$\hat{\mathbf a}$ 是单位轴。非零角度时用罗德里格斯公式：</p>
+<p>$$
+\operatorname{Rot}(\boldsymbol\omega)
+=I+\sin\phi[\hat{\mathbf a}]_\times
++(1-\cos\phi)[\hat{\mathbf a}]_\times^2.
+$$</p>
+<p>$$
+[\hat{\mathbf a}]_\times=
+\begin{bmatrix}
+0&-a_z&a_y\\a_z&0&-a_x\\-a_y&a_x&0
+\end{bmatrix}.
+$$</p>
+<p>叉乘矩阵满足 $[\hat{\mathbf a}]_\times\mathbf v=\hat{\mathbf a}\times\mathbf v$。零角附近用稳定实现，此时旋转接近单位矩阵。</p>
+<p>45 维姿态每 3 个分量一组，变成 15 个关节旋转矩阵。当前 <code>use_pca=False</code>，使用完整轴角，没有使用低维姿态 PCA 系数。</p>
+<h3>4.3 再加入姿态相关表面形变</h3>
+<p>弯曲时的表面并非只有刚性转动。smplx 根据各关节相对中性旋转的变化构造：</p>
+<p>$$
+\mathbf f_{\rm pose}(\theta)=
+\operatorname{vec}\left(
+\operatorname{Rot}(\theta_1)-I,\ldots,
+\operatorname{Rot}(\theta_{15})-I\right)
+\in\mathbb R^{135}.
+$$</p>
+<p>$$
+V_{\rm posed}
+=V_{\rm shaped}
++\operatorname{reshape}\left(P_{\rm pose}\mathbf f_{\rm pose}\right).
+$$</p>
+<ul>
+<li>每个旋转矩阵有 9 个元素，15×9=135 个姿态形变特征。</li>
+<li>$P_{\rm pose}$ 为预先给定的姿态形变基；公式用列向量，源码存储可能采用转置。</li>
+<li>reshape 把每个顶点的三维偏移恢复成 778×3。</li>
+</ul>
+<p><strong>45 个轴角分量与 135 个姿态形变特征是两层表示，不能混写。</strong> 当前只有 15 个局部关节旋转矩阵。</p>
+<p><code>flat_hand_mean=True</code> 表示零输入采用平展参考，而非叠加统计平均弯曲姿态。</p>
+<h3>4.4 沿骨架累积变换，再做蒙皮</h3>
+<p>线性混合蒙皮（linear blend skinning，LBS）使表面顶点随多个关节一起运动。</p>
+<p>令 $G_j$ 为关节 j 的累计齐次变换。根部为：</p>
+<p>$$
+G_0=
+\begin{bmatrix}
+\operatorname{Rot}(\gamma)&J_0(\beta)\\
+\mathbf0^\top&1
+\end{bmatrix}.
+$$</p>
+<p>对非根关节：</p>
+<p>$$
+G_j=G_{\operatorname{parent}(j)}
+\begin{bmatrix}
+\operatorname{Rot}(\theta_j)&J_j(\beta)-J_{\operatorname{parent}(j)}(\beta)\\
+\mathbf0^\top&1
+\end{bmatrix}.
+$$</p>
+<p>它把父关节的影响传给子关节。为消除静止关节位置的重复平移：</p>
+<p>$$
+A_j=G_j
+\begin{bmatrix}
+I&-J_j(\beta)\\\mathbf0^\top&1
+\end{bmatrix}.
+$$</p>
+<p>对顶点 v：</p>
+<p>$$
+\begin{bmatrix}\mathbf v'_v\\1\end{bmatrix}
+=
+\left(\sum_{j=0}^{15}w_{vj}A_j\right)
+\begin{bmatrix}\mathbf v_{{\rm posed},v}\\1\end{bmatrix}.
+$$</p>
+<p>$w_{vj}$ 为顶点对关节的蒙皮权重，$A_j$ 已包含祖先运动。根变换纳入整体朝向，输出再按实现加入平移。因此不能简化成“每个点只绕自己的关节中心转一下”。</p>
+<h3>4.5 21 点如何提取</h3>
+<table>
+<thead>
+<tr>
+<th>项目点序号</th>
+<th>语义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>腕</td>
+</tr>
+<tr>
+<td>1–4</td>
+<td>拇指 CMC、MCP、IP、指尖</td>
+</tr>
+<tr>
+<td>5–8</td>
+<td>食指 MCP、PIP、DIP、指尖</td>
+</tr>
+<tr>
+<td>9–12</td>
+<td>中指 MCP、PIP、DIP、指尖</td>
+</tr>
+<tr>
+<td>13–16</td>
+<td>无名指 MCP、PIP、DIP、指尖</td>
+</tr>
+<tr>
+<td>17–20</td>
+<td>小指 MCP、PIP、DIP、指尖</td>
+</tr>
+</tbody>
+</table>
+<p>CMC 是腕掌关节（carpometacarpal joint）；MCP 是掌指关节（metacarpophalangeal joint）；PIP/DIP 是近端/远端指间关节（proximal/distal interphalangeal joint）；IP 是拇指指间关节（interphalangeal joint）。</p>
+<table>
+<thead>
+<tr>
+<th>手指</th>
+<th>MANO 原生关节索引</th>
+<th style="text-align: right;">指尖顶点索引</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>拇指</td>
+<td>13、14、15</td>
+<td style="text-align: right;">744</td>
+</tr>
+<tr>
+<td>食指</td>
+<td>1、2、3</td>
+<td style="text-align: right;">320</td>
+</tr>
+<tr>
+<td>中指</td>
+<td>4、5、6</td>
+<td style="text-align: right;">443</td>
+</tr>
+<tr>
+<td>无名指</td>
+<td>10、11、12</td>
+<td style="text-align: right;">554</td>
+</tr>
+<tr>
+<td>小指</td>
+<td>7、8、9</td>
+<td style="text-align: right;">671</td>
+</tr>
+</tbody>
+</table>
+<p>腕部取原生关节 0。原生顺序与项目顺序不同，必须重排。指尖是表面顶点，不是新增的独立关节，其位置受蒙皮及姿态形变影响。</p>
+<p>具体依据是项目的 <code>batched_landmarks</code>、<code>mano_landmarks_torch</code> 和本地 smplx 的 <code>lbs.py</code>。模型背景见 <a href="https://mano.is.tue.mpg.de/">MANO 作者项目</a>，本文计算细节以实际本地实现为准。</p>
+<p><a id="s5"></a></p>
+<h2>5. 步骤三：L20 运动学与语义点</h2>
+<p>**输入：**L20 URDF、网格、腕部及指尖局部代理点。</p>
+<p>**输出：**关节顺序、有效限位、完整关节角、各 link 变换和 21 个语义点。</p>
+<h3>5.1 独立坐标和正运动学</h3>
+<p>当前文件为 22 个 link、21 个转动关节、5 条 mimic，留下 16 个独立坐标。四根长指各有 MCP roll、MCP pitch、PIP，DIP 从动；拇指有 3 个 CMC 坐标及 MCP，IP 从动。</p>
+<p>独立坐标顺序固定为：</p>
+<pre><code class="language-text">pinky_mcp_roll, pinky_mcp_pitch, pinky_pip,
+ring_mcp_roll, ring_mcp_pitch, ring_pip,
+middle_mcp_roll, middle_mcp_pitch, middle_pip,
+index_mcp_roll, index_mcp_pitch, index_pip,
+thumb_cmc_yaw, thumb_cmc_roll, thumb_cmc_pitch, thumb_mcp
+</code></pre>
+<p>正运动学（forward kinematics，FK）：</p>
+<p>$$
+{}^0T_c(\mathbf q)
+={}^0T_p(\mathbf q)\,T_{{\rm origin},j}\,T_{{\rm motion},j}(q_j).
+$$</p>
+<p>p/c 是关节的父/子 link；0 为根 <code>hand_base_link</code>。每个 T 为 4×4 齐次变换：origin 是相对父 link 的固定放置，motion 是围绕关节局部轴的转动。</p>
+<p>URDF 固定旋转为：</p>
+<p>$$
+R_{\rm origin}
+=R_z({\rm yaw})R_y({\rm pitch})R_x({\rm roll}).
+$$</p>
+<p>转轴定义在经过 origin 放置后的关节局部系内，不能直接当父 link 或世界轴。</p>
+<p>若指尖在末节 link 内的位置为 $\mathbf c_{\rm tip}$：</p>
+<p>$$
+\begin{bmatrix}\mathbf p_{\rm tip}^0\\1\end{bmatrix}
+={}^0T_{\rm distal}(\mathbf q)
+\begin{bmatrix}\mathbf c_{\rm tip}\\1\end{bmatrix}.
+$$</p>
+<p>这一步使网格上的固定局部点随机器人运动。</p>
+<h3>5.2 mimic 的结构展开</h3>
+<p>$$
+q_{{\rm DIP},f}=0.8917q_{{\rm PIP},f},
+\quad f\in\{\text{食、中、无名、小}\},
+\qquad
+q_{\rm thumb\,IP}=1.1619q_{\rm thumb\,MCP}.
+$$</p>
+<p>offset 均为 0。写为展开算子：</p>
+<p>$$
+\Phi:\mathbb R^{16}\rightarrow\mathbb R^{21},
+\qquad \mathbf q=\Phi(\boldsymbol\xi).
+$$</p>
+<p>只优化主关节，再按公式补齐从关节，因此相对于这份 URDF 的 mimic 残差按构造为零。这里不是通过损失“尽量满足”联动。</p>
+<p>从关节限位也要反向约束主关节。若一般 mimic 为 $q_d=m\xi_l+b$ 且 m&gt;0：</p>
+<p>$$
+\xi_l\in[\xi_l^{\min},\xi_l^{\max}]
+\cap
+\left[\frac{q_d^{\min}-b}{m},\frac{q_d^{\max}-b}{m}\right].
+$$</p>
+<p>m&lt;0 时端点排序后再求交集。<code>HandURDF</code> 会沿 mimic 链求仿射关系，并计算有效范围。</p>
+<table>
+<thead>
+<tr>
+<th>原始限位组</th>
+<th style="text-align: right;">范围（rad）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>四指 MCP roll</td>
+<td style="text-align: right;">−0.17～0.17</td>
+</tr>
+<tr>
+<td>四指 MCP pitch</td>
+<td style="text-align: right;">0～1.40</td>
+</tr>
+<tr>
+<td>四指 PIP / DIP</td>
+<td style="text-align: right;">0～1.57 / 0～1.40</td>
+</tr>
+<tr>
+<td>拇指 CMC yaw / roll / pitch</td>
+<td style="text-align: right;">0～1.40 / 0～1.22 / 0～0.79</td>
+</tr>
+<tr>
+<td>拇指 MCP / IP</td>
+<td style="text-align: right;">0～1.05 / 0～1.22</td>
+</tr>
+</tbody>
+</table>
+<p>这只保证文件角度关系，不证明真实连杆严格线性，也不证明 SDK 命令等于这些角度。</p>
+<h3>5.3 腕部与指尖代理点</h3>
+<p>STL 只有三角形，不含解剖点标签。项目采用可重复规则：</p>
+<ul>
+<li>腕部取基座网格底部安装平面端盖的面积加权中心。</li>
+<li>五指尖取各末节局部 +z 端 0.5 mm 带宽内选定三角面的面积加权中心。</li>
+</ul>
+<p>对选中三角面集合 $\mathcal F$：</p>
+<p>$$
+\mathbf c=\frac{\sum_{f\in\mathcal F}A_f\mathbf c_f}
+{\sum_{f\in\mathcal F}A_f}.
+$$</p>
+<p>$A_f$ 为三角形面积，$\mathbf c_f$ 为三个顶点的平均位置。该点是几何代理，不是真实指腹接触中心。</p>
+<p>四指 MCP/PIP/DIP 取对应机械关节框架原点；拇指 CMC 取 <code>thumb_cmc_pitch</code> 原点。机械多轴中心与人体中心不严格重合，属于近似语义对应。</p>
+<p>按腕部代理→中指 MCP 定义的“掌长”含安装基部影响，不能直接等同实物解剖掌长。</p>
+<p><a id="s6"></a></p>
+<h2>6. 步骤四：构造固定虚拟手 R</h2>
+<h3>6.1 当前 R 的定义</h3>
+<p>$$
+\beta_R=\mathbf0,\qquad \theta_R^{\rm ref}=\mathbf0.
+$$</p>
+<p>固定标准 MANO 形状和平展参考，仅改变其整体放置。形态对不同操作者保持一致，动作随时间变化。</p>
+<table>
+<thead>
+<tr>
+<th>对象</th>
+<th>实际含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$S_R$</td>
+<td>标准 MANO 自然表面</td>
+</tr>
+<tr>
+<td>$K_R$</td>
+<td>该 MANO 的 21 个人手语义点</td>
+</tr>
+<tr>
+<td>$K_R^{L20}$</td>
+<td>另外构造、使用 L20 比例的功能骨架目标</td>
+</tr>
+<tr>
+<td>$z$</td>
+<td>未实现的候选共享运动表示</td>
+</tr>
+</tbody>
+</table>
+<p>自然表面与条件化骨架没有通过统一蒙皮变成同一个精确 L20 比例模型。清单同时保存 MANO 和 L20 信息，不代表二者运动等价。</p>
+<h3>6.2 七自由度相似放置</h3>
+<p>标准 MANO 点为 $\mathbf x_k$，L20 零位点为 $\mathbf y_k$：</p>
+<p>$$
+\min_{s_R>0,\ A_R\in SO(3),\ \mathbf b_R}
+\sum_{k=0}^{20}w_k
+\|s_RA_R\mathbf x_k+\mathbf b_R-\mathbf y_k\|_2^2.
+$$</p>
+<p>s 提供 1 个尺度自由度、旋转提供 3 个、平移提供 3 个，共 7 个。$SO(3)$ 表示正交且行列式为 +1 的旋转集合，排除反射。腕部权重 2，其余 1。</p>
+<p>β 固定意味着这里只能整体放大、转动和搬动，不能单独把掌变窄或小指变长。</p>
+<h3>6.3 加权对齐的计算步骤</h3>
+<p>先归一化权重 $\bar w_k=w_k/\sum_kw_k$ 并求质心：</p>
+<p>$$
+\boldsymbol\mu_x=\sum_k\bar w_k\mathbf x_k,\qquad
+\boldsymbol\mu_y=\sum_k\bar w_k\mathbf y_k.
+$$</p>
+<p>中心化为 $\mathbf x'_k=\mathbf x_k-\boldsymbol\mu_x$、$\mathbf y'_k=\mathbf y_k-\boldsymbol\mu_y$，再构造协方差：</p>
+<p>$$
+C=\sum_k\bar w_k\mathbf x'_k(\mathbf y'_k)^\top
+=U\Sigma V^\top.
+$$</p>
+<p>奇异值分解（singular value decomposition，SVD）用于求旋转；反射修正为：</p>
+<p>$$
+D=\operatorname{diag}(1,1,\det(VU^\top)),\qquad A_R=VDU^\top.
+$$</p>
+<p>$$
+s_R=
+\frac{\sum_k\bar w_k(A_R\mathbf x'_k)^\top\mathbf y'_k}
+{\sum_k\bar w_k\|\mathbf x'_k\|_2^2},
+\qquad
+\mathbf b_R=\boldsymbol\mu_y-s_RA_R\boldsymbol\mu_x.
+$$</p>
+<p>项目 <code>weighted_similarity</code> 实现该计算，并用于尺度基线初值；尺度基线还进行数值优化。<strong>当前 R 构造脚本直接读取既有尺度基线结果，回放时不重新估计这些参数。</strong></p>
+<h3>6.4 固定结果及几何含义</h3>
+<p>$$
+s_R=1.4920215577.
+$$</p>
+<p>这是 MANO 模型单位到当前放置尺寸的比例，与“R 比本人手大多少”的比例不同。</p>
+<table>
+<thead>
+<tr>
+<th>几何诊断量</th>
+<th style="text-align: right;">L20</th>
+<th style="text-align: right;">当前 R</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>食指 MCP–小指 MCP 掌宽</td>
+<td style="text-align: right;">65.43 mm</td>
+<td style="text-align: right;">99.84 mm</td>
+</tr>
+<tr>
+<td>腕部代理–中指 MCP 长度</td>
+<td style="text-align: right;">164.86 mm</td>
+<td style="text-align: right;">141.34 mm</td>
+</tr>
+<tr>
+<td>腕部代理–中指尖距离</td>
+<td style="text-align: right;">265.46 mm</td>
+<td style="text-align: right;">261.54 mm</td>
+</tr>
+<tr>
+<td>静态 21 点欧氏距离 RMSE</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">35.52 mm</td>
+</tr>
+<tr>
+<td>最大点误差</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">78.18 mm</td>
+</tr>
+</tbody>
+</table>
+<p>20 条语义骨段平均绝对长度差 11.29 mm、平均相对差 19.4%；其中包括腕部到指根的段，不仅是解剖指骨。</p>
+<p>这是固定参考几何诊断，不是动态映射性能。当前总长度接近 L20，但掌宽、掌长和各指比例不匹配。</p>
+<p><a id="s7"></a></p>
+<h2>7. 步骤五：摄像头关键点采集</h2>
+<p>**输入：**电脑摄像头图像。</p>
+<p>**输出：**逐帧图像关键点、米制三维点、手性和时间戳；现有录制没有同步 RGB 视频。</p>
+<h3>7.1 检测调用与时间戳</h3>
+<p>OpenCV 打开 camera 0，请求 640×480；BGR 转 RGB 后调用 MediaPipe VIDEO 模式。源码最多检测 1 只手，检测/存在性/跟踪三个阈值均为 0.55。</p>
+<p>检测器所需递增整数毫秒时间戳为：</p>
+<p>$$
+m_\tau=\max\left(m_{\tau-1}+1,
+\left\lfloor1000t_\tau^{\rm elapsed}\right\rfloor\right).
+$$</p>
+<p>连续帧落在同一毫秒时也保证 API 时间戳递增；JSON 另存浮点秒。帧间隔不保证均匀，不能默认严格 30 FPS。</p>
+<h3>7.2 两种坐标输出</h3>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义与用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>image_landmarks_normalized</code></td>
+<td>图像归一化点，用于画骨架</td>
+</tr>
+<tr>
+<td><code>world_landmarks_m</code></td>
+<td>检测器估计的米制三维点，用于拟合</td>
+</tr>
+<tr>
+<td><code>handedness</code></td>
+<td>项目保存的物理左右标签，用于筛选</td>
+</tr>
+<tr>
+<td><code>handedness_raw_mediapipe</code></td>
+<td>检测器原始类别，用于追溯</td>
+</tr>
+<tr>
+<td><code>timestamp_s</code></td>
+<td>时序检查和回放时间</td>
+</tr>
+</tbody>
+</table>
+<p>MediaPipe 图像 x/y 按图像宽高归一化，图像 z 以腕部深度为参考；世界点以手的几何中心为原点、单位 m。<strong>世界点本来不是腕部原点或已标定的相机三维坐标。</strong> 项目在下一步自行减腕。依据：<a href="https://developers.google.com/edge/mediapipe/solutions/vision/hand_landmarker/python">官方输出说明</a>。</p>
+<p>单目估计输出米制数字，不等于真实尺寸已经独立标定。</p>
+<h3>7.3 镜像与手性的现有记录</h3>
+<p>原图、检测图、预览图须分开理解。当前源码仅在 <code>--input-mirrored</code> 时翻转检测图，默认镜像预览；但标签处理及元数据的 <code>detection_frame_mirrored</code> 使用 <code>not input_mirrored</code>。<strong>该字段名称不能单独证明送检像素的实际镜像状态，注释、标签假设和图像路径仍需联合核查。</strong></p>
+<p>774 帧文件实际记录 <code>mirror_display=true</code>、<code>detection_frame_mirrored=true</code>、774 个 Left。本文照实保留，不用当前注释替代历史证据。本次未重新采集、修改标签或验收物理手性。</p>
+<h3>7.4 当前个人数据</h3>
+<p><code>my_mediapipe_capture.json</code> 保存 774 帧，774 帧都有检测，停止模式为按 q 停止，时间跨度约 27.9024 秒。没有同步 RGB 视频。</p>
+<p>检测非空仅表示有输出，不证明每帧点的位置和方向正确。</p>
+<p><a id="s8"></a></p>
+<h2>8. 步骤六：源手坐标规范化</h2>
+<h3>8.1 有效性筛选</h3>
+<p>拟合器检查 Left 标签、21×3 有限三维点、非退化掌部向量；按最大帧数选全部或均匀子集，记录缺点、错误手性和非法点的跳过数量。完整 774 帧未因这些条件跳过帧。</p>
+<h3>8.2 拟合用的掌部正交系</h3>
+<p>设检测器点为 $\mathbf P_k$，腕为 0、食指 MCP 为 5、中指 MCP 为 9、小指 MCP 为 17：</p>
+<p>$$
+\hat{\mathbf x}_{\rm fit}
+=\operatorname{unit}(\mathbf P_5-\mathbf P_{17}),
+\qquad
+\mathbf v=\mathbf P_9-\mathbf P_0.
+$$</p>
+<p>$$
+\hat{\mathbf y}_{\rm fit}
+=\operatorname{unit}
+\left(\mathbf v-(\mathbf v^\top\hat{\mathbf x}_{\rm fit})\hat{\mathbf x}_{\rm fit}\right),
+\qquad
+\hat{\mathbf z}_{\rm fit}
+=\operatorname{unit}(\hat{\mathbf x}_{\rm fit}\times\hat{\mathbf y}_{\rm fit}).
+$$</p>
+<p>再令 $\hat{\mathbf y}_{\rm fit}=\operatorname{unit}(\hat{\mathbf z}_{\rm fit}\times\hat{\mathbf x}_{\rm fit})$ 以保持正交，组成：</p>
+<p>$$
+B_{\rm fit}=[\hat{\mathbf x}_{\rm fit}\ \hat{\mathbf y}_{\rm fit}\ \hat{\mathbf z}_{\rm fit}],
+\qquad
+\mathbf p_k=B_{\rm fit}^\top(\mathbf P_k-\mathbf P_0).
+$$</p>
+<p>减腕消去平移，乘转置转换坐标；<strong>这里未除掌长，仍是米制。</strong> 不做反射，正交基应有行列式 +1。</p>
+<p>原始腕点和基矩阵保存为元数据，不自动成为经过标定的机器人腕运动。</p>
+<p>第 12 节的功能特征采用另一套轴约定：拟合中 y 沿掌长，功能特征中 z 沿掌长，不能按同名 x/y/z 直接混用。</p>
+<p><a id="s9"></a></p>
+<h2>9. 步骤七：个人 MANO 参数拟合</h2>
+<p>**目的：**把离散观测点转为能够生成表面、且保持固定个人形态的参数模型。</p>
+<p>**输入：**规范化的米制 21 点序列。</p>
+<p>**输出：**序列共享的 $\beta_i,s_i$ 与逐帧 $\theta_\tau,\gamma_\tau,\mathbf t_\tau$。</p>
+<h3>9.1 预测点</h3>
+<p>令 K 为 21 点提取算子，$\mathcal M$ 为 MANO 前向：</p>
+<p>$$
+\hat{\mathbf p}_{\tau,k}
+=s_i\left[K\big(\mathcal M(\beta_i,\theta_\tau,\gamma_\tau,\mathbf0)\big)\right]_k
++\mathbf t_\tau.
+$$</p>
+<p>模型 transl 传零，外部平移在尺度之后加入。整体朝向由 MANO 围绕原生腕关节处理，不能擅自改成绕任意坐标原点旋转。</p>
+<h3>9.2 有界参数化</h3>
+<p>$$
+\beta_i=3\tanh\tilde\beta_i,\quad
+\theta_\tau=\pi\tanh\tilde\theta_\tau,\quad
+\gamma_\tau=\pi\tanh\tilde\gamma_\tau,\quad
+s_i=\exp(\ell_i).
+$$</p>
+<p>优化原始变量后通过 tanh 限制各分量、exp 保证正尺度。上述为当前默认边界，<strong>不是逐关节解剖活动范围</strong>。tanh 接近边界会饱和、梯度变小，不能说它消除了边界优化问题。</p>
+<h3>9.3 损失函数逐项解释</h3>
+<p>当前优化批次有 $N_b$ 帧，参考长度为：</p>
+<p>$$
+d_{\rm ref}=
+\max\left(\operatorname{median}_{\tau}
+\|\mathbf p_{\tau,9}-\mathbf p_{\tau,0}\|_2,\ 10^{-4}\right).
+$$</p>
+<p>校准批次和全动作批次分别计算，因此 d_ref 不保证完全相同。</p>
+<p><strong>点位置项：</strong></p>
+<p>$$
+L_{\rm point}
+=
+\frac{\sum_{\tau=1}^{N_b}\sum_{k=0}^{20}
+w_k\|\hat{\mathbf p}_{\tau,k}-\mathbf p_{\tau,k}\|_2^2}
+{N_b(\sum_kw_k)d_{\rm ref}^2}.
+$$</p>
+<p>腕部权重 2，其余 1；分子为距离平方，分母按帧数、权重与长度归一化，避免数据量和米制数值直接决定损失量级。</p>
+<p><strong>骨段长度项：</strong></p>
+<p>$$
+\hat l_{\tau,e}=\|\hat{\mathbf p}_{\tau,b}-\hat{\mathbf p}_{\tau,a}\|_2,\qquad
+l_{\tau,e}=\|\mathbf p_{\tau,b}-\mathbf p_{\tau,a}\|_2,
+\quad e=(a,b).
+$$</p>
+<p>$$
+L_{\rm bone}=\frac{1}{20N_bd_{\rm ref}^2}
+\sum_{\tau,e}(\hat l_{\tau,e}-l_{\tau,e})^2.
+$$</p>
+<p>它约束相邻点间距，防止只顾逐点贴合；观测骨长也可能有噪声，不是解剖真值。</p>
+<p><strong>形状、姿态、平移先验：</strong></p>
+<p>$$
+L_\beta=\frac{\|\beta_i\|_2^2}{10},\qquad
+L_\theta=\frac{\sum_\tau\|\theta_\tau\|_2^2}{45N_b},\qquad
+L_t=\frac{\sum_\tau\|\mathbf t_\tau\|_2^2}{3N_bd_{\rm ref}^2}.
+$$</p>
+<p>均对应源码的 <code>square().mean()</code>。它们偏好较小形状偏移、旋转幅值和平移，不能识别各关节哪种旋转才自然。保持原权重时，不能无说明地改写为不除元素数的平方和。</p>
+<p><strong>相邻帧平滑：</strong></p>
+<p>$$
+L_{\rm smooth}=
+\operatorname{mean}_{\tau,c}(\theta_{\tau,c}-\theta_{\tau-1,c})^2
++0.25\operatorname{mean}_{\tau,c}(\gamma_{\tau,c}-\gamma_{\tau-1,c})^2
++\frac{0.10}{d_{\rm ref}^2}
+\operatorname{mean}_{\tau,c}(t_{\tau,c}-t_{\tau-1,c})^2.
+$$</p>
+<p>c 为分量，τ 从第二帧开始；单帧时平滑项为零。当前不除真实时间间隔，因此不是严格角速度或加速度损失；轴角分量差也不是旋转群上的测地角差。</p>
+<p><strong>形态校准总目标：</strong></p>
+<p>$$
+L_{\rm cal}=
+L_{\rm point}+0.35L_{\rm bone}
++10^{-3}L_\beta+2\times10^{-4}L_\theta
++2\times10^{-3}L_t+0.08L_{\rm smooth}.
+$$</p>
+<p><strong>固定形态后的动作目标：</strong></p>
+<p>$$
+L_{\rm motion}=
+L_{\rm point}+0.35L_{\rm bone}
++2\times10^{-4}L_\theta
++2\times10^{-3}L_t+0.08L_{\rm smooth}.
+$$</p>
+<p>β、s 冻结后不再将形状项加入总目标，诊断中仍可报告其值。</p>
+<h3>9.4 求解步骤与参数来源</h3>
+<ol>
+<li>从有效帧等间隔抽校准子集。</li>
+<li>中性 MANO 与观测加权对齐，获得尺度、整体朝向、平移初值；局部姿态初始为零。</li>
+<li>校准时优化共享 β、s 及校准帧的姿态/整体变换。</li>
+<li>冻结 β、s，再拟合全序列姿态和整体变换。</li>
+<li>保存参数、源点、拟合点、逐点误差和历史。</li>
+</ol>
+<p>动作阶段对整段多帧共同计算损失和平滑，不是逐帧在线估计。它重新建立动作阶段初始化，没有直接把校准帧全部姿态扩展为全序列初值。</p>
+<p>这里用 Adam 优化的是个人 β、姿态等输入参数，并未训练一个跨尺寸映射网络。smplx 提供可微的固定模型；MediaPipe 使用已有检测模型。这几件事不能统称为“两个网络已经训练完成”。</p>
+<table>
+<thead>
+<tr>
+<th>配置</th>
+<th style="text-align: right;">当前源码默认</th>
+<th>774 帧产物中的证据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>校准帧</td>
+<td style="text-align: right;">24</td>
+<td>有 24 个校准 ID</td>
+</tr>
+<tr>
+<td>形态 Adam 步数</td>
+<td style="text-align: right;">350</td>
+<td>最后 step=349</td>
+</tr>
+<tr>
+<td>动作 Adam 步数</td>
+<td style="text-align: right;">300</td>
+<td>最后 step=299</td>
+</tr>
+<tr>
+<td>学习率</td>
+<td style="text-align: right;">0.025</td>
+<td>历史 JSON 未独立保存命令行学习率</td>
+</tr>
+<tr>
+<td>最大帧数</td>
+<td style="text-align: right;">64；0 为全部</td>
+<td>产物为 774 帧，不能按默认 64 描述</td>
+</tr>
+<tr>
+<td>计算类型</td>
+<td style="text-align: right;">float64</td>
+<td>当前代码</td>
+</tr>
+</tbody>
+</table>
+<p>损失权重为当前源码默认值；历史 JSON 未完整归档全部命令行参数，不能把默认值一概写成已逐项复证的历史设置。48 帧接口记录另使用 16 帧校准和 180/180 步，不与完整个人序列混用。</p>
+<h3>9.5 输出与拟合结果</h3>
+<p>每帧保存 <code>theta_hand_pose</code>、<code>beta</code>、<code>global_orient</code>、<code>transl</code>、<code>source_landmarks_m</code>、<code>fitted_landmarks_m</code>、时间戳，以及原始腕点和掌部基。</p>
+<p>完整个人序列的 $s_i=1.0776804092$；相对 MediaPipe 的点距离 RMSE 为 3.468683 mm，骨段长度 MAE 为 3.005717 mm。</p>
+<p>这些说明对观测的拟合程度，没有同步视频或独立三维真值，不能解释为本人动作已精确恢复。</p>
+<p><a id="s10"></a></p>
+<h2>10. 步骤八：小指末节扭转处理</h2>
+<p>**目的：**处理已有姿态中，小指远端指间关节绕指骨轴的大幅扭转。</p>
+<p>**输入：**个人 MANO 拟合序列；保持目标是“原拟合 21 点”，不是新的真实标注。</p>
+<p>**输出：**只修改小指 DIP 的 3 个姿态分量，其余 42 个分量、β、尺度、整体变换和时间戳不变的候选序列。</p>
+<h3>10.1 为什么点误差小，指尖方向仍会异常</h3>
+<p>点的位置主要约束“骨头指向哪里”，对绕骨长轴的旋转通常约束不足。例如，指尖中心位置几乎不变时，指甲方向仍可能发生较大变化。</p>
+<p>完整的 MANO 15 个局部关节都开放三维旋转，而源拟合没有逐关节的屈伸、侧弯和扭转约束，因此可能找到“点接近观测、但表面很不自然”的解。当前小指处理是减少这种多解性的后处理先验，不是恢复真实指甲朝向。</p>
+<h3>10.2 摆动与扭转分解</h3>
+<p>从个人中性形态的 DIP 到指尖定义单位轴：</p>
+<p>$$
+\hat{\mathbf a}=
+\operatorname{unit}(\mathbf p_{20}^{\rm neutral}-\mathbf p_{19}^{\rm neutral}).
+$$</p>
+<p>把当前旋转转换为四元数 $Q=(\mathbf v,w)$，其中向量部为前三维、标量部为 w。投影得到绕轴的扭转：</p>
+<p>$$
+Q_{\rm twist}
+=\operatorname{normalize}
+\left((\mathbf v^\top\hat{\mathbf a})\hat{\mathbf a},w\right),
+\qquad
+Q_{\rm swing}=Q Q_{\rm twist}^{-1}.
+$$</p>
+<p>Q_swing 改变指骨方向；Q_twist 表示绕该轴旋转。若投影四元数接近零，分解有歧义，代码拒绝静默选择。</p>
+<p>描述性扭转角为：</p>
+<p>$$
+\alpha_{\rm twist}
+=
+\operatorname{wrap}_{[-\pi,\pi)}
+\left(2\operatorname{atan2}
+(\mathbf v^\top\hat{\mathbf a},w)\right).
+$$</p>
+<p>这是相对模型中性轴的分解，不是量角器测出的解剖角度。</p>
+<h3>10.3 以原点集为目标重新求三维末节旋转</h3>
+<p>小指原生关节为 9，对应 Python <code>hand_pose[24:27]</code>。令替换后的姿态为 $\theta(\boldsymbol\omega)$，则：</p>
+<p>$$
+\min_{\boldsymbol\omega\in\mathbb R^3}
+\|\,\operatorname{vec}
+(K(\mathcal M(\beta_i,\theta(\boldsymbol\omega))))
+-\operatorname{vec}(\mathbf P^{\rm old})\,\|_2^2.
+$$</p>
+<p>$\mathbf P^{\rm old}$ 是原拟合 21 点。初值用去掉扭转的 swing，随后允许三维旋转调整。这里没有把“小扭转”作为额外加权损失；它通过初值和最终接受条件来选择解。</p>
+<p>每帧独立使用带阻尼 Gauss–Newton 更新：</p>
+<p>$$
+\Delta\boldsymbol\omega
+=-(J_r^\top J_r+\lambda I)^{-1}J_r^\top\mathbf r.
+$$</p>
+<p>$\mathbf r$ 为 63 维点坐标残差，$J_r$ 为其对 3 个旋转分量的 63×3 雅可比；$\lambda=10^{-9}$ 为数值阻尼。雅可比由中央有限差分计算：</p>
+<p>$$
+J_r[:,c]\approx
+\frac{\mathbf r(\boldsymbol\omega+\varepsilon\mathbf e_c)
+-\mathbf r(\boldsymbol\omega-\varepsilon\mathbf e_c)}
+{2\varepsilon},
+\qquad \varepsilon=10^{-5}\ {\rm rad}.
+$$</p>
+<p>每步向量长度上限 0.2 rad，回溯系数为 1、0.5、0.25、0.125，最多 18 次迭代，按 64 帧分批计算，但帧间不共享更新。</p>
+<h3>10.4 接受条件与结果</h3>
+<p>只有同时满足以下两项才接受：</p>
+<p>$$
+\max_k s_i\|\mathbf p_k^{\rm new}-\mathbf p_k^{\rm old}\|_2
+\le 0.05\ {\rm mm},
+\qquad
+|\alpha_{\rm new}|\le|\alpha_{\rm old}|+\epsilon.
+$$</p>
+<p>代码将米换算成毫米后判断；$\epsilon$ 是数值余量。失败帧保留原解。0.05 mm 是“不要破坏已有拟合点”的工程保护，不是真实手精度或动作质量阈值。</p>
+<table>
+<thead>
+<tr>
+<th>完整 774 帧的诊断</th>
+<th style="text-align: right;">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>接受候选帧</td>
+<td style="text-align: right;">774</td>
+</tr>
+<tr>
+<td>开头 60 帧扭转绝对值均值</td>
+<td style="text-align: right;">112.54° → 8.21°</td>
+</tr>
+<tr>
+<td>源 21 点最大位移</td>
+<td style="text-align: right;">0.000995 mm</td>
+</tr>
+<tr>
+<td>相对观测的点 RMSE</td>
+<td style="text-align: right;">3.468683 → 3.468693 mm</td>
+</tr>
+</tbody>
+</table>
+<p>保留原 21 点时，全局位置误差几乎不变，同时扭转可明显改变，正好说明“点误差小”无法保证表面朝向正确。</p>
+<p>这一处理没有修正其他手指。当前其他 DIP 仍有较大描述性扭转，动作质量仍未通过验收。较小扭转先验没有指甲方向真值支持，不能叫作完整的解剖修复。</p>
+<p><a id="s11"></a></p>
+<h2>11. 步骤九：个人动作迁移到固定 R</h2>
+<p>**输入：**个人形态与姿态序列；当前查看入口采用小指后处理后的输入。</p>
+<p>**输出：**固定形态 R 的 21 点和表面顶点序列，同时保存个人形态的参照支路。</p>
+<h3>11.1 两条支路的参数</h3>
+<table>
+<thead>
+<tr>
+<th>支路</th>
+<th>形状</th>
+<th>尺度</th>
+<th>局部动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>个人拟合手</td>
+<td>$\beta_i$</td>
+<td>$s_i=1.0776804092$</td>
+<td>$\theta_i(\tau)$</td>
+</tr>
+<tr>
+<td>固定 R</td>
+<td>$\beta_R=\mathbf0$</td>
+<td>$s_R=1.4920215577$</td>
+<td>同一个 $\theta_i(\tau)$</td>
+</tr>
+</tbody>
+</table>
+<p>R 的输出不以个人 β 替换目标 β。个人参照支路只是比较对象，不是另一份真实动作标注。</p>
+<h3>11.2 各自减腕，再放到同一个锚点</h3>
+<p>令 $\mathbf p_k(\beta,\theta)$ 为整体朝向和平移均为零时的 MANO 点，腕点为 $\mathbf p_0$。固定锚点：</p>
+<p>$$
+\mathbf a_R
+=s_RA_R\mathbf p_0(\beta_R,\mathbf0)+\mathbf b_R.
+$$</p>
+<p>目标 R：</p>
+<p>$$
+\mathbf p_{\tau,k}^{R}
+=s_RA_R
+\left[\mathbf p_k(\beta_R,\theta_i(\tau))
+-\mathbf p_0(\beta_R,\theta_i(\tau))\right]
++\mathbf a_R.
+$$</p>
+<p>个人参照：</p>
+<p>$$
+\mathbf p_{\tau,k}^{i,\rm ref}
+=s_iA_R
+\left[\mathbf p_k(\beta_i,\theta_i(\tau))
+-\mathbf p_0(\beta_i,\theta_i(\tau))\right]
++\mathbf a_R.
+$$</p>
+<p>两者使用自己的形状和尺度，但共用放置旋转与腕部锚点。表面顶点采用同样的减腕、缩放和放置。</p>
+<p>**含义：**只观察手内部姿态的变化；输入的整体朝向 γ 和平移 t 不作为真实腕部运动传入 R，R 不会随着手在摄像头前的整体移动而移动。</p>
+<p>并排显示时额外加的平移只是让两只手不重叠，不参与映射指标。</p>
+<h3>11.3 源重建一致性检查</h3>
+<p>丢弃整体运动之前，代码先用个人 β、s、θ、γ、t 重建原拟合点，核对是否和输入保存的 <code>fitted_landmarks_m</code> 一致。当前重复测试的最大坐标差约 $2.39\times10^{-9}$ m。</p>
+<p>这验证参数解释和单位一致，不验证拟合点是否忠于真实手。</p>
+<h3>11.4 迁移结果及功能差异</h3>
+<table>
+<thead>
+<tr>
+<th>当前 774 帧</th>
+<th style="text-align: right;">数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>局部姿态参数复制误差</td>
+<td style="text-align: right;">0，按构造为零</td>
+</tr>
+<tr>
+<td>源/R 骨方向 RMSE</td>
+<td style="text-align: right;">1.153377°</td>
+</tr>
+<tr>
+<td>10 对指尖归一化距离 MAE</td>
+<td style="text-align: right;">0.0358173</td>
+</tr>
+<tr>
+<td>R/个人参照的掌部尺度比</td>
+<td style="text-align: right;">1.352204</td>
+</tr>
+<tr>
+<td>目标 β、尺度、腕锚</td>
+<td style="text-align: right;">固定</td>
+</tr>
+</tbody>
+</table>
+<p>$s_R/s_i$ 与掌部尺度比不完全相同，因为 β 也改变几何。不能用两个外部尺度的比值替代实际点计算的掌部比例。</p>
+<p>在源拇食指最近的 frame 190，个人参照距离为 17.8 mm，R 同帧为 27.0 mm；源拇小指最近的 frame 513，个人参照为 5.6 mm，R 同帧为 15.7 mm。注意这些是“源距离最小帧上的双方距离”，不一定是双方各自独立最小值。</p>
+<p>这些点距离不是皮肤接触间隙，也没有物体真值。它们说明复制 θ 不保证保持相同的指尖关系。</p>
+<p>当前源/R 小误差反映同姿态在不同形态上的差异；源姿态里的错误也会被复制。因此不能把 1.153° 当作经过学习的跨尺寸算法精度。</p>
+<p><a id="s12"></a></p>
+<h2>12. 步骤十：功能特征与比较语言</h2>
+<p>**目的：**用相对几何描述动作，使不同整体大小和放置的手能够比较；同时保留需要考虑的比例差。</p>
+<p>**输入：**任意一只手按同一语义顺序排列的 21 个点。</p>
+<p>**输出：**掌部局部点、20 条骨段方向与长度、15 个段间夹角、10 对指尖距离和方向。</p>
+<h3>12.1 功能特征掌部坐标</h3>
+<p>该坐标与源拟合坐标不同，先固定 z 为腕→中指 MCP：</p>
+<p>$$
+\hat{\mathbf z}_{\rm feat}
+=\operatorname{unit}(\mathbf p_9-\mathbf p_0),
+\qquad
+\mathbf h=\mathbf p_5-\mathbf p_{17}.
+$$</p>
+<p>$$
+\hat{\mathbf x}_{\rm feat}
+=\operatorname{unit}
+(\mathbf h-(\mathbf h^\top\hat{\mathbf z}_{\rm feat})\hat{\mathbf z}_{\rm feat}),
+\qquad
+\hat{\mathbf y}_{\rm feat}
+=\operatorname{unit}(\hat{\mathbf z}_{\rm feat}\times\hat{\mathbf x}_{\rm feat}).
+$$</p>
+<p>$$
+B_{\rm feat}=
+[\hat{\mathbf x}_{\rm feat}\ \hat{\mathbf y}_{\rm feat}\ \hat{\mathbf z}_{\rm feat}],
+\qquad
+s_{\rm palm}=\|\mathbf p_9-\mathbf p_0\|_2.
+$$</p>
+<p>x 指向“小指 MCP→食指 MCP”的投影方向，y 补全右手系。再归一化：</p>
+<p>$$
+\tilde{\mathbf p}_k
+=\frac{B_{\rm feat}^\top(\mathbf p_k-\mathbf p_0)}{s_{\rm palm}}.
+$$</p>
+<p>减腕去平移、旋转到掌部去整体朝向、除掌部尺度去整体大小。R 与 L20 各自建立基和尺度。</p>
+<p>此操作不消除指长比例差，也不等于已经学得与形态无关的 z。若 MCP 点随关节变化，归一化基和尺度也可能受动作影响，属于当前特征定义的一部分。</p>
+<h3>12.2 骨段方向与归一化长度</h3>
+<p>每指链有腕→第一关节、随后三段，共 5×4=20 条边：</p>
+<p>$$
+\mathbf v_e=B_{\rm feat}^\top(\mathbf p_b-\mathbf p_a),\qquad
+\mathbf d_e=\frac{\mathbf v_e}{\|\mathbf v_e\|_2},\qquad
+\ell_e=\frac{\|\mathbf v_e\|_2}{s_{\rm palm}}.
+$$</p>
+<ul>
+<li>$\mathbf d_e$：只表示该骨段方向。</li>
+<li>$\ell_e$：该段占掌部尺度的比例，保留形态信息。</li>
+<li>腕→指根是语义掌部段，不应全称解剖指骨。</li>
+</ul>
+<p>腕→中指 MCP 被用来定义 z，其归一化方向恒为 (0,0,1)，因此该边方向误差为零属于定义结果，不是算法成绩。</p>
+<h3>12.3 指尖对特征</h3>
+<p>5 个指尖有 $\binom52=10$ 对。对点 m、n：</p>
+<p>$$
+\mathbf v_{mn}=\tilde{\mathbf p}_n-\tilde{\mathbf p}_m,\qquad
+D_{mn}=\|\mathbf v_{mn}\|_2,\qquad
+\mathbf u_{mn}=\mathbf v_{mn}/D_{mn}.
+$$</p>
+<p>D 为无量纲距离，u 为指尖连线方向；此处 u 是特征向量，不是前文执行器指令，均用下标 mn 区分。</p>
+<p>距离接近零时，连线方向无稳定定义。代码在极小距离处返回零向量；特定任务的额外方向项另设 0.025 的归一化距离门槛。但一般 10 对方向残差没有全部按这一门槛屏蔽，不能声称所有近零方向项都已处理完善。</p>
+<h3>12.4 段间夹角</h3>
+<p>每指 4 段相邻配对形成 3 个夹角，共 15 个：</p>
+<p>$$
+\kappa_{f,r}
+=\arccos\!\left[
+\operatorname{clip}(\mathbf d_{f,r}^\top\mathbf d_{f,r+1},-1,1)
+\right],
+\quad r=1,2,3.
+$$</p>
+<p>它度量相邻骨段之间的无符号夹角，不能区分所有侧弯、屈伸和扭转，也不等于某个 MANO 轴角分量或机器人编码器角。</p>
+<h3>12.5 一个归一化数怎样换成毫米</h3>
+<p>若某对距离为 0.10，当前掌部尺度为 0.14 m：</p>
+<p>$$
+D_{\rm mm}=0.10\times0.14\times1000=14\ {\rm mm}.
+$$</p>
+<p>这是示意算例，不是新实验。双方各除自己的掌部长度时，相同归一化距离不保证相同绝对毫米距离。</p>
+<p><a id="s13"></a></p>
+<h2>13. 步骤十一：L20 条件化目标骨架</h2>
+<p>**动机：**自然 MANO 的指长/掌部比例与 L20 不同，直接让所有绝对点重合可能与捏合目标冲突。</p>
+<p>**输入：**源动作 21 点、源参考帧，以及 L20 零位 21 点。</p>
+<p>**输出：**采用 L20 参考骨长、携带源相对方向变化的目标点集；另保留原始 R 的任务目标。</p>
+<h3>13.1 固定参考</h3>
+<p>源码取输入序列的<strong>第一帧</strong>作源参考，而不是自动识别张手；合成序列的第一帧是张开姿态。应用于其他数据时，不能默认第一帧一定是理想中性手。</p>
+<p>对每条边 e，在各自掌部功能坐标下保存：</p>
+<ul>
+<li>源参考方向 $\mathbf d_e^{i,0}$。</li>
+<li>当前源方向 $\mathbf d_e^{i,\tau}$。</li>
+<li>L20 零位方向 $\mathbf d_e^{L20,0}$。</li>
+<li>L20 归一化骨长 $\ell_e^{L20,0}$。</li>
+</ul>
+<h3>13.2 最小方向旋转</h3>
+<p>$$
+\Delta A_e^\tau
+=\operatorname{MinRot}
+(\mathbf d_e^{i,0}\rightarrow\mathbf d_e^{i,\tau}).
+$$</p>
+<p>对单位向量 a、b：</p>
+<p>$$
+\mathbf c=\mathbf a\times\mathbf b,\quad
+\sigma=\|\mathbf c\|_2,\quad
+\rho=\operatorname{clip}(\mathbf a^\top\mathbf b,-1,1).
+$$</p>
+<p>非平行时取旋转轴 $\mathbf c/\sigma$，使用罗德里格斯式，其中 sinφ=σ、cosφ=ρ。同向取单位矩阵，反向由代码选择垂直轴旋转 π。</p>
+<p>单个向量对应只能确定改变方向所需的最小旋转，不能恢复绕骨轴的完整朝向。它也不是完整的解剖关节旋转迁移。</p>
+<h3>13.3 在 L20 比例上重建点</h3>
+<p>$$
+\mathbf d_e^{\rm adapt,\tau}
+=\operatorname{unit}(\Delta A_e^\tau\mathbf d_e^{L20,0}).
+$$</p>
+<p>从腕点为零逐链累加：</p>
+<p>$$
+\tilde{\mathbf p}_b^\tau
+=\tilde{\mathbf p}_a^\tau
++\ell_e^{L20,0}\mathbf d_e^{\rm adapt,\tau}.
+$$</p>
+<p>再使用固定 L20 参考掌部基、尺度、腕部位置放回根坐标：</p>
+<p>$$
+\mathbf p_k^{\rm adapt,\tau}
+=s_{\rm palm}^{L20,0}B_{\rm feat}^{L20,0}
+\tilde{\mathbf p}_k^\tau+\mathbf p_0^{L20,0}.
+$$</p>
+<p>这保持各边长度为参考 L20 长度，但不保证所有边方向组合满足 L20 关节轴与耦合，也不保证条件化骨架整体可达，仍需后续 q 求解。</p>
+<h3>13.4 形状目标与任务目标分开</h3>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>target_landmarks_m</code></td>
+<td>适配后的 L20 比例骨架，用于整体形状正则</td>
+</tr>
+<tr>
+<td><code>task_target_landmarks_m</code></td>
+<td>原始 R 目标，用于选定指尖对的任务关系</td>
+</tr>
+<tr>
+<td><code>source_target_landmarks_m</code></td>
+<td>保存适配前点以追溯</td>
+</tr>
+</tbody>
+</table>
+<p>否则只顾换成机械比例时，可能把原本想捏合的关系也改掉。当前机制主要对明确标出的任务对保持原始 R 关系，其余一般特征仍对照条件化目标。</p>
+<p>**运行范围：**该支路有 17 帧合成序列和 48 帧旧真实接口产物；尚未接到当前固定 R 的 774 帧个人序列。它没有修改自然 MANO 表面，也没有实现一个网络。</p>
+<p><a id="s14"></a></p>
+<h2>14. 步骤十二：机器人关节与轨迹求解</h2>
+<p>**输入：**条件化骨架目标、原始 R 任务对、L20 文件运动学与有效限位。</p>
+<p>**输出：**16 个独立关节角及展开后的 21 个关节角，不是实际执行器指令。</p>
+<h3>14.1 求解空间与硬约束</h3>
+<p>$$
+\boldsymbol\xi_\tau\in\mathbb R^{16},\qquad
+\boldsymbol\xi^{\min}\le\boldsymbol\xi_\tau\le\boldsymbol\xi^{\max},
+\qquad
+\mathbf q_\tau=\Phi(\boldsymbol\xi_\tau).
+$$</p>
+<p>每次候选角先经 mimic 展开，再 FK 得到 21 点，最后提取与目标同口径的功能特征。5 个从关节从不作为自由优化变量。</p>
+<h3>14.2 残差拼接</h3>
+<p>设 a 表示候选 q 的实际 FK 特征，h 表示条件化骨架目标：</p>
+<p>$$
+\mathbf r_{\rm shape}(\boldsymbol\xi)=
+\begin{bmatrix}
+w_d\operatorname{vec}(\mathbf d^a-\mathbf d^h)\\
+w_l(\boldsymbol\ell^a-\boldsymbol\ell^h)\\
+w_p\operatorname{vec}(\tilde{\mathbf P}_{1:20}^a-\tilde{\mathbf P}_{1:20}^h)\\
+w_\kappa(\boldsymbol\kappa^a-\boldsymbol\kappa^h)\\
+w_D(\mathbf D^a-\mathbf D^h)\\
+w_U\operatorname{vec}(\mathbf U^a-\mathbf U^h)
+\end{bmatrix}.
+$$</p>
+<table>
+<thead>
+<tr>
+<th>块</th>
+<th style="text-align: right;">元素数量</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>骨方向</td>
+<td style="text-align: right;">20×3</td>
+<td>各语义段指向</td>
+</tr>
+<tr>
+<td>归一化长度</td>
+<td style="text-align: right;">20</td>
+<td>相对长度；受归一化尺度和语义点定义影响</td>
+</tr>
+<tr>
+<td>非腕部点</td>
+<td style="text-align: right;">20×3</td>
+<td>整体骨架布局</td>
+</tr>
+<tr>
+<td>段间夹角</td>
+<td style="text-align: right;">15</td>
+<td>局部弯曲程度</td>
+</tr>
+<tr>
+<td>全指尖对距离</td>
+<td style="text-align: right;">10</td>
+<td>指尖关系</td>
+</tr>
+<tr>
+<td>全指尖对方向</td>
+<td style="text-align: right;">10×3</td>
+<td>指尖连线方向</td>
+</tr>
+</tbody>
+</table>
+<p>这些量冗余但目标不同；当前没有按每块维数再次归一化，因此块大小也会影响总目标，不能只看表中一个权重判断贡献。</p>
+<p>对于选定任务对 (m,n)，使用原始 R 任务目标 T：</p>
+<p>$$
+r_{\rm task,D}=w_{TD}(D_{mn}^a-D_{mn}^{T}),
+$$</p>
+<p>$$
+\mathbf r_{\rm task,U}
+=w_{TU}(\mathbf u_{mn}^a-\mathbf u_{mn}^{T})
+\quad\text{仅当 }D_{mn}^{T}\ge0.025.
+$$</p>
+<p>没有任务对标签时，这两项不加入。0.025 是归一化方向门槛，不是捏合成功的物理距离阈值。</p>
+<h3>14.3 权重怎样理解</h3>
+<table>
+<thead>
+<tr>
+<th>残差乘子</th>
+<th style="text-align: right;">普通动作</th>
+<th style="text-align: right;">有选定任务对</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>骨方向 $w_d$</td>
+<td style="text-align: right;">1.25</td>
+<td style="text-align: right;">0.75</td>
+</tr>
+<tr>
+<td>长度 $w_l$</td>
+<td style="text-align: right;">0.45</td>
+<td style="text-align: right;">0.25</td>
+</tr>
+<tr>
+<td>非腕部点 $w_p$</td>
+<td style="text-align: right;">1.10</td>
+<td style="text-align: right;">0.35</td>
+</tr>
+<tr>
+<td>段间夹角 $w_\kappa$</td>
+<td style="text-align: right;">0.85</td>
+<td style="text-align: right;">0.30</td>
+</tr>
+<tr>
+<td>全指尖对距离 $w_D$</td>
+<td style="text-align: right;">0.35</td>
+<td style="text-align: right;">0.15</td>
+</tr>
+<tr>
+<td>全指尖对方向 $w_U$</td>
+<td style="text-align: right;">0.35</td>
+<td style="text-align: right;">0.15</td>
+</tr>
+<tr>
+<td>选定任务对距离 $w_{TD}$</td>
+<td style="text-align: right;">2.5</td>
+<td style="text-align: right;">35.0</td>
+</tr>
+<tr>
+<td>选定任务对方向 $w_{TU}$</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">0.35</td>
+</tr>
+</tbody>
+</table>
+<p>普通列的任务对乘子只有实际指定该对时才生效。源码遇到选定任务对会切换至右列，优先满足指尖距离、减弱整体形状要求。</p>
+<p>求解器最小化：</p>
+<p>$$
+\frac12\|\mathbf r(\boldsymbol\xi)\|_2^2.
+$$</p>
+<p>表里的数是乘在残差上的 w，平方后变成目标中的 $w^2$。例如 35 表示该标量误差的平方项系数为 1225，而不是 35。不能与 MANO 拟合中“直接乘在损失上的系数”混读。</p>
+<h3>14.4 逐帧平滑求解</h3>
+<p>上一帧结果为 $\boldsymbol\xi_{\tau-1}$，关节范围为：</p>
+<p>$$
+\Delta\xi_c=\max(\xi_c^{\max}-\xi_c^{\min},10^{-9}).
+$$</p>
+<p>平滑残差为：</p>
+<p>$$
+\mathbf r_{{\rm smooth},\tau}
+=w_s
+\frac{\boldsymbol\xi_\tau-\boldsymbol\xi_{\tau-1}}
+{\Delta\boldsymbol\xi}.
+$$</p>
+<p>除法逐分量执行，使窄范围与宽范围关节可比较。第一帧无此项。当前 w_s=0.35，惩罚角度步长而不是按实际秒计算的速度。</p>
+<p>每帧采用 4 个初值：</p>
+<ol>
+<li>上一帧解；首帧用零位。</li>
+<li>有效范围中点。</li>
+<li>范围 25% 处。</li>
+<li>固定随机种子 20261017 的均匀随机点。</li>
+</ol>
+<p>SciPy <code>least_squares</code> 使用 trf（带边界的信赖域反射方法），xtol/ftol/gtol 为 1e−10，max_nfev=900，diff_step=1e−5。比较 4 个结果的代价，保留最低者，并记录其成功标志、终止原因和评估次数。</p>
+<p>局部优化不保证全局最优；success 表示满足求解器终止条件，不表示任务成功。</p>
+<h3>14.5 整段轨迹联合求解</h3>
+<p>逐帧求解只考虑过去的结果。整段优化将所有帧一起作为变量：</p>
+<p>$$
+X=[\boldsymbol\xi_1^\top,\ldots,\boldsymbol\xi_N^\top]^\top
+\in\mathbb R^{16N}.
+$$</p>
+<p>$$
+\min_X
+\frac12\sum_{\tau=1}^{N}
+\|\mathbf r_{{\rm shape},\tau}\oplus\mathbf r_{{\rm task},\tau}\|_2^2
++
+\frac12\sum_{\tau=2}^{N}
+\left\|w_s\frac{\boldsymbol\xi_\tau-\boldsymbol\xi_{\tau-1}}
+{\Delta\boldsymbol\xi}\right\|_2^2,
+$$</p>
+<p>所有帧均满足同样的有效限位。17 帧就是 272 个优化变量，初值从已有 q 序列读取，要求帧数与顺序一致。</p>
+<p>当前实现使用 w_s=0.80、trf、x_scale=jac、三个容差 1e−9、差分步长 1e−5。<strong>源码默认 max_nfev=45；已保存合成续跑结果实际记录上限 35、使用 28 次函数评估并收敛。</strong> 默认值与运行配置不能混写。首次未收敛结果和续跑结果均保留。</p>
+<h3>14.6 已有结果和输入范围</h3>
+<p>同一 17 帧合成动作：</p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th style="text-align: right;">逐帧求解</th>
+<th style="text-align: right;">整段续跑</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>条件化非腕部点 RMSE 的逐帧均值</td>
+<td style="text-align: right;">0.108737</td>
+<td style="text-align: right;">0.109628</td>
+</tr>
+<tr>
+<td>段间夹角 RMSE 的逐帧均值</td>
+<td style="text-align: right;">6.728°</td>
+<td style="text-align: right;">6.833°</td>
+</tr>
+<tr>
+<td>拇食指任务对归一化距离 MAE</td>
+<td style="text-align: right;">0.001434</td>
+<td style="text-align: right;">0.001489</td>
+</tr>
+<tr>
+<td>拇中指任务对归一化距离 MAE</td>
+<td style="text-align: right;">0.001120</td>
+<td style="text-align: right;">0.001109</td>
+</tr>
+<tr>
+<td>最大独立角单步变化</td>
+<td style="text-align: right;">0.979151 rad</td>
+<td style="text-align: right;">0.830350 rad</td>
+</tr>
+<tr>
+<td>平均“每步最大分量变化”</td>
+<td style="text-align: right;">0.243898 rad</td>
+<td style="text-align: right;">0.228392 rad</td>
+</tr>
+<tr>
+<td>文件限位违规 / mimic 最大残差</td>
+<td style="text-align: right;">0 / 0</td>
+<td style="text-align: right;">0 / 0</td>
+</tr>
+</tbody>
+</table>
+<p>这里形状指标针对条件化目标，不能与未适配自然 MANO 目标混作同一口径。平滑改善伴随部分任务/形状误差略增，也不代表真实控制时延达标。</p>
+<p>另外 48 帧旧真实输入的最大单步角变化为 0.107817 / 0.070034 rad，限位及 mimic 检查通过；其任务对指标为空，不能由此宣称捏合任务通过。</p>
+<p>当前 774 帧固定 R 序列没有接此求解。除概念接口外，还需统一实际字段：例如现逐帧求解器读取 alpha/phase/name 等字段，当前 R 帧没有 alpha。<strong>本文不把尚未验收的直接拼接命令写成已经可用的完整闭环。</strong></p>
+<p><a id="s15"></a></p>
+<h2>15. 步骤十三：显示与回放</h2>
+<h3>15.1 表面与机器人分别怎样显示</h3>
+<p>R 播放器使用 MuJoCo 的 visual skin 和 mocap 点表达逐帧 MANO 顶点，不直接修改编译后的内部网格，也不推进物理步进。</p>
+<p>当前 R-only 场景包含 1 个 skin、778 个 mocap 点、0 个关节、0 个碰撞 geom；并排视图为两套表面。它是可变形表面的运动学播放，不是可接触抓取的物理手。</p>
+<p>L20 支路用机械模型及求得 q 显示关节姿态。二者同屏只是比较手段，不会自动建立驱动或接触关系。</p>
+<h3>15.2 回放时间与帧数</h3>
+<p>完整播放器用全部 774 帧和原时间戳选帧；GUI 刷新帧率与输入采样率不是同一个量。</p>
+<p>当前重复测试 GIF 按 8 FPS 预览采样，共 224 张，覆盖整段约 27.9 秒。GIF 少于 774 张不等于底层序列丢了对应帧。</p>
+<p>并排图中金色是个人<strong>拟合手</strong>，蓝色是固定 R，二者共用姿态。金色不是同步真实视频，二者动作一致不能证明与本人真实动作一致。</p>
+<h3>15.3 显示检查的边界</h3>
+<p>测试将渲染场景里的顶点与生成的目标顶点逐帧比较，并检查有界时长 GUI 是否正常退出：</p>
+<ul>
+<li>全 774 帧并排最大坐标差约 $7.38\times10^{-9}$ m。</li>
+<li>30 秒 GUI 回放退出码为 0。</li>
+</ul>
+<p>这说明显示按给定数据运行，没有证明动作自然、人体姿态正确、网格不穿插或 L20 能执行。当前用户对自然性和弯曲网格的反馈仍为未通过。</p>
+<p><a id="s16"></a></p>
+<h2>16. 测试过程与指标定义</h2>
+<p>当前主要完成分层诊断，尚无冻结的跨操作者/跨机器人正式测试集。下面按测试要回答的问题组织。</p>
+<h3>16.1 先区分现有样本</h3>
+<table>
+<thead>
+<tr>
+<th>样本</th>
+<th>获得方式</th>
+<th>用来检查什么</th>
+<th>不能证明什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>114 个机器人姿态</td>
+<td>固定规则、固定随机种子产生 q</td>
+<td>FK、转轴、mimic、限位</td>
+<td>实物精度</td>
+</tr>
+<tr>
+<td>3 个固定合成动作</td>
+<td>MANO 张开、拇食指捏合、拇中指对指</td>
+<td>单帧任务与几何接口</td>
+<td>真实任务成功</td>
+</tr>
+<tr>
+<td>17 帧合成序列</td>
+<td>对固定姿态向量插值</td>
+<td>连续 q、平滑权衡</td>
+<td>摄像头、真实时序、泛化</td>
+</tr>
+<tr>
+<td>48 帧旧真实输入</td>
+<td>另一份固定 MediaPipe 输入；16 帧校准</td>
+<td>MANO 与 q 的离线接口</td>
+<td>当前 774 帧固定 R 闭环</td>
+</tr>
+<tr>
+<td>774 帧个人录制</td>
+<td>同一操作者、同一录制；24 帧校准</td>
+<td>个人拟合、固定 R 迁移与质量</td>
+<td>独立测试、跨操作者泛化</td>
+</tr>
+</tbody>
+</table>
+<p>17 帧由两段各 9 帧插值、去掉重复连接帧得到：</p>
+<p>$$
+\theta(\alpha)=(1-\alpha)\theta_A+\alpha\theta_B,
+\qquad \alpha\in[0,1].
+$$</p>
+<p>这是轴角分量的线性插值，不是旋转群测地插值，也不是实测轨迹。第一段在 α&gt;0.45 时标拇食指任务对，第二段标拇中指任务对；它们是合成测试规则，不是从真实接触识别出的标注。</p>
+<p>774 帧的校准子集来自同一段，之后整段又参与拟合和指标计算；它们不是独立留出测试。</p>
+<h3>16.2 测试 A：模型接口与文件运动学</h3>
+<p>**问题：**输入参数后，模型维数、坐标与运动是否符合定义？</p>
+<p>MANO 检查：</p>
+<ol>
+<li>加载左手文件，确认形状基、姿态基、拓扑与父子索引。</li>
+<li>设 β、θ、γ、t 为零，生成参考手。</li>
+<li>与原数组比较中性顶点和关节。</li>
+<li>检查形状梯度，以及指定姿态扰动是否产生有限、非零变化。</li>
+<li>检查 21 点顺序和指尖索引。</li>
+</ol>
+<p>已有中性顶点最大差约 6.31e−9 模型单位，只说明读取与前向一致，不是物理重建误差。</p>
+<p>L20 固定诊断姿态：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th style="text-align: right;">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>零位</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>单独改变各独立关节</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr>
+<td>独立关节上下限端点</td>
+<td style="text-align: right;">32</td>
+</tr>
+<tr>
+<td>固定种子随机姿态</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr>
+<td>5 条 mimic 各 5 点扫描</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr>
+<td>合计</td>
+<td style="text-align: right;">114</td>
+</tr>
+</tbody>
+</table>
+<p>每个姿态展开 mimic 后，分别由自编实现和 yourdfpy 计算 FK；核对全部 link 的位置、旋转、正交性和行列式，检查运动仅影响下游子树、当前关节原点不随自身角改变、骨段中心距保持、非法输入被拒绝。</p>
+<p>正转轴用有限差分与下式对照：</p>
+<p>$$
+\frac{\partial\mathbf p}{\partial q_j}
+=\hat{\mathbf a}_j^0\times(\mathbf p-\mathbf o_j^0).
+$$</p>
+<p>右侧为根坐标下的关节轴与“关节中心→探针点”向量的叉积；能发现轴方向、正转方向或变换顺序错误。</p>
+<p>已有最大位置差 5.64e−17 m、最大朝向差 2.26e−16 rad，mimic 残差 0。两套实现计算同一文件一致，不能推出实物有这样的精度。</p>
+<h3>16.3 测试 B：数据、坐标与时间</h3>
+<p>按以下顺序检查：</p>
+<ol>
+<li>固定输入与哈希，避免混用录制。</li>
+<li>检查 Left、点顺序、米/弧度/秒。</li>
+<li>从原采集点重新减腕、规范化，与保存源点比较。</li>
+<li>由个人参数重建，与保存拟合点比较。</li>
+<li>检查时间戳递增、个人 β 固定、帧数一致。</li>
+<li>检查目标 R 的 β、尺度和腕锚固定。</li>
+</ol>
+<p>当前重复测试记录：</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align: right;">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入 / 输出</td>
+<td style="text-align: right;">774 / 774</td>
+</tr>
+<tr>
+<td>原采集规范化与存储点最大坐标差</td>
+<td style="text-align: right;">0 m</td>
+</tr>
+<tr>
+<td>源参数重建最大坐标差</td>
+<td style="text-align: right;">约 2.39e−9 m</td>
+</tr>
+<tr>
+<td>时间戳</td>
+<td style="text-align: right;">严格递增</td>
+</tr>
+<tr>
+<td>R 腕部锚点偏差</td>
+<td style="text-align: right;">0 m</td>
+</tr>
+</tbody>
+</table>
+<p>这些能发现单位、索引、变换不一致；相互一致的数据也可能都偏离真实手，不能只用内部一致性验收物理方向。</p>
+<h3>16.4 测试 C：个人 MANO 对观测的拟合</h3>
+<p>每点三维距离误差：</p>
+<p>$$
+e_{\tau,k}
+=1000\|\hat{\mathbf p}_{\tau,k}-\mathbf p_{\tau,k}\|_2
+\quad({\rm mm}).
+$$</p>
+<p>点 RMSE：</p>
+<p>$$
+E_{\rm point}
+=\sqrt{\frac1{21N}\sum_{\tau,k}e_{\tau,k}^2}.
+$$</p>
+<p>先求三维距离，再对距离平方平均、开方；不是对所有坐标分量直接均方根，也不同于优化中的加权无量纲损失。</p>
+<p>骨长平均绝对误差（mean absolute error，MAE）：</p>
+<p>$$
+E_{\rm bone}
+=\frac{1000}{20N}\sum_{\tau,e}|\hat l_{\tau,e}-l_{\tau,e}|.
+$$</p>
+<p>均方根误差（root mean square error，RMSE）更强调大偏差，MAE 是绝对偏差平均。</p>
+<p>完整个人原始拟合：</p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th style="text-align: right;">数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>点距离 RMSE</td>
+<td style="text-align: right;">3.468683 mm</td>
+</tr>
+<tr>
+<td>最大点误差</td>
+<td style="text-align: right;">15.191664 mm</td>
+</tr>
+<tr>
+<td>骨段长度 MAE</td>
+<td style="text-align: right;">3.005717 mm</td>
+</tr>
+<tr>
+<td>最大骨段长度误差</td>
+<td style="text-align: right;">18.937012 mm</td>
+</tr>
+</tbody>
+</table>
+<p>参考是 MediaPipe 点。没有独立真值，不能据此算出真实人体姿态准确率。</p>
+<h3>16.5 测试 D：个人参照→固定 R</h3>
+<p>双方各自提取功能特征，每条边的方向夹角：</p>
+<p>$$
+\delta_{\tau,e}
+=\frac{180}{\pi}\arccos
+\left[\operatorname{clip}
+((\mathbf d_{\tau,e}^{i})^\top\mathbf d_{\tau,e}^{R},-1,1)\right].
+$$</p>
+<p>全帧全 20 条边方向 RMSE：</p>
+<p>$$
+E_{\rm direction}
+=\sqrt{\frac1{20N}\sum_{\tau,e}\delta_{\tau,e}^2}.
+$$</p>
+<p>10 对指尖归一化距离 MAE：</p>
+<p>$$
+E_{\rm pair}
+=\frac1{10N}\sum_{\tau=1}^{N}\sum_{m<n}
+|D_{\tau,mn}^{R}-D_{\tau,mn}^{i}|.
+$$</p>
+<table>
+<thead>
+<tr>
+<th>当前完整序列指标</th>
+<th style="text-align: right;">数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>方向 RMSE</td>
+<td style="text-align: right;">1.153377°</td>
+</tr>
+<tr>
+<td>方向平均 / p95 / 最大</td>
+<td style="text-align: right;">0.977463° / 2.094853° / 2.255284°</td>
+</tr>
+<tr>
+<td>指尖对距离 MAE</td>
+<td style="text-align: right;">0.0358173</td>
+</tr>
+<tr>
+<td>指尖对距离最大误差</td>
+<td style="text-align: right;">0.0948531</td>
+</tr>
+</tbody>
+</table>
+<p>同时按手指、边、指尖对报告，避免全手平均掩盖问题。腕→中指 MCP 的定义性零误差保留在当前统一口径里。</p>
+<p>绝对源/R 点差另作诊断，受大小差异主导，不作为任务保持的单独成绩。</p>
+<h3>16.6 测试 E：R 与 L20 静态几何</h3>
+<p>20 段长度误差：</p>
+<p>$$
+E_{\rm length,abs}
+=\frac1{20}\sum_e|L_e^R-L_e^{L20}|,
+\qquad
+E_{\rm length,rel}
+=\frac1{20}\sum_e
+\left|\frac{L_e^R}{L_e^{L20}}-1\right|.
+$$</p>
+<p>L 为毫米长度，相对误差乘 100% 表示百分比。静态点距离 RMSE：</p>
+<p>$$
+E_{\rm static}
+=1000\sqrt{\frac1{21}\sum_{k=0}^{20}
+\|\mathbf p_k^R-\mathbf p_k^{L20}\|_2^2}.
+$$</p>
+<p>已有长度 MAE 11.286842 mm、相对 19.4218%、静态点 RMSE 35.523200 mm。此测试不重拟合、不求 q，只量化既有模型。</p>
+<p>β_R 固定为 0，仅整体相似变换不能改变比例。是否增加形状自由度属于设计取舍，本文不推进。</p>
+<h3>16.7 测试 F：小指处理、重复性和显示</h3>
+<p>已经执行过的过程：</p>
+<ol>
+<li>从原个人拟合输入重新计算小指处理，不直接复制上一份几何。</li>
+<li>再以同一个固定 R 生成完整动作。</li>
+<li>与既有候选的几何数组逐项比较。</li>
+<li>检查全部 774 帧的重建、目标形态、尺度、腕锚。</li>
+<li>两种显示视图逐帧核对顶点。</li>
+<li>输出覆盖整段的采样 GIF、关键帧图。</li>
+<li>运行 30 秒 GUI，记录退出码。</li>
+</ol>
+<p>原固定诊断帧 0、190、383、773；另加 5、30、60、120、250 查看初始小指现象。增加失败帧没有替换原名单。</p>
+<p>重复数组一致、顶点检查通过、GUI 正常退出。<strong>同一输入重复得到同一输出只说明可重复性，不构成新动作或独立样本。</strong></p>
+<h3>16.8 测试 G：L20 q 轨迹</h3>
+<p>每帧从 q 再做 FK，检查条件化骨架、原始任务对、求解状态、限位、mimic、角度步长与失败帧。</p>
+<p>非腕部点 RMSE 使用<strong>坐标分量口径</strong>：</p>
+<p>$$
+E_{{\rm sem},\tau}
+=\sqrt{\frac1{20\times3}
+\sum_{k=1}^{20}\sum_{c=1}^{3}
+(\tilde p_{\tau,k,c}^{a}-\tilde p_{\tau,k,c}^{h})^2}.
+$$</p>
+<p>汇总为 $\frac1N\sum_\tau E_{{\rm sem},\tau}$，不是把全部帧合并再开方。方向与段间角也先算每帧 RMSE，再对帧平均。</p>
+<p>这不同于第 16.5 节全帧全边合并计算的方向口径。同一批三维点的分量 RMSE 与点距离 RMSE 相差 $\sqrt3$，但不同样本和目标之间不能只乘一个因子就作比较。</p>
+<p>最大单步角变化：</p>
+<p>$$
+S_{\max}=\max_{\tau\ge2,c}
+|\xi_{\tau,c}-\xi_{\tau-1,c}|.
+$$</p>
+<p>mean_q_step 先对每一步取最大分量，再对步平均：</p>
+<p>$$
+S_{\rm mean}
+=\frac1{N-1}\sum_{\tau=2}^{N}
+\max_c|\xi_{\tau,c}-\xi_{\tau-1,c}|.
+$$</p>
+<p>没有除 Δt，不能叫真实平均角速度。</p>
+<p>mimic 最大残差：</p>
+<p>$$
+E_{\rm mimic}
+=\max_{\tau,d}|q_{\tau,d}-(m_dq_{\tau,l(d)}+b_d)|.
+$$</p>
+<p>限位由有界求解、有效范围和展开检查保持；输出 limit_violations 置 0，不是真机回读的违规统计。</p>
+<p>17 帧合成样本有明确任务对；48 帧旧真实接口的任务对指标为空，不能把空字典或未测当成误差为零。</p>
+<p>还运行过一次基于原 URDF 碰撞网格的接触诊断：17 帧最大原始接触数 39，过滤直接父子关系后最大仍有 26。该网格尚非清理、验证过的接触描述，所以这些数不作为可靠碰撞率，也没有将其加入当前优化约束。不能把“未建立有效碰撞约束”写成“从未查看过接触输出”。</p>
+<h3>16.9 测试 H：动作与表面质量</h3>
+<p>这是数值和回放之外的独立验收层，当前未通过：</p>
+<ul>
+<li>用户认为动作不自然、弯曲网格异常。</li>
+<li>食/中/无名指 DIP 的模型中性轴扭转峰值约 64.69° / 62.17° / 72.81°。</li>
+<li>源拟合无逐关节解剖约束，塌陷、扭转、穿插各自的贡献未完成专项检测。</li>
+<li>无同步 RGB，不能逐帧核对真实动作。</li>
+</ul>
+<p>另有段间弯曲分配诊断：</p>
+<p>$$
+\eta_f
+=\frac{\kappa_{{\rm DIP},f}}
+{\kappa_{{\rm PIP},f}+\kappa_{{\rm DIP},f}}.
+$$</p>
+<p>仅统计 PIP 段间角至少 0.2 rad 的帧：</p>
+<table>
+<thead>
+<tr>
+<th>手指</th>
+<th style="text-align: right;">PIP 段间角中位</th>
+<th style="text-align: right;">DIP 段间角中位</th>
+<th style="text-align: right;">η 中位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>食指</td>
+<td style="text-align: right;">28.2°</td>
+<td style="text-align: right;">33.1°</td>
+<td style="text-align: right;">0.525</td>
+</tr>
+<tr>
+<td>中指</td>
+<td style="text-align: right;">31.4°</td>
+<td style="text-align: right;">2.9°</td>
+<td style="text-align: right;">0.084</td>
+</tr>
+<tr>
+<td>无名指</td>
+<td style="text-align: right;">18.9°</td>
+<td style="text-align: right;">10.6°</td>
+<td style="text-align: right;">0.355</td>
+</tr>
+<tr>
+<td>小指</td>
+<td style="text-align: right;">30.4°</td>
+<td style="text-align: right;">16.5°</td>
+<td style="text-align: right;">0.349</td>
+</tr>
+</tbody>
+</table>
+<p>这些是模型点的段间夹角，不是实测人体角，更不是 L20 编码器角。L20 关节坐标份额被 mimic 固定为 $0.8917/(1+0.8917)\approx0.4714$；双方零位与角定义不同，不能当作同一解剖量逐项比较。</p>
+<p>这组分布只是源端关节分配可能异常的线索。没有视频和方向真值，不能凭中位数断言人体不可能这样，也不将其用作可靠耦合标定或角度迁移标签。</p>
+<h3>16.10 正式评测尚缺的条件</h3>
+<p>尚未冻结：按操作者/完整序列/机器人留出的名单；形态覆盖与数据规模；任务定义和捏合阈值；失败处理、统计单位、指标聚合；公平基线预算；有效碰撞几何、接触真值、实际驱动与回读。</p>
+<p>已有姿态复制和项目内部优化基线；外部 dex-retargeting / dex-hand-teleop 的完整正式复现报告尚未建立。内部求解代码可作为本项目基线，但不能直接写成已经复现外部论文结果。</p>
+<p>大量相邻帧不是大量独立操作者。774 帧诊断不能代替跨操作者性能，空中点靠近不能代替实际抓取成功。</p>
+<p><a id="s17"></a></p>
+<h2>17. 当前证据与适用边界</h2>
+<h3>17.1 已有证据支持的结论</h3>
+<table>
+<thead>
+<tr>
+<th>结论</th>
+<th>证据</th>
+<th>范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MANO 读取和前向接口可用</td>
+<td>模板、关节、梯度和姿态扰动</td>
+<td>模型接口</td>
+</tr>
+<tr>
+<td>L20 FK、mimic 实现一致</td>
+<td>114 姿态、自编与 yourdfpy 对照</td>
+<td>同一文件</td>
+</tr>
+<tr>
+<td>个人数据可离线拟合为 MANO</td>
+<td>774 帧参数、残差与历史</td>
+<td>单操作者单序列</td>
+</tr>
+<tr>
+<td>姿态能复制到固定 R 并回放</td>
+<td>固定形态、几何与 GUI 记录</td>
+<td>离线工程</td>
+</tr>
+<tr>
+<td>小指扭转可在保持点集时改变</td>
+<td>后处理与逐帧诊断</td>
+<td>中性先验候选</td>
+</tr>
+<tr>
+<td>当前 R 与 L20 比例不同</td>
+<td>静态点与长度审计</td>
+<td>当前几何候选</td>
+</tr>
+<tr>
+<td>q 优化能输出满足文件约束的角度</td>
+<td>合成动作及 48 帧旧真实接口</td>
+<td>不含实际驱动与接触</td>
+</tr>
+</tbody>
+</table>
+<h3>17.2 当前未得到证实的结论</h3>
+<ul>
+<li>两阶段网络优于直接映射，或已经减少实际逐对调参成本。</li>
+<li>跨操作者、跨机器人、零样本泛化已经实现。</li>
+<li>当前 R 忠实重现本人动作，或通过自然性验收。</li>
+<li>当前标准 MANO R 与 L20 几何、运动学完全等价。</li>
+<li>当前 774 帧已形成可靠的 R→L20 q 闭环。</li>
+<li>满足 mimic 等于真实欠驱动机构、SDK 和真机可执行。</li>
+<li>点距离接近零等于皮肤接触、无穿透或抓取成功。</li>
+<li>当前摄像头已实时驱动 R 或 L20。</li>
+</ul>
+<h3>17.3 用因果链理解当前问题</h3>
+<p>检测点有误差，逆向拟合又存在旋转多解；通用幅值和平滑先验不能排除所有异常关节姿态。第一阶段复制 θ 会将异常搬到 R，形态变化又可能改变指尖任务关系。机器人求解只能在自己的轴、限位和耦合内追踪给定目标，不会自动恢复操作者真实意图。</p>
+<p>因此要分别验收：</p>
+<pre><code class="language-text">源动作可信
+    → 固定 R 保持动作功能
+        → L20 q 实现目标且满足文件约束
+            → 实际 u / SDK / 真机执行
+</code></pre>
+<p>本次只整理逻辑，不执行后续实验。</p>
+<p><a id="s18"></a></p>
+<h2>18. 已有入口、命令与来源</h2>
+<h3>18.1 说明和结果入口</h3>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>当前本人拟合手→R</td>
+<td><a href="E:/lingqiaoshou/dex-mapping/experiment/v23_pinky_distal_twist/run2_personal_mapping_test/README.md">run2 README</a></td>
+</tr>
+<tr>
+<td>并排动画</td>
+<td><a href="E:/lingqiaoshou/dex-mapping/experiment/v23_pinky_distal_twist/run2_personal_mapping_test/mujoco/separate/personal_to_fixed_r.gif">已有 GIF</a></td>
+</tr>
+<tr>
+<td>动作质量结论</td>
+<td><a href="E:/lingqiaoshou/dex-mapping/experiment/v23_pinky_distal_twist/run2_personal_mapping_test/quality_review/README.md">质量复核</a></td>
+</tr>
+<tr>
+<td>阶段一与 R–L20 几何</td>
+<td><a href="E:/lingqiaoshou/dex-mapping/experiment/v24_stage1_R_L20_audit/README.md">审计报告</a></td>
+</tr>
+<tr>
+<td>历史运行与失败</td>
+<td><a href="E:/lingqiaoshou/dex-mapping/experiment/results.md">实验结果总表</a></td>
+</tr>
+<tr>
+<td>测评约定草案</td>
+<td><a href="E:/lingqiaoshou/dex-mapping/experiment/evaluation.md">测评规则</a></td>
+</tr>
+<tr>
+<td>研究背景</td>
+<td><a href="E:/lingqiaoshou/dex-mapping/docs/研究思路与新手指南.md">研究思路与新手指南</a></td>
+</tr>
+<tr>
+<td>最新交接</td>
+<td><a href="E:/lingqiaoshou/dex-mapping/handoff.md">handoff</a></td>
+</tr>
+</tbody>
+</table>
+<p>旧“项目方法与公式总览”保留。本说明进一步补充测试过程，区分世界点原点、两套掌部坐标、45/135 维表示、默认/实际参数、RMSE 口径及 q/u。旧文档中与源码和当前证据冲突的说法，不作为本说明依据。</p>
+<h3>18.2 已有查看命令</h3>
+<p>以下仅供以后手动参考，<strong>本次整理未执行</strong>：</p>
+<pre><code class="language-powershell"># 当前本人拟合手与 R；空格暂停，关闭窗口退出
+&amp; 'E:\lingqiaoshou\dex-mapping\experiment\v23_pinky_distal_twist\run2_personal_mapping_test\open_personal_to_R.cmd'
+
+# 仅查看已有 R
+&amp; 'E:\lingqiaoshou\dex-mapping\experiment\v23_pinky_distal_twist\run2_personal_mapping_test\open_R.cmd'
+
+# 只检查显示数据，不运行物理仿真
+&amp; 'E:\lingqiaoshou\dex-mapping\experiment\v23_pinky_distal_twist\run2_personal_mapping_test\open_R.cmd' --check-only
+</code></pre>
+<h3>18.3 个人拟合参考命令</h3>
+<p>下面按当前脚本接口写出，<strong>不是找回的原始运行命令行</strong>。使用独立示例目录，避免覆盖已有结果；当前无需执行。</p>
+<pre><code class="language-powershell">$projectPython = 'E:\lingqiaoshou\dex-mapping\.conda\envs\mano-l20\python.exe'
+$fitScript = 'E:\lingqiaoshou\dex-mapping\scripts\fit_mediapipe_to_mano_v21.py'
+$fitArgs = @(
+  '--input', 'E:\lingqiaoshou\dex-mapping\experiment\v21_MediaPipe到MANO序列拟合\my_mediapipe_capture.json',
+  '--mano', 'E:\dex\MANO\mano_v1_2\mano_v1_2\models\MANO_LEFT.pkl',
+  '--output', 'E:\lingqiaoshou\dex-mapping\experiment\manual_reference_run\mano_sequence.json',
+  '--max-frames', '0', '--calibration-frames', '24',
+  '--shape-steps', '350', '--motion-steps', '300', '--learning-rate', '0.025'
+)
+&amp; $projectPython $fitScript @fitArgs
+</code></pre>
+<p>新采集如以后使用当前脚本，须显式传 <code>--hand-landmarker-model</code>；不会只因默认目录有模型就自动加载。镜像与手性仍需验收，本文不提供立即采集或真机控制指令。</p>
+<p>774 帧进入 q 求解的字段适配和任务标注尚未完成，不能提供声称已验证的“一键本人→L20”命令。</p>
+<h3>18.4 代码与公式对应</h3>
+<p>以下脚本均在 <code>E:\lingqiaoshou\dex-mapping\scripts</code>：</p>
+<table>
+<thead>
+<tr>
+<th>流程</th>
+<th>主要脚本</th>
+<th>核查点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MANO 读取</td>
+<td><code>check_mano_model.py</code></td>
+<td>原始数组、点序、前向</td>
+</tr>
+<tr>
+<td>L20 FK</td>
+<td><code>l20_kinematics.py</code>、<code>check_l20_kinematics.py</code></td>
+<td>origin、局部轴、mimic、有效限位</td>
+</tr>
+<tr>
+<td>几何语义点</td>
+<td><code>define_l20_reference_points.py</code>、<code>export_l20_fit_landmarks.py</code></td>
+<td>局部点与代理规则</td>
+</tr>
+<tr>
+<td>固定 R</td>
+<td><code>fit_mano_r.py</code>、<code>build_canonical_r_l20_fit.py</code>、<code>build_shared_r_l20_model.py</code></td>
+<td>β 固定、相似放置来源</td>
+</tr>
+<tr>
+<td>采集</td>
+<td><code>capture_camera_mediapipe_v20.py</code></td>
+<td>镜像、标签、时间戳</td>
+</tr>
+<tr>
+<td>个人拟合</td>
+<td><code>fit_mediapipe_to_mano_v21.py</code></td>
+<td>两步拟合、mean、冻结变量</td>
+</tr>
+<tr>
+<td>小指处理</td>
+<td><code>audit_pinky_distal_v23.py</code></td>
+<td>分解、三参数残差、接受条件</td>
+</tr>
+<tr>
+<td>R 迁移</td>
+<td><code>transfer_personal_hand_to_r_v22.py</code></td>
+<td>β/尺度、腕部锚定</td>
+</tr>
+<tr>
+<td>功能特征</td>
+<td><code>run_r_l20_feature_baseline_v15.py</code></td>
+<td>20 段、10 对、掌部坐标</td>
+</tr>
+<tr>
+<td>条件化骨架</td>
+<td><code>build_target_conditioned_sequence_v18.py</code></td>
+<td>第一帧参考、最小方向旋转、任务分离</td>
+</tr>
+<tr>
+<td>q 逐帧</td>
+<td><code>run_r_l20_alignment_v17.py</code></td>
+<td>15 夹角、残差乘子、多起点</td>
+</tr>
+<tr>
+<td>q 整段</td>
+<td><code>run_r_l20_global_trajectory_v19.py</code></td>
+<td>16N 变量、初值与终止</td>
+</tr>
+<tr>
+<td>旧接口</td>
+<td><code>prepare_offline_mano_sequence_v20.py</code>、<code>compare_offline_mano_v18_v19_v20.py</code></td>
+<td>旧源 β 行为、点透传、任务字段</td>
+</tr>
+<tr>
+<td>回放与重复性</td>
+<td><code>view_fixed_r_mujoco_v22.py</code>、<code>verify_personal_mapping_repeat_v23.py</code></td>
+<td>顶点、选帧、GUI</td>
+</tr>
+<tr>
+<td>几何/阶段一审计</td>
+<td><code>audit_stage1_and_r_geometry_v24.py</code></td>
+<td>相同口径的源/R 与静态几何</td>
+</tr>
+<tr>
+<td>关节分配诊断</td>
+<td><code>measure_human_joint_ratio_v24.py</code></td>
+<td>角定义、有效帧门槛</td>
+</tr>
+</tbody>
+</table>
+<p>最直接的数值来源：</p>
+<ol>
+<li><a href="E:/lingqiaoshou/dex-mapping/experiment/v21_MediaPipe到MANO序列拟合/my_mano_sequence_v21_all_metrics.json">个人完整拟合指标</a>。</li>
+<li><a href="E:/lingqiaoshou/dex-mapping/experiment/v23_pinky_distal_twist/run2_personal_mapping_test/mapping_test_summary.json">当前重复测试汇总</a>。</li>
+<li><a href="E:/lingqiaoshou/dex-mapping/experiment/v23_pinky_distal_twist/run2_personal_mapping_test/metrics.json">小指处理指标</a>。</li>
+<li><a href="E:/lingqiaoshou/dex-mapping/experiment/v24_stage1_R_L20_audit/metrics.json">阶段一与静态几何</a>。</li>
+<li><a href="E:/lingqiaoshou/dex-mapping/experiment/v18_R_L20目标条件化骨架适配/alignment_sequence/metrics.json">17 帧逐帧 q</a>。</li>
+<li><a href="E:/lingqiaoshou/dex-mapping/experiment/v19_R_L20全局轨迹优化/global_trajectory_continuation/metrics.json">17 帧整段续跑 q</a>。</li>
+<li><a href="E:/lingqiaoshou/dex-mapping/experiment/v21_MediaPipe到MANO序列拟合/r_l20_compare/comparison.json">48 帧旧真实接口</a>。它保留部分合成 fixture 模板措辞，真实来源须按 input 字段核对，不能按模板句判断。</li>
+</ol>
+<h3>18.5 缺失输入与文档适用范围</h3>
+<p>投稿目标、截止日期、正式样本量、机器人范围和实际硬件/SDK 版本仍待确定，本文未自行补填。</p>
+<p>当前最确定的成果是模块与离线诊断已经建立。动作忠实度、可靠控制和两阶段方法的新增收益仍需后续证据。本说明以现有代码、配置与结果解释“现在怎样做”，不把计划写成实现。</p>
+</body>
+</html>
